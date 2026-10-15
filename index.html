@@ -635,8 +635,8 @@
       <div style="background:linear-gradient(135deg,#EFF6FF,#F0FDFA);border:2px solid var(--teal);border-radius:12px;padding:16px 18px;margin-bottom:18px">
         <div style="font-size:13px;font-weight:800;color:var(--teal);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">🦟 Visão Geral — O que é a Dengue?</div>
         <p style="margin-bottom:8px">A <strong>dengue</strong> é uma arbovirose febril aguda causada pelo vírus dengue (DENV), transmitida pela picada da fêmea do <em>Aedes aegypti</em>. É a arbovirose de maior impacto em saúde pública nas Américas, com estimativa de 390 milhões de infecções anuais no mundo (Bhatt et al., Nature, 2013).</p>
-        <p style="margin-bottom:8px">A doença segue um <strong>curso trifásico previsível</strong>: fase febril (dias 1–3), fase crítica (dias 4–7) e fase de recuperação (dias 7–10). A transição entre a fase febril e a crítica — marcada pela <strong>defervescência</strong> — é o momento de maior risco de complicações: o vírus induz extravasamento capilar maciço, trombocitopenia e coagulopatia que, se não reconhecidos a tempo, evoluem para choque e óbito.</p>
-        <p style="margin-bottom:0">O manejo é <strong>essencialmente clínico e de suporte</strong>: não há antiviral específico aprovado. A correta classificação do paciente em Grupos A/B/C/D (Ministério da Saúde / OMS) e a hidratação dirigida são os pilares que reduzem a mortalidade de até 20% (sem tratamento) para menos de 1% (com tratamento adequado).</p>
+        <p style="margin-bottom:8px">A doença segue um <strong>curso trifásico previsível</strong>: fase febril (febre alta, de início abrupto, por 2 a 7 dias), fase crítica (começa com a defervescência, entre o 3º e o 7º dia) e fase de recuperação. A transição entre a fase febril e a crítica — marcada pela <strong>defervescência</strong> — é o momento de maior risco de complicações: o vírus induz extravasamento capilar maciço, trombocitopenia e coagulopatia que, se não reconhecidos a tempo, evoluem para choque e óbito.</p>
+        <p style="margin-bottom:0">O manejo é <strong>essencialmente clínico e de suporte</strong>: não há antiviral específico aprovado. A correta classificação do paciente em Grupos A/B/C/D (Ministério da Saúde / OMS) e a hidratação dirigida são os pilares do tratamento. Segundo o Ministério da Saúde (2024), os óbitos por dengue são, em sua maioria, evitáveis com medidas de baixa densidade tecnológica, e os idosos são o grupo de maior vulnerabilidade para desfechos fatais.</p>
       </div>
 
       <h3>Agente Etiológico e Vetor</h3>
@@ -645,16 +645,16 @@
       <h3>Curso Clínico em 3 Fases</h3>
       <div class="timeline">
         <div class="tl-phase tl-febrile">
-          <span class="days">Dias 1–3</span>
-          Fase Febril<br/><small>Febre alta, mialgia, cefaleia, exantema, leucopenia, início da trombocitopenia</small>
+          <span class="days">2 a 7 dias</span>
+          Fase Febril<br/><small>Febre alta (39–40°C) de início abrupto, cefaleia, adinamia, mialgias, artralgias, dor retro-orbital; exantema em cerca de 50% dos casos</small>
         </div>
         <div class="tl-phase tl-critical">
-          <span class="days">Dias 4–7</span>
-          Fase Crítica ⚠️<br/><small>Defervescência, extravasamento plasmático, risco de choque e hemorragia</small>
+          <span class="days">3º ao 7º dia</span>
+          Fase Crítica ⚠️<br/><small>Começa com a defervescência. Sinais de alarme, extravasamento plasmático (24 a 48 h); choque mais comum no 4º ou 5º dia</small>
         </div>
         <div class="tl-phase tl-recovery">
-          <span class="days">Dias 7–10</span>
-          Fase de Recuperação<br/><small>Reabsorção do plasma extravasado, trombocitose reativa, risco de hipervolemia</small>
+          <span class="days">Após a fase crítica</span>
+          Fase de Recuperação<br/><small>Reabsorção gradual do líquido extravasado, diurese normaliza ou aumenta, risco de hiper-hidratação, bradicardia, exantema com prurido</small>
         </div>
       </div>
 
@@ -707,29 +707,33 @@
     <div class="card-header" onclick="toggleCard('farm')">
       <div class="card-title">
         <div class="card-icon icon-farm">💊</div>
-        Módulo 2 · Farmacologia — Indicações e Contraindicações
+        Módulo 2 · Medicamentos, Hidratação e Remédios de Uso Contínuo
       </div>
       <span class="chevron" id="chevron-farm">▼</span>
     </div>
     <div class="card-body open" id="body-farm">
 
-      <h3>Fármacos na Dengue: Panorama Geral</h3>
+      <h3>Analgésicos e Antitérmicos: o que o Ministério da Saúde recomenda</h3>
       <div class="drug-grid">
         <div class="drug-card drug-safe">
           <div class="drug-name">Paracetamol</div>
           <div class="drug-status">✓ INDICADO</div>
-          <p style="font-size:11px;margin-top:6px;margin-bottom:0">10–15 mg/kg/dose a cada 6h<br/>Máx: 75 mg/kg/dia (crianças)<br/>Máx: 4g/dia (adultos)</p>
+          <p style="font-size:11px;margin-top:6px;margin-bottom:0">Crianças: 10 mg/kg/dose até de 6/6 h<br/>Adultos: 500 mg até de 4/4 h, ou 1 g até de 6/6 h<br/>Máximo: 4 g em 24 h<br/>Gotas 200 mg/mL (1 mL = 20 gotas)</p>
         </div>
         <div class="drug-card drug-safe2">
           <div class="drug-name">Dipirona</div>
           <div class="drug-status">✓ INDICADO</div>
-          <p style="font-size:11px;margin-top:6px;margin-bottom:0">15 mg/kg/dose a cada 6h<br/>Adultos: 500–1000 mg/dose<br/>Via oral ou IV</p>
+          <p style="font-size:11px;margin-top:6px;margin-bottom:0">Crianças: 10 mg/kg/dose até de 6/6 h<br/>Adultos: 500 mg (20 gotas ou 1 comprimido) até de 6/6 h<br/>Gotas 500 mg/mL · solução oral 50 mg/mL · injetável 500 mg/mL</p>
         </div>
         <div class="drug-card drug-danger">
-          <div class="drug-name">AINEs / AAS</div>
-          <div class="drug-status">✗ CONTRAINDICADO</div>
-          <p style="font-size:11px;margin-top:6px;margin-bottom:0">Ibuprofeno, Cetoprofeno,<br/>Diclofenaco, Naproxeno,<br/>Aspirina (AAS)</p>
+          <div class="drug-name">Salicilatos, AINEs e corticoides</div>
+          <div class="drug-status">✗ NÃO UTILIZAR</div>
+          <p style="font-size:11px;margin-top:6px;margin-bottom:0">AAS como analgésico, ibuprofeno, cetoprofeno, diclofenaco, nimesulida, naproxeno e corticosteroides.<br/><strong>Exceção:</strong> AAS como antiagregante (ver abaixo).</p>
         </div>
+      </div>
+      <div class="evidence-box">
+        <div class="ev-title">📘 Fonte oficial</div>
+        Brasil. Ministério da Saúde. <em>Dengue: diagnóstico e manejo clínico – adulto e criança</em>, 6. ed., 2024: Grupo A (item 6.1.2) e Apêndice H. Nas crianças, respeitar a dose máxima para peso e idade: doses de paracetamol acima da recomendada são hepatotóxicas. Orientar o paciente a não se automedicar.
       </div>
 
       <h3>Mecanismo do Paracetamol — Por Que É Seguro?</h3>
@@ -752,16 +756,51 @@
       <h3>Corticosteroides — Evidência Contrária ao Uso</h3>
       <p>A revisão Cochrane (Zhang & Kramer, 2014) com múltiplos ensaios clínicos em crianças &lt;15 anos com choque por dengue demonstrou <strong>nenhum benefício em mortalidade, hemorragia, transfusão ou tempo de hospitalização</strong>. Riscos documentados incluem <strong>hiperglicemia</strong> (prednisolona 2mg/kg) e ausência de resposta plaquetária. A OMS e o Ministério da Saúde <strong>NÃO recomendam</strong> corticosteroides na dengue.</p>
 
-      <h3>Fluidoterapia — Cristaloides Balanceados vs. Soro Fisiológico</h3>
+      <h3>Hidratação Oral (Grupos A e B)</h3>
       <ul class="clinical-list">
-        <li><strong>Ringer com Lactato (preferencial):</strong> menor incidência de injúria renal aguda, redução de 58% na necessidade de terapia de substituição renal vs. SF 0,9%</li>
-        <li><strong>Plasmalyte:</strong> alternativa ao RL em casos de disfunção hepática grave (evitar lactato)</li>
-        <li><strong>SF 0,9%:</strong> risco de acidose metabólica hiperclorêmica em grandes volumes; alternativa quando cristaloides balanceados indisponíveis, ou na hiponatremia</li>
-        <li><strong>Limiar crítico:</strong> &gt; 181 mL/kg acumulado em 24h → risco elevado de ventilação mecânica (AUC 0,871)</li>
+        <li><strong>Começa ainda na sala de espera</strong>, enquanto o paciente aguarda a consulta.</li>
+        <li><strong>Adultos:</strong> 60 mL/kg/dia, sendo 1/3 com sais de reidratação oral (SRO) e 2/3 com líquidos caseiros (água, suco, soro caseiro, chás, água de coco). Volume maior no início: 1/3 do total nas primeiras 4 a 6 horas. Ex.: adulto de 70 kg = 4,2 L/dia, com 1,4 L nas primeiras 4 a 6 h.</li>
+        <li><strong>Crianças (&lt; 13 anos):</strong> até 10 kg: 130 mL/kg/dia · acima de 10 até 20 kg: 100 mL/kg/dia · acima de 20 kg: 80 mL/kg/dia. 1/3 como SRO; 1/3 do volume nas primeiras 4 a 6 h. Não interromper a alimentação; manter e estimular a amamentação.</li>
+        <li>Manter durante todo o período febril e por até 24 a 48 h após a defervescência. Escrever o volume na receita ou no Cartão de Acompanhamento.</li>
       </ul>
+
+      <h3>Hidratação Venosa (Grupos C e D)</h3>
+      <ul class="clinical-list">
+        <li><strong>Grupo C:</strong> soro fisiológico 0,9%, 10 mL/kg na 1ª hora, em qualquer ponto de atenção, mesmo sem exames e durante a transferência. Reavaliar após 1 h. Manter 10 mL/kg/h na 2ª hora até o hematócrito (em até 2 h). Máximo de 20 mL/kg em 2 h por fase de expansão; repetir até 3 vezes. Com melhora: manutenção de 25 mL/kg em 6 h e, depois, 25 mL/kg em 8 h.</li>
+        <li><strong>Grupo D:</strong> soro fisiológico 0,9%, 20 mL/kg em até 20 minutos, repetir até 3 vezes. Reavaliar a cada 15 a 30 min e hematócrito a cada 2 h. Com melhora, voltar à fase de expansão do Grupo C.</li>
+        <li><strong>Choque persistente com hematócrito subindo:</strong> albumina 0,5 a 1 g/kg (solução a 5%: 25 mL de albumina 20% + 75 mL de SF 0,9%); na falta, coloides sintéticos 10 mL/kg/h.</li>
+        <li><strong>Idosos:</strong> maior risco de sobrecarga de fluidos. Acompanhar de perto e procurar crepitações (edema pulmonar).</li>
+      </ul>
+
+      <h3>Cardiopatas com Insuficiência Cardíaca (MS, cap. 8)</h3>
+      <ul class="clinical-list">
+        <li>Acompanhar pressão arterial, perfusão periférica, congestão pulmonar e débito urinário. Hipotensão, para fins práticos: PAS &lt; 100 mmHg.</li>
+        <li><strong>Classe funcional I:</strong> hidratar como os demais pacientes. <strong>Classe II:</strong> SF 0,9% ou Ringer simples 15 mL/kg em 30 min, até 3 vezes. <strong>Classe III:</strong> 10 mL/kg em 30 min, até 3 vezes. <strong>Classe IV:</strong> UTI.</li>
+        <li>Manutenção: 15 a 25 mL/kg de SF 0,9% ou Ringer simples a cada 12 h, atento a sinais de congestão. Hipotensos e congestos: aminas vasoativas.</li>
+      </ul>
+
+      <h3>Anti-hipertensivos (MS, cap. 7)</h3>
+      <ul class="clinical-list">
+        <li>Dengue sem sinais de alarme e PA normal: manter a medicação habitual.</li>
+        <li>Desidratação ou hipovolemia com necessidade de hidratação venosa: suspender, em princípio, <strong>diuréticos e vasodilatadores</strong> durante a observação.</li>
+        <li><strong>Betabloqueadores e clonidina:</strong> ponderar antes de suspender, pelo risco de hipertensão rebote.</li>
+        <li>No hipertenso, queda de 40% em relação à PA habitual pode significar hipotensão. Em dengue grave com extravasamento importante, suspender os hipotensores.</li>
+      </ul>
+
+      <h3>Antiagregantes e Anticoagulantes (MS, cap. 11)</h3>
+      <div class="table-scroll"><table class="group-table">
+        <thead><tr><th>Medicamento</th><th>Plaquetas &gt; 50 mil</th><th>30 a 50 mil</th><th>&lt; 30 mil</th></tr></thead>
+        <tbody>
+          <tr><td><strong>AAS + clopidogrel</strong> (stent farmacológico &lt; 6 meses ou convencional &lt; 1 mês)</td><td>Manter; plaquetas diárias (protocolo do Grupo B)</td><td>Manter; leito de observação; plaquetas diárias</td><td>Suspender; observação até &gt; 50 mil</td></tr>
+          <tr><td><strong>AAS</strong> (stent antigo, profilaxia secundária coronária ou cerebrovascular)</td><td>Manter; plaquetas diárias</td><td>Manter; leito de observação</td><td>Suspender; observação até &gt; 50 mil</td></tr>
+          <tr><td><strong>Varfarina</strong></td><td>TAP ambulatorial; plaquetas diárias</td><td>Internar; trocar por heparina não fracionada quando INR &lt; 2</td><td>Suspender; internar; TAP e plaquetas diários</td></tr>
+          <tr><td><strong>Dabigatrana, rivaroxabana, apixabana, edoxabano</strong></td><td colspan="1">≥ 50 mil: manter (se a suspensão não for opção)</td><td colspan="2">&lt; 50 mil: internar; trocar por heparina não fracionada 24 h após a última dose</td></tr>
+        </tbody>
+      </table></div>
+      <p style="font-size:12px">Sangramento moderado ou grave: suspender antiagregantes e anticoagulantes. Dupla antiagregação: plaquetas 1 unidade/10 kg. Varfarina: plasma fresco 15 mL/kg (até INR &lt; 1,5) e vitamina K 10 mg. Não reverter a anticoagulação sem sangramento.</p>
       <div class="evidence-box">
-        <div class="ev-title">💉 Transição Cristaloide → Coloide</div>
-        Indicar coloide (dextran 70 ou gelatina) quando: falha a 3 bolus de cristaloide OU hematócrito persistentemente elevado apesar de hidratação adequada. O dextran 70 promoveu normalização mais rápida do índice cardíaco e hematócrito vs. cristaloides (Dung et al, CID 1999).
+        <div class="ev-title">📘 Fonte oficial</div>
+        Brasil. Ministério da Saúde. <em>Dengue: diagnóstico e manejo clínico – adulto e criança</em>, 6. ed., 2024: Quadro 3 e itens 6.3, 6.4, 7, 8 e 11. O manual usa soro fisiológico 0,9% na expansão; não recomenda dextran nem Plasmalyte.
       </div>
     </div>
   </div>
@@ -777,86 +816,133 @@
     </div>
     <div class="card-body open" id="body-emerg">
 
-      <h3>Diagnóstico Clínico — Critérios de Suspeição</h3>
-      <p><strong>Febre ≤ 7 dias</strong> + pelo menos 2 dos seguintes: cefaleia/dor retrorbital, mialgia, artralgia, prostração, exantema máculo-papular, náuseas/vômitos ou petéquias.</p>
-      <p>Realizar <strong>Prova do Laço</strong> em todos os casos suspeitos. Positiva: ≥ 20 petéquias/2,5cm² (adultos) ou ≥ 10 petéquias/2,5cm² (crianças).</p>
+      <h3>Caso Suspeito de Dengue (MS, item 10.1)</h3>
+      <p>Pessoa que <strong>vive em área com casos de dengue</strong> ou que <strong>viajou nos últimos 14 dias</strong> para área com transmissão (ou presença de <em>Aedes aegypti</em>), com <strong>febre, usualmente de 2 a 7 dias</strong>, e <strong>duas ou mais</strong> das manifestações: náuseas, vômitos, exantema, mialgias, artralgias, cefaleia, dor retro-orbital, petéquias, prova do laço positiva e leucopenia.</p>
+      <p>Também é caso suspeito <strong>toda criança</strong> de área com transmissão, com febre aguda de 2 a 7 dias e <strong>sem foco de infecção aparente</strong>.</p>
+      <p><strong>Notificação compulsória</strong> de todo caso suspeito, pela primeira unidade que atender o paciente. Nos primeiros dias, quando é difícil diferenciar de outras viroses, manejar como dengue.</p>
 
-      <h3>Diagnóstico Etiológico</h3>
+      <h3>Diagnóstico Laboratorial (MS, item 10.4)</h3>
       <ul class="clinical-list">
-        <li><strong>NS1 (antígeno):</strong> 1º ao 4º dia de sintomas</li>
-        <li><strong>Sorologia IgM/IgG:</strong> a partir do 6º dia</li>
-        <li><strong>Pacientes no 5º dia:</strong> coletar simultaneamente NS1 + sorologia</li>
+        <li><strong>Até o 5º dia de sintomas:</strong> NS1, RT-PCR ou isolamento viral.</li>
+        <li><strong>A partir do 6º dia:</strong> sorologia IgM (ELISA).</li>
+        <li>Amostras pareadas (PRNT ou inibição da hemaglutinação) com aumento ≥ 4 vezes nos títulos.</li>
+        <li>Reação cruzada com Zika é possível. Sem exame ou com resultado inconclusivo: confirmação por vínculo clínico-epidemiológico.</li>
+        <li>Nos Grupos A e B, exames específicos <strong>não são necessários para a conduta</strong>; nos Grupos C e D são obrigatórios, mas não essenciais para a conduta.</li>
       </ul>
 
-      <h3>Classificação por Grupos (Ministério da Saúde / OMS)</h3>
+      <h3>Classificação de Risco no Acolhimento (Quadro 2)</h3>
+      <div class="table-scroll"><table class="group-table">
+        <thead><tr><th>Cor</th><th>Grupo</th><th>Prioridade</th></tr></thead>
+        <tbody>
+          <tr class="group-a-row"><td>Azul</td><td><span class="badge badge-a">A</span></td><td>Atendimento conforme horário de chegada</td></tr>
+          <tr class="group-b-row"><td>Verde</td><td><span class="badge badge-b">B</span></td><td>Prioridade não urgente</td></tr>
+          <tr class="group-c-row"><td>Amarelo</td><td><span class="badge badge-c">C</span></td><td>Urgência, atendimento o mais rápido possível</td></tr>
+          <tr class="group-d-row"><td>Vermelho</td><td><span class="badge badge-d">D</span></td><td>Emergência, atendimento imediato</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Estadiamento e Conduta por Grupo (MS 2024)</h3>
       <div class="table-scroll"><table class="group-table">
         <thead>
-          <tr><th>Grupo</th><th>Critério</th><th>Conduta Principal</th><th>Hidratação</th></tr>
+          <tr><th>Grupo</th><th>Critério</th><th>Conduta principal</th><th>Hidratação</th></tr>
         </thead>
         <tbody>
           <tr class="group-a-row">
             <td><span class="badge badge-a">A</span></td>
-            <td>Sem sinais de alarme · Sem comorbidades · Sem fatores de risco</td>
-            <td>Alta domiciliar · Paracetamol/Dipirona · Notificar</td>
-            <td><strong>Oral:</strong> ≥ 60 mL/kg/dia · SRO</td>
+            <td>Sem sinais de alarme · sem condição especial, risco social ou comorbidade · sem sangramento de pele</td>
+            <td>Ambulatorial · exames a critério médico · paracetamol e/ou dipirona · retorno no dia da melhora da febre (ou no 5º dia) · cartão · notificar</td>
+            <td><strong>Oral:</strong> adultos 60 mL/kg/dia; crianças 80 a 130 mL/kg/dia conforme o peso</td>
           </tr>
           <tr class="group-b-row">
             <td><span class="badge badge-b">B</span></td>
-            <td>Sem sinais de alarme COM fatores de risco (comorbidade, gestante, &lt;2 anos, ≥65 anos) ou prova do laço positiva / petéquias</td>
-            <td>Observação · Hemograma + plaquetas · Se plaquetas alteradas → internação</td>
-            <td><strong>Oral:</strong> 60–80 mL/kg/dia · EV se necessário</td>
+            <td>Sem sinais de alarme, <strong>com</strong> sangramento de pele espontâneo ou induzido (prova do laço) <strong>ou</strong> condição especial, risco social ou comorbidade</td>
+            <td>Hemograma obrigatório (resultado em até 2 h, máx. 4 h) · observação até o resultado · hemoconcentração ou alarme → Grupo C · Ht normal → ambulatorial com reavaliação diária até 48 h após a febre</td>
+            <td><strong>Oral</strong>, como no Grupo A, até o resultado dos exames</td>
           </tr>
           <tr class="group-c-row">
             <td><span class="badge badge-c">C</span></td>
-            <td><strong>Sinais de alarme presentes</strong> (qualquer um)</td>
-            <td>Internação imediata · Expansão volêmica EV urgente · Monitorização contínua</td>
-            <td><strong>EV:</strong> Ringer Lactato 10 mL/kg em 1 hora · Repetir até 2–3× se necessário · Reduzir progressivamente se melhora</td>
+            <td><strong>Sinais de alarme presentes</strong> e sinais de gravidade ausentes</td>
+            <td>Internação até estabilização (mín. 48 h) · hemograma, albumina e transaminases obrigatórios · RX de tórax e USG de abdome · sem melhora após 3 fases → Grupo D</td>
+            <td><strong>SF 0,9%:</strong> 10 mL/kg na 1ª h; 10 mL/kg/h na 2ª h até o Ht; até 3 fases. Manutenção: 25 mL/kg em 6 h, depois 25 mL/kg em 8 h</td>
           </tr>
           <tr class="group-d-row">
             <td><span class="badge badge-d">D</span></td>
-            <td><strong>Choque / Dengue Grave</strong> com disfunção orgânica ou hemorragia grave</td>
-            <td>UTI · Ressuscitação vigorosa · Suporte avançado · Avaliar coloide</td>
-            <td><strong>EV:</strong> 20 mL/kg o mais rápido possível · Repetir · Considerar coloide</td>
+            <td><strong>Dengue grave:</strong> choque, desconforto respiratório por extravasamento, sangramento grave ou comprometimento grave de órgãos</td>
+            <td>UTI até estabilização (mín. 48 h) · reavaliação a cada 15 a 30 min · Ht a cada 2 h · O₂ no choque · albumina se Ht subindo com choque persistente</td>
+            <td><strong>SF 0,9%:</strong> 20 mL/kg em até 20 min, até 3 vezes; com melhora, volta à expansão do Grupo C</td>
           </tr>
         </tbody>
       </table></div>
 
       <div class="evidence-box" style="margin-top:4px">
-        <div class="ev-title">✅ Verificação de Condutas — Referências Primárias</div>
-        As condutas acima foram revisadas e confrontadas com: <strong>(1)</strong> Brasil. Ministério da Saúde. <em>Dengue: diagnóstico e manejo clínico</em>. 5ª ed, 2016. <strong>(2)</strong> WHO. <em>Dengue guidelines for diagnosis, treatment, prevention and control</em>. Geneva, 2009. <strong>(3)</strong> PAHO. <em>Dengue: guías para la atención de enfermos en la región de las Américas</em>. 2ª ed, 2016.
-        <br/><br/>
-        <strong>Pontos revisados e confirmados:</strong> Grupo A = alta domiciliar + paracetamol q6h + hidratação oral ≥60 mL/kg/dia ✓ · Grupo B = hemograma + observação + hidratação oral supervisionada 60 mL/kg/dia ✓ · Grupo C = internação + Ringer Lactato 10 mL/kg <strong>em 1 hora</strong> (corrigido de "20 min" — o bolus rápido em 20 min é protocolo do Grupo D) ✓ · Grupo D = ressuscitação com 20 mL/kg em 15–20 min + UTI ✓ · Limiar de fluidos 181 mL/kg/24h (AUC 0,871) ✓ · Transfusão plaquetas apenas &lt;20.000/mm³ com sangramento ativo ✓
+        <div class="ev-title">✅ Condutas conferidas com o manual oficial</div>
+        Brasil. Ministério da Saúde. Secretaria de Vigilância em Saúde e Ambiente. <em>Dengue: diagnóstico e manejo clínico: adulto e criança</em>. 6. ed. Brasília: Ministério da Saúde, 2024 (Figura 2 e itens 6.1 a 6.10). <strong>Mudanças em relação à versão anterior do app:</strong> expansão com soro fisiológico 0,9% (não Ringer); Grupo C com 10 mL/kg/h na 2ª hora e manutenção de 25 mL/kg em 6 h e em 8 h; plaquetas &lt; 50 mil não é sinal de alarme; doses infantis de 10 mg/kg; novos grupos de risco (obesidade, doença ácido-péptica, doenças autoimunes, risco social).
       </div>
 
-      <h3>Sinais de Alarme — Memo Clínico</h3>
+      <h3>Sinais de Alarme (Quadro 1)</h3>
       <ul class="clinical-list">
-        <li>Dor abdominal intensa, referida ou à palpação, contínua</li>
+        <li>Dor abdominal intensa (referida ou à palpação) e contínua</li>
         <li>Vômitos persistentes</li>
-        <li>Hipotensão postural / lipotimia</li>
-        <li>Hepatomegalia dolorosa (&gt; 2 cm abaixo do rebordo costal)</li>
-        <li>Sangramento de mucosas</li>
-        <li>Sonolência ou irritabilidade</li>
-        <li>Derrames cavitários (pleural, pericárdico, peritoneal)</li>
-        <li>Plaquetas &lt; 50.000/mm³</li>
-        <li>Elevação do hematócrito &gt; 10% acima do valor basal</li>
+        <li>Acúmulo de líquidos (ascite, derrame pleural, derrame pericárdico)</li>
+        <li>Hipotensão postural ou lipotimia</li>
+        <li>Hepatomegalia &gt; 2 cm abaixo do rebordo costal</li>
+        <li>Sangramento de mucosa</li>
+        <li>Letargia e/ou irritabilidade</li>
+        <li>Aumento progressivo do hematócrito</li>
       </ul>
+      <p style="font-size:12px;color:var(--text-muted)">Os sinais de alarme costumam aparecer na remissão da febre. Na criança, o agravamento costuma ser súbito, e o quadro grave pode ser a primeira manifestação.</p>
 
       <h3>Sinais de Choque (Grupo D)</h3>
       <ul class="clinical-list">
-        <li>Hipotensão arterial ou Pressão de Pulso ≤ 20 mmHg <span class="badge badge-danger">mais específico</span></li>
-        <li>Taquicardia: adultos &gt;100bpm · crianças 1–10a &gt;120bpm · &lt;1a &gt;160bpm</li>
-        <li>Extremidades frias e cianose · enchimento capilar &gt; 2 segundos</li>
-        <li>Redução da diurese · Taquipneia</li>
+        <li>Taquicardia · extremidades distais frias · pulso fraco e filiforme</li>
+        <li>Enchimento capilar lento (&gt; 2 segundos)</li>
+        <li>Pressão arterial convergente (PA diferencial &lt; 20 mmHg) <span class="badge badge-danger">precoce</span></li>
+        <li>Taquipneia · oligúria (&lt; 1,5 mL/kg/h)</li>
+        <li>Hipotensão arterial e cianose (fase tardia do choque)</li>
       </ul>
-
-      <h3>Hematócrito — Valores de Referência Pediátricos</h3>
       <div class="hct-ref">
-        <strong>Crianças:</strong> &lt;1 mês: 51% · 1 mês: 43% · 2–6 meses: 35% · 6m–2a: 36% · 2–6a: 37% · 6–12a: 38%<br/>
-        <strong>Adultos:</strong> Homens: 45% · Mulheres: 40%<br/>
-        <strong>Alerta:</strong> Aumento &gt;10% → Grupo C/D · Aumento &gt;20% → hemoconcentração grave
+        <strong>Hipotensão:</strong> PAS &lt; 90 mmHg ou PAM &lt; 70 mmHg no adulto, ou queda da PAS &gt; 40 mmHg. Crianças até 10 anos: PAS abaixo de 70 + (idade × 2) mmHg.<br/>
+        <strong>Dengue grave também é:</strong> sangramento grave (hematêmese, melena, metrorragia volumosa, sangramento do SNC) e comprometimento grave de órgãos (AST/ALT &gt; 1.000, alteração de consciência, miocardite).
       </div>
 
-      <h3>Biomarcadores Laboratoriais de Alto Valor Preditivo</h3>
+      <h3>Parâmetros por Idade (Apêndices C, D e I)</h3>
+      <div class="table-scroll"><table class="group-table">
+        <thead><tr><th>Idade</th><th>FC acordado</th><th>FR (até)</th><th>Hematócrito de referência</th></tr></thead>
+        <tbody>
+          <tr><td>0 a 2 meses</td><td>85–205</td><td>&lt; 2 meses: 60</td><td>15 dias: 52 ± 8% · 3 meses: 37 ± 4%</td></tr>
+          <tr><td>3 a 23 meses</td><td>100–190</td><td>2 meses a 1 ano: 50</td><td>6 meses: 35 ± 4% · 1 a 2 anos: 36 ± 4%</td></tr>
+          <tr><td>2 a 10 anos</td><td>60–140</td><td>1 a 5 anos: 40 · 5 a 8 anos: 30</td><td>5 anos: 37 ± 4% · 10 anos: 40 ± 4%</td></tr>
+          <tr><td>&gt; 10 anos e adultos</td><td>60–100</td><td>Adultos: 12 a 20</td><td>Mulheres 42 ± 6% · homens 46 ± 7% · &gt; 70 anos 41 ± 6%</td></tr>
+        </tbody>
+      </table></div>
+      <p style="font-size:12px;color:var(--text-muted)">Sempre que possível, compare o hematócrito com um valor anterior do próprio paciente: o que importa é o aumento progressivo.</p>
+
+      <h3>Indicações de Internação (item 6.9)</h3>
+      <ul class="clinical-list">
+        <li>Sinais de alarme ou de choque, sangramento grave ou comprometimento grave de órgão (Grupos C e D)</li>
+        <li>Recusa de alimentos e líquidos</li>
+        <li>Comprometimento respiratório: dor torácica, dificuldade respiratória, murmúrio vesicular diminuído</li>
+        <li>Impossibilidade de seguimento ou de retorno à unidade (condições clínicas ou sociais)</li>
+        <li>Comorbidade descompensada: diabetes, hipertensão, insuficiência cardíaca, uso de dicumarínicos, crise asmática, anemia falciforme</li>
+      </ul>
+
+      <h3>Critérios de Alta Hospitalar (item 6.10, todos)</h3>
+      <ul class="clinical-list">
+        <li>Estabilização hemodinâmica por 48 horas · sem febre por 24 horas · melhora visível do quadro</li>
+        <li>Hematócrito normal e estável por 24 horas · plaquetas em elevação</li>
+      </ul>
+
+      <h3>Situações Especiais</h3>
+      <ul class="clinical-list">
+        <li><strong>Gestantes:</strong> tratar conforme o estadiamento, com vigilância independente da gravidade. Taquicardia, hipotensão postural e hemoconcentração podem passar por alterações da gravidez. Mesmo volume dos demais pacientes. Após 20 semanas, decúbito lateral esquerdo. Diferenciais: pré-eclâmpsia, HELLP, sepse. Toda gestante com sangramento deve ser perguntada sobre febre nos últimos 7 dias.</li>
+        <li><strong>Crianças:</strong> sintomas inespecíficos (adinamia, sonolência, recusa alimentar, vômitos, diarreia); em menores de 2 anos, dor pode aparecer como choro persistente e irritabilidade.</li>
+        <li><strong>Idosos:</strong> maior vulnerabilidade a desfechos fatais e maior risco de sobrecarga hídrica.</li>
+      </ul>
+
+      <h3>Biomarcadores em Estudo (complementar)</h3>
+      <div style="font-size:11px;background:#FEF3C7;border:1px solid #FCD34D;border-radius:8px;padding:8px 12px;margin-bottom:8px;color:#92400E">
+        ℹ️ Estes marcadores <strong>não fazem parte do protocolo do Ministério da Saúde</strong> e vêm de estudos citados pela equipe. Confira os números nos artigos originais antes de usar. Na prática, vale o estadiamento A, B, C e D.
+      </div>
       <div class="drug-grid" style="grid-template-columns: 1fr 1fr;">
         <div class="drug-card" style="border-color:#2563EB;background:#EFF6FF">
           <div style="font-size:12px;font-weight:700;color:#1E40AF;margin-bottom:6px">Dias 1–3 (Fase Febril)</div>
@@ -875,68 +961,50 @@
     <div class="card-header" onclick="toggleCard('hepatotox')">
       <div class="card-title">
         <div class="card-icon" style="background:#FFF7ED">🧬</div>
-        Módulo 4 · Hepatotoxicidade do Paracetamol na Dengue
+        Módulo 4 · Fígado na Dengue e Uso Seguro do Paracetamol
       </div>
       <span class="chevron" id="chevron-hepatotox">▼</span>
     </div>
     <div class="card-body" id="body-hepatotox">
 
-      <h3>Paradoxo Clínico — Fármaco Seguro com Risco Hepático Específico na Dengue</h3>
-      <p>O paracetamol é o analgésico/antipirético de escolha na dengue por não inibir a COX-1 plaquetária. No entanto, a própria dengue causa <strong>hepatite viral direta</strong> por replicação do DENV nos hepatócitos, elevando AST e ALT em até 80% dos casos. Nesse contexto de hepatócito já lesionado, o metabolismo do paracetamol pode ser alterado.</p>
+      <h3>O Fígado na Dengue (MS 2024)</h3>
+      <p>A elevação de enzimas hepáticas <strong>de pequena monta ocorre em até 50% dos pacientes</strong>. Nas formas graves, pode evoluir para comprometimento severo da função hepática: <strong>aminotransferases acima de 10 vezes o valor máximo normal, com tempo de protrombina elevado</strong>. Para a classificação de caso, o manual cita como dano hepático importante <strong>AST/ALT &gt; 1.000</strong>, critério de dengue grave (Grupo D). O comprometimento grave de órgãos pode ocorrer sem extravasamento plasmático.</p>
 
-      <h3>Mecanismo de Hepatotoxicidade</h3>
-      <p>O paracetamol é metabolizado principalmente por glucuronidação (55%) e sulfatação (35%) no fígado. Uma fração menor (≈10%) é oxidada pela <strong>CYP2E1/CYP3A4</strong> gerando o metabólito tóxico <strong>NAPQI</strong> (N-acetil-p-benzoquinonaimina). Em condições normais, o NAPQI é rapidamente conjugado com glutationa. Na dengue grave, o estresse oxidativo hepático depleta a glutationa, tornando os hepatócitos mais vulneráveis à toxicidade por NAPQI mesmo em doses terapêuticas.</p>
+      <h3>Por que cuidar da dose de paracetamol</h3>
+      <p>O paracetamol é metabolizado principalmente por glucuronidação e sulfatação. Uma fração menor é oxidada pelo citocromo P450 (CYP2E1) em <strong>NAPQI</strong>, metabólito tóxico neutralizado pela glutationa. Em doses acima das recomendadas, ou com reserva de glutationa reduzida, o NAPQI se acumula e lesa o hepatócito. Por isso o MS reforça: <strong>não utilizar doses maiores que a recomendada, pois doses elevadas são hepatotóxicas</strong>.</p>
 
       <div class="evidence-box">
-        <div class="ev-title">🔬 Evidência Central — RCT Tailandês (Vasikasin et al., 2019)</div>
-        <p style="margin-bottom:8px">Ensaio clínico randomizado conduzido na Tailândia comparou dois esquemas posológicos de paracetamol em pacientes com dengue confirmada:</p>
-        <div class="drug-grid" style="grid-template-columns:1fr 1fr">
-          <div class="drug-card" style="border-color:var(--group-b);background:#F0FDF4">
-            <div class="drug-name" style="color:var(--group-b)">Esquema q6h ✓</div>
-            <p style="font-size:11px;margin-top:6px;margin-bottom:4px">10–15 mg/kg a cada <strong>6 horas</strong></p>
-            <div style="font-size:13px;font-weight:900;color:var(--group-b)">10% elevação de transaminases</div>
-          </div>
-          <div class="drug-card" style="border-color:var(--group-d);background:#FFF1F2">
-            <div class="drug-name" style="color:var(--group-d)">Esquema q4h ✗</div>
-            <p style="font-size:11px;margin-top:6px;margin-bottom:4px">10–15 mg/kg a cada <strong>4 horas</strong></p>
-            <div style="font-size:13px;font-weight:900;color:var(--group-d)">22% elevação de transaminases</div>
-          </div>
-        </div>
-        <p style="margin-top:10px;font-size:12px;color:#991B1B;font-weight:700">⚠️ O estudo foi encerrado precocemente pelo comitê de segurança devido à diferença significativa de hepatotoxicidade. A dose q4h dobra o risco de lesão hepática.</p>
-        <div class="ref-list">
-          <span class="ref-tag">Vasikasin V et al. Int J Infect Dis, 2019</span>
-          <span class="ref-tag">DSMB — encerramento precoce por segurança</span>
-        </div>
+        <div class="ev-title">📘 Doses do Ministério da Saúde (Apêndice H)</div>
+        <strong>Adultos:</strong> 500 mg (40 gotas ou 1 comprimido) até de 4/4 h, ou 1 g (60 gotas ou 2 comprimidos de 500 mg) até de 6/6 h. Não exceder 4 g em 24 h.<br/>
+        <strong>Crianças:</strong> 10 mg/kg/dose até de 6/6 h, respeitando a dose máxima para peso e idade. Gotas 200 mg/mL (1 mL = 20 gotas): 10 mg/kg corresponde a 1 gota por kg.
       </div>
 
-      <h3>Implicações Clínicas Práticas</h3>
+      <h3>Na prática</h3>
       <ul class="clinical-list">
-        <li><strong>Usar SEMPRE q6h</strong> — nunca q4h em dengue, mesmo que o paciente refira dor ou febre persistentes entre doses</li>
-        <li><strong>Dose máxima diária:</strong> 60 mg/kg/dia (crianças) — 4 doses de 15 mg/kg — nunca ultrapassar</li>
-        <li><strong>Monitorar AST/ALT</strong> em pacientes com dengue moderada/grave, especialmente nos dias 4–7 (fase crítica)</li>
-        <li><strong>Hepatopatia prévia:</strong> reduzir dose para 10 mg/kg/dose q8h e considerar dipirona como alternativa</li>
-        <li><strong>Atenção ao paracetamol "oculto"</strong> em formulações combinadas (antigripais, analgésicos compostos) — risco de dose acumulada inadvertida</li>
+        <li><strong>Somar todas as fontes de paracetamol</strong>: antigripais e analgésicos combinados contêm paracetamol e levam a dose acumulada sem o paciente perceber.</li>
+        <li>Orientar o paciente a <strong>não se automedicar</strong> e a anotar os horários das doses.</li>
+        <li>Nos Grupos C e D, <strong>transaminases são exames obrigatórios</strong>. Com AST/ALT &gt; 1.000 ou sinais de insuficiência hepática, conduzir como dengue grave (Grupo D).</li>
+        <li>Com hepatopatia prévia (condição do Grupo B), a escolha e a dose do antitérmico ficam a critério médico; a dipirona é a alternativa listada pelo MS.</li>
       </ul>
 
-      <h3>Monitoramento Laboratorial Recomendado</h3>
+      <h3>Leitura das Transaminases</h3>
       <div class="drug-grid" style="grid-template-columns:1fr 1fr 1fr">
         <div class="drug-card" style="border-color:#2563EB;background:#EFF6FF">
-          <div style="font-weight:700;color:#1E40AF;margin-bottom:6px;font-size:12px">AST/ALT normais</div>
-          <p style="font-size:11px;margin:0">Manter q6h · Repetir lab em 48–72h se fase crítica</p>
+          <div style="font-weight:700;color:#1E40AF;margin-bottom:6px;font-size:12px">Normais ou pouco elevadas</div>
+          <p style="font-size:11px;margin:0">Comum na dengue (até 50%). Manter dose padrão e seguir o grupo clínico.</p>
         </div>
         <div class="drug-card" style="border-color:var(--group-c);background:#FFF7ED">
-          <div style="font-weight:700;color:#9A3412;margin-bottom:6px;font-size:12px">AST/ALT 1–5× LSN</div>
-          <p style="font-size:11px;margin:0">Reduzir para 10 mg/kg q8h · Aumentar hidratação · Considerar dipirona</p>
+          <div style="font-weight:700;color:#9A3412;margin-bottom:6px;font-size:12px">Elevação importante</div>
+          <p style="font-size:11px;margin:0">Reavaliar o uso de paracetamol (a critério médico), somar fontes ocultas, repetir exames.</p>
         </div>
         <div class="drug-card" style="border-color:var(--group-d);background:#FFF1F2">
-          <div style="font-weight:700;color:#991B1B;margin-bottom:6px;font-size:12px">AST/ALT &gt; 5× LSN</div>
-          <p style="font-size:11px;margin:0">Suspender paracetamol · Usar dipirona · Avaliar N-acetilcisteína · Hepatologista</p>
+          <div style="font-weight:700;color:#991B1B;margin-bottom:6px;font-size:12px">&gt; 10× o normal com TP alto, ou AST/ALT &gt; 1.000</div>
+          <p style="font-size:11px;margin:0">Comprometimento hepático grave: dengue grave, Grupo D.</p>
         </div>
       </div>
 
-      <div class="evidence-box" style="margin-top:12px">
-        <div class="ev-title">💡 Limiar Clínico de Referência (Open Evidence)</div>
-        AST ou ALT &gt; 400 U/L = OR 3,0 e 6,6 respectivamente para dengue grave. Bilirrubina &gt; 17 µmol/L = OR 4,6. Esses valores devem disparar reavaliação urgente de conduta e suspensão do paracetamol.
+      <div style="font-size:11px;background:#FEF3C7;border:1px solid #FCD34D;border-radius:8px;padding:8px 12px;margin-top:12px;color:#92400E">
+        ℹ️ A versão anterior deste módulo citava um ensaio clínico comparando paracetamol de 4/4 h e de 6/6 h. Como o manual do MS (2024) admite 500 mg até de 4/4 h em adultos e não traz esses números, o trecho foi retirado. Se a equipe quiser citá-lo, confira o artigo original e apresente como evidência complementar.
       </div>
     </div>
   </div>
@@ -951,6 +1019,9 @@
       <span class="chevron" id="chevron-gbwt">▼</span>
     </div>
     <div class="card-body" id="body-gbwt">
+      <div style="font-size:11px;background:#FEF3C7;border:1px solid #FCD34D;border-radius:8px;padding:8px 12px;margin-bottom:12px;color:#92400E">
+        ℹ️ <strong>Conteúdo complementar:</strong> a medida do espessamento da vesícula biliar não faz parte do protocolo do Ministério da Saúde (6ª ed., 2024). O manual recomenda <strong>ultrassonografia de abdome nos Grupos C e D</strong>, por ser mais sensível para derrames cavitários. Os números abaixo vêm de estudos e devem ser conferidos nas fontes. A classificação do paciente segue os critérios do MS.
+      </div>
 
       <h3>O que é o GBWT?</h3>
       <p><strong>Gallbladder Wall Thickening (GBWT)</strong> — espessamento da parede da vesícula biliar — é um marcador ultrassonográfico de extravasamento plasmático na dengue. O DENV causa aumento da permeabilidade vascular local pela ação da proteína NS1 sobre o endotélio biliar, resultando em edema submucoso detectável à ultrassonografia com boa antecedência clínica.</p>
@@ -1046,7 +1117,7 @@
     </div>
     <div class="card-body open" id="body-triagem">
       <p style="font-size:12px;color:var(--text-muted);margin-bottom:14px">
-        Preencha antes de confirmar o diagnóstico. Caso o diagnóstico já esteja confirmado, pule para os dados clínicos abaixo. <strong>Critérios: MS 2016 / WHO 2009.</strong>
+        Preencha antes de confirmar o diagnóstico. Caso o diagnóstico já esteja confirmado, pule para os dados clínicos abaixo. <strong>Critérios: Ministério da Saúde, 6ª ed., 2024 (item 10.1).</strong>
       </p>
 
       <!-- DATA DE INÍCIO E DIAS -->
@@ -1071,89 +1142,82 @@
 
       <!-- CRITÉRIO OBRIGATÓRIO -->
       <div class="form-section">
-        <div class="form-section-title">Critério Obrigatório</div>
+        <div class="form-section-title">Critério Obrigatório e Contexto</div>
         <div class="check-list">
           <label class="check-item" id="tri-febre-item">
             <input type="checkbox" id="tri-febre" onchange="avaliarTriagem()"/>
             <span class="check-label">
-              Febre aguda ≤ 7 dias (geralmente 38,5–40°C, início súbito)
-              <small>Critério obrigatório — sem febre, dengue improvável</small>
+              Febre, usualmente de 2 a 7 dias (referida ou aferida)
+              <small>Geralmente alta (39–40°C) e de início abrupto. Pergunte também pela febre do dia anterior.</small>
             </span>
           </label>
         </div>
+        <div class="form-grid" style="margin-top:10px">
+          <div class="field full">
+            <label>Mora em área com casos de dengue ou viajou, nos últimos 14 dias, para área com transmissão?</label>
+            <select id="tri-epi" onchange="avaliarTriagem()">
+              <option value="sim">Sim</option>
+              <option value="talvez">Sem informação</option>
+              <option value="nao">Não</option>
+            </select>
+          </div>
+        </div>
       </div>
 
-      <!-- SINTOMAS ASSOCIADOS (precisa ≥2) -->
+      <!-- MANIFESTAÇÕES (precisa ≥2) -->
       <div class="form-section">
-        <div class="form-section-title">Sintomas Associados — marque os presentes (necessário ≥ 2)</div>
+        <div class="form-section-title">Manifestações — marque as presentes (necessário ≥ 2)</div>
         <div class="check-list">
-          <label class="check-item" id="tri-cef-item">
-            <input type="checkbox" id="tri-cef" onchange="avaliarTriagem()"/>
-            <span class="check-label">Cefaleia intensa / Dor retroorbitária<small>Dor atrás dos olhos, piora com movimento</small></span>
-          </label>
-          <label class="check-item" id="tri-mio-item">
-            <input type="checkbox" id="tri-mio" onchange="avaliarTriagem()"/>
-            <span class="check-label">Mialgia e/ou artralgia ("febre quebra-ossos")<small>Dor muscular e articular intensa, característica da dengue</small></span>
-          </label>
-          <label class="check-item" id="tri-prost-item">
-            <input type="checkbox" id="tri-prost" onchange="avaliarTriagem()"/>
-            <span class="check-label">Prostração / Astenia intensa<small>Fraqueza desproporcional ao quadro febril</small></span>
-          </label>
-          <label class="check-item" id="tri-exan-item">
-            <input type="checkbox" id="tri-exan" onchange="avaliarTriagem()"/>
-            <span class="check-label">Exantema máculo-papular<small>Aparece geralmente no 3º–5º dia, centrífugo, poupa palmas e plantas</small></span>
-          </label>
-          <label class="check-item" id="tri-naus-item">
-            <input type="checkbox" id="tri-naus" onchange="avaliarTriagem()"/>
-            <span class="check-label">Náuseas / Vômitos<small>Muito frequentes; vômitos persistentes = sinal de alarme</small></span>
-          </label>
-          <label class="check-item" id="tri-petq-item">
-            <input type="checkbox" id="tri-petq" onchange="avaliarTriagem()"/>
-            <span class="check-label">Petéquias espontâneas e/ou Prova do Laço positiva<small>Sinal hemorrágico leve — use o contador interativo abaixo em Sinais Vitais</small></span>
-          </label>
+          <label class="check-item" id="tri-naus-item"><input type="checkbox" id="tri-naus" onchange="avaliarTriagem()"/><span class="check-label">Náuseas</span></label>
+          <label class="check-item" id="tri-vom-item"><input type="checkbox" id="tri-vom" onchange="avaliarTriagem()"/><span class="check-label">Vômitos<small>Vômitos persistentes são sinal de alarme</small></span></label>
+          <label class="check-item" id="tri-exan-item"><input type="checkbox" id="tri-exan" onchange="avaliarTriagem()"/><span class="check-label">Exantema<small>Maculopapular em ~50% dos casos, face, tronco e membros, inclusive palmas e plantas; surge do 3º ao 6º dia, com ou sem prurido</small></span></label>
+          <label class="check-item" id="tri-mial-item"><input type="checkbox" id="tri-mial" onchange="avaliarTriagem()"/><span class="check-label">Mialgias</span></label>
+          <label class="check-item" id="tri-art-item"><input type="checkbox" id="tri-art" onchange="avaliarTriagem()"/><span class="check-label">Artralgias<small>Na dengue costuma ser leve; artralgia intensa com edema sugere chikungunya</small></span></label>
+          <label class="check-item" id="tri-cef-item"><input type="checkbox" id="tri-cef" onchange="avaliarTriagem()"/><span class="check-label">Cefaleia</span></label>
+          <label class="check-item" id="tri-retro-item"><input type="checkbox" id="tri-retro" onchange="avaliarTriagem()"/><span class="check-label">Dor retro-orbital</span></label>
+          <label class="check-item" id="tri-petq-item"><input type="checkbox" id="tri-petq" onchange="avaliarTriagem()"/><span class="check-label">Petéquias</span></label>
+          <label class="check-item" id="tri-laco-item"><input type="checkbox" id="tri-laco" onchange="avaliarTriagem()"/><span class="check-label">Prova do laço positiva<small>Marcada sozinha pelo contador em Sinais Vitais</small></span></label>
+          <label class="check-item" id="tri-leuco-item"><input type="checkbox" id="tri-leuco" onchange="avaliarTriagem()"/><span class="check-label">Leucopenia<small>Marcada sozinha se os leucócitos forem &lt; 4.000/mm³</small></span></label>
+        </div>
+        <div class="check-list" style="margin-top:10px">
+          <label class="check-item" id="tri-crianca-item"><input type="checkbox" id="tri-crianca" onchange="avaliarTriagem()"/><span class="check-label">Criança com febre aguda (2 a 7 dias) sem foco de infecção aparente<small>Pelo MS, já é caso suspeito, mesmo sem outras manifestações</small></span></label>
         </div>
       </div>
 
       <!-- DIAGNÓSTICO ETIOLÓGICO -->
       <div class="form-section">
-        <div class="form-section-title">Confirmação Laboratorial (quando disponível)</div>
+        <div class="form-section-title">Confirmação (quando disponível)</div>
         <div class="form-grid">
-          <div class="field">
-            <label>Exame realizado</label>
+          <div class="field full">
+            <label>Exame ou critério</label>
             <select id="tri-exame" onchange="avaliarTriagem()">
               <option value="">Ainda não realizado</option>
-              <option value="ns1pos">NS1 Positivo (dias 1–4)</option>
-              <option value="ns1neg">NS1 Negativo</option>
-              <option value="igmpos">IgM Positivo (a partir do 6º dia)</option>
-              <option value="igmneg">IgM Negativo</option>
-              <option value="pcr">PCR Positivo</option>
-              <option value="clinico">Diagnóstico clínico-epidemiológico</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Contexto epidemiológico</label>
-            <select id="tri-epi" onchange="avaliarTriagem()">
-              <option value="sim">Área endêmica / surto ativo</option>
-              <option value="talvez">Sem informação</option>
-              <option value="nao">Sem contexto epidemiológico</option>
+              <option value="ns1pos">NS1 reagente (até o 5º dia)</option>
+              <option value="ns1neg">NS1 não reagente</option>
+              <option value="pcr">RT-PCR detectável (até o 5º dia)</option>
+              <option value="igmpos">IgM reagente (a partir do 6º dia)</option>
+              <option value="igmneg">IgM não reagente</option>
+              <option value="clinico">Vínculo clínico-epidemiológico</option>
             </select>
           </div>
         </div>
         <div style="margin-top:8px;font-size:11px;background:#F0F9FF;border:1px solid #BAE6FD;border-radius:7px;padding:8px 12px;color:#0369A1">
-          <strong>Quando pedir cada teste:</strong> NS1 → dias 1–4 de sintomas · IgM/IgG → a partir do 6º dia · No 5º dia: pedir NS1 + sorologia simultaneamente.
+          <strong>Quando pedir:</strong> até o 5º dia de sintomas, NS1, RT-PCR ou isolamento viral · a partir do 6º dia, sorologia IgM. Nos Grupos A e B os exames específicos não mudam a conduta; nos Grupos C e D são obrigatórios. <strong>Notificar todo caso suspeito.</strong>
         </div>
       </div>
 
       <!-- DIAGNÓSTICOS DIFERENCIAIS -->
       <div class="form-section">
-        <div class="form-section-title">Principais Diagnósticos Diferenciais a Excluir</div>
+        <div class="form-section-title">Diagnósticos Diferenciais (MS, cap. 3)</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px">
-          <div style="padding:8px 12px;background:var(--white-clinical);border:1px solid var(--platinum);border-radius:8px;font-size:12px">🦟 <strong>Zika / Chikungunya</strong><br/><span style="color:var(--text-muted)">Exantema mais precoce, artralgia mais intensa (chik)</span></div>
-          <div style="padding:8px 12px;background:var(--white-clinical);border:1px solid var(--platinum);border-radius:8px;font-size:12px">🦠 <strong>Malária</strong><br/><span style="color:var(--text-muted)">Febre cíclica; área endêmica Norte/Centro-Oeste</span></div>
-          <div style="padding:8px 12px;background:var(--white-clinical);border:1px solid var(--platinum);border-radius:8px;font-size:12px">🌡️ <strong>Influenza</strong><br/><span style="color:var(--text-muted)">Predomina sintomas respiratórios; sem exantema típico</span></div>
-          <div style="padding:8px 12px;background:var(--white-clinical);border:1px solid var(--platinum);border-radius:8px;font-size:12px">🩸 <strong>Febre Tifoide</strong><br/><span style="color:var(--text-muted)">Febre escalonada, bradicardia relativa, manchas rosadas</span></div>
-          <div style="padding:8px 12px;background:var(--white-clinical);border:1px solid var(--platinum);border-radius:8px;font-size:12px">🔴 <strong>Leptospirose</strong><br/><span style="color:var(--text-muted)">Contato com água/lama, icterícia, sufusão conjuntival</span></div>
-          <div style="padding:8px 12px;background:var(--white-clinical);border:1px solid var(--platinum);border-radius:8px;font-size:12px">🧒 <strong>Sarampo / Rubéola</strong><br/><span style="color:var(--text-muted)">Exantema confluente céfalo-caudal; Koplik (sarampo)</span></div>
+          <div style="padding:8px 12px;background:var(--white-clinical);border:1px solid var(--platinum);border-radius:8px;font-size:12px">🦟 <strong>Chikungunya</strong><br/><span style="color:var(--text-muted)">Febre alta por 2–3 dias, artralgia intensa com edema articular</span></div>
+          <div style="padding:8px 12px;background:var(--white-clinical);border:1px solid var(--platinum);border-radius:8px;font-size:12px">🦟 <strong>Zika e oropouche</strong><br/><span style="color:var(--text-muted)">Zika: febre baixa ou ausente, exantema no 1º–2º dia, conjuntivite em 50–90%</span></div>
+          <div style="padding:8px 12px;background:var(--white-clinical);border:1px solid var(--platinum);border-radius:8px;font-size:12px">🌡️ <strong>Influenza, covid-19, enteroviroses</strong><br/><span style="color:var(--text-muted)">Síndromes febris com sintomas respiratórios</span></div>
+          <div style="padding:8px 12px;background:var(--white-clinical);border:1px solid var(--platinum);border-radius:8px;font-size:12px">🔴 <strong>Leptospirose, febre maculosa, hantavirose, febre amarela</strong><br/><span style="color:var(--text-muted)">Síndromes hemorrágicas febris</span></div>
+          <div style="padding:8px 12px;background:var(--white-clinical);border:1px solid var(--platinum);border-radius:8px;font-size:12px">🦠 <strong>Malária, febre tifoide, hepatites virais</strong><br/><span style="color:var(--text-muted)">Considerar viagem e exposição</span></div>
+          <div style="padding:8px 12px;background:var(--white-clinical);border:1px solid var(--platinum);border-radius:8px;font-size:12px">🧒 <strong>Sarampo, rubéola, escarlatina, Kawasaki</strong><br/><span style="color:var(--text-muted)">Síndromes exantemáticas febris</span></div>
+          <div style="padding:8px 12px;background:var(--white-clinical);border:1px solid var(--platinum);border-radius:8px;font-size:12px">🚨 <strong>Meningococcemia, sepse</strong><br/><span style="color:var(--text-muted)">Síndromes de choque; ver diferenças no Apêndice A do MS</span></div>
+          <div style="padding:8px 12px;background:var(--white-clinical);border:1px solid var(--platinum);border-radius:8px;font-size:12px">🩺 <strong>Abdome agudo</strong><br/><span style="color:var(--text-muted)">Apendicite, colecistite, infecção urinária, pneumonia</span></div>
         </div>
       </div>
 
@@ -1222,21 +1286,26 @@
         </div>
       </div>
       <div class="form-section">
-        <div class="form-section-title">Fatores de Risco Pregressos</div>
+        <div class="form-section-title">Condições Especiais, Risco Social ou Comorbidades</div>
         <div style="font-size:11px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:8px 12px;margin-bottom:10px;color:#1E40AF">
-          <strong>Base:</strong> Qualquer fator abaixo classifica o paciente em <strong>Grupo B no mínimo</strong>, mesmo sem sinais de alarme. (MS 2016, p. 24 — Quadro 3)
+          <strong>Base:</strong> sem sinais de alarme, qualquer condição abaixo classifica o paciente no <strong>Grupo B</strong> (MS, 6ª ed., 2024, Figura 2). Esses pacientes podem evoluir mal e precisam de acompanhamento diferenciado.
         </div>
         <div class="check-list" id="fatores-risco">
-          <label class="check-item"><input type="checkbox" name="fator" value="dengue_prev" onchange="atualizar()"/> <span class="check-label">Infecção prévia por dengue<small>↑ risco de dengue grave — ADE (Facilitação Dependente de Anticorpos)</small></span></label>
-          <label class="check-item"><input type="checkbox" name="fator" value="menor2" onchange="atualizar()"/> <span class="check-label">Criança &lt; 2 anos ou idoso ≥ 65 anos<small>Faixa etária de risco — marcado automaticamente pela idade</small></span></label>
-          <label class="check-item"><input type="checkbox" name="fator" value="gestante" onchange="atualizar()"/> <span class="check-label">Gestante<small>Protocolo especial — internação preferencial</small></span></label>
-          <label class="check-item"><input type="checkbox" name="fator" value="hipertensao" onchange="atualizar()"/> <span class="check-label">Hipertensão Arterial Sistêmica</span></label>
-          <label class="check-item"><input type="checkbox" name="fator" value="diabetes" onchange="atualizar()"/> <span class="check-label">Diabetes Mellitus</span></label>
-          <label class="check-item"><input type="checkbox" name="fator" value="renal" onchange="atualizar()"/> <span class="check-label">Doença Renal Crônica</span></label>
-          <label class="check-item"><input type="checkbox" name="fator" value="hepato" onchange="atualizar()"/> <span class="check-label">Hepatopatia / Doença Hepática Crônica<small>Contraindicação para Ringer Lactato — preferir Plasmalyte</small></span></label>
-          <label class="check-item"><input type="checkbox" name="fator" value="imuno" onchange="atualizar()"/> <span class="check-label">Imunossupressão (medicamentosa ou doença)</span></label>
-          <label class="check-item"><input type="checkbox" name="fator" value="cardio" onchange="atualizar()"/> <span class="check-label">Cardiopatia / DPOC / Asma</span></label>
-          <label class="check-item"><input type="checkbox" name="fator" value="hematol" onchange="atualizar()"/> <span class="check-label">Doença Hematológica (anemia falciforme, plaquetopenia crônica)</span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="menor2" onchange="atualizar()"/> <span class="check-label">Lactente (&lt; 24 meses)<small>Marcado automaticamente pela idade</small></span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="idoso" onchange="atualizar()"/> <span class="check-label">Adulto &gt; 65 anos<small>Marcado pela idade. Grupo de maior vulnerabilidade para óbito; atenção à sobrecarga hídrica</small></span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="gestante" onchange="atualizar()"/> <span class="check-label">Gestante<small>Vigilância independente da gravidade; mesmo volume dos demais na reposição</small></span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="hipertensao" onchange="atualizar()"/> <span class="check-label">Hipertensão arterial ou outra doença cardiovascular grave<small>Ver anti-hipertensivos (cap. 7) e hidratação em cardiopatas (cap. 8) no Módulo 2</small></span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="diabetes" onchange="atualizar()"/> <span class="check-label">Diabetes mellitus</span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="dpoc" onchange="atualizar()"/> <span class="check-label">Doença pulmonar obstrutiva crônica (DPOC)</span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="asma" onchange="atualizar()"/> <span class="check-label">Asma</span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="obesidade" onchange="atualizar()"/> <span class="check-label">Obesidade<small>A prova do laço costuma ser negativa na obesidade</small></span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="hematol" onchange="atualizar()"/> <span class="check-label">Doença hematológica crônica<small>Ex.: anemia falciforme</small></span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="renal" onchange="atualizar()"/> <span class="check-label">Doença renal crônica</span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="acidopeptica" onchange="atualizar()"/> <span class="check-label">Doença ácido-péptica<small>Maior risco de hemorragia digestiva</small></span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="hepato" onchange="atualizar()"/> <span class="check-label">Hepatopatia</span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="autoimune" onchange="atualizar()"/> <span class="check-label">Doença autoimune</span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="social" onchange="atualizar()"/> <span class="check-label">Risco social<small>Ex.: não consegue retornar ou ser acompanhado (também indica internação)</small></span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="outra" onchange="atualizar()"/> <span class="check-label">Outra comorbidade ou condição especial<small>A critério médico</small></span></label>
         </div>
       </div>
     </div>
@@ -1245,11 +1314,11 @@
   <!-- ── CALCULADORA DE DOSES PEDIÁTRICAS ── -->
   <div class="card">
     <div class="card-header" onclick="toggleCard('doses')">
-      <div class="card-title"><div class="card-icon icon-farm" style="background:#F5F3FF">💉</div>Calculadora de Doses Pediátricas</div>
+      <div class="card-title"><div class="card-icon icon-farm" style="background:#F5F3FF">💉</div>Calculadora de Doses e Hidratação (MS 2024)</div>
       <span class="chevron open" id="chevron-doses">▼</span>
     </div>
     <div class="card-body open" id="body-doses">
-      <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px">Preenche automaticamente com o peso do paciente. Atualize o peso na aba "Dados do Paciente" para recalcular.</p>
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px">Preenche automaticamente com o peso do paciente. Crianças (&lt; 13 anos) por peso; adultos com as doses fixas do Apêndice H do MS.</p>
       <div class="form-grid">
         <div class="field">
           <label>Peso para cálculo (kg)</label>
@@ -1259,53 +1328,31 @@
       </div>
       <div id="dose-results" style="display:none">
         <div class="dose-result">
-          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--group-b);margin-bottom:10px">💊 RESULTADOS POR DOSE</div>
-          <!-- Paracetamol -->
-          <div class="dose-row">
-            <span class="dose-label">Paracetamol (10 mg/kg/dose) · a cada 6h</span>
-            <span class="dose-val" id="d-para-min">—</span>
-          </div>
-          <div class="dose-row">
-            <span class="dose-label">Paracetamol (15 mg/kg/dose) · a cada 6h</span>
-            <span class="dose-val" id="d-para-max">—</span>
-          </div>
-          <div class="dose-row" style="border-bottom:1px solid #BBF7D0">
-            <span class="dose-label">Paracetamol — Dose máxima/dia (60 mg/kg/dia)</span>
-            <span class="dose-val" id="d-para-dia">—</span>
-          </div>
-          <div style="margin:6px 0 10px;font-size:11px;background:#FEF9C3;border:1px solid #FDE047;border-radius:6px;padding:6px 10px;color:#854D0E">
-            ⚠️ <strong>Protocolo dengue:</strong> 10–15 mg/kg q6h (NÃO q4h). Estudo tailandês (Vasikasin 2019): regime q4h elevou transaminases em 22% vs 10% — ensaio interrompido precocemente.
-          </div>
-          <!-- Dipirona -->
-          <div class="dose-row">
-            <span class="dose-label">Dipirona (15 mg/kg/dose) · a cada 6h</span>
-            <span class="dose-val" id="d-dipi">—</span>
-          </div>
-          <div style="margin:6px 0 10px;font-size:11px;color:var(--text-muted)">Dipirona IV disponível para casos de difícil controle térmico · Adultos: 500–1000 mg/dose</div>
-          <!-- Fluidos EV -->
-          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--group-c);margin:12px 0 6px">💧 VOLUMES DE FLUIDOS EV (RINGER COM LACTATO)</div>
-          <div class="dose-row">
-            <span class="dose-label">Grupo C — Expansão volêmica (10 mL/kg) em 1 hora</span>
-            <span class="dose-val" id="d-rl-c">—</span>
-          </div>
-          <div class="dose-row">
-            <span class="dose-label">Grupo D — Ressuscitação (20 mL/kg) em 15–20 min</span>
-            <span class="dose-val" id="d-rl-d" style="color:var(--group-d)">—</span>
-          </div>
-          <div class="dose-row">
-            <span class="dose-label">Limiar crítico de volume acumulado (181 mL/kg/24h)</span>
-            <span class="dose-val" id="d-limiar" style="color:var(--group-d)">—</span>
-          </div>
-          <!-- Hidratação oral -->
+          <div id="dose-perfil" style="font-size:12px;font-weight:700;color:var(--slate-dark);margin-bottom:10px"></div>
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--group-b);margin-bottom:6px">💊 ANALGÉSICO E ANTITÉRMICO (APÊNDICE H)</div>
+          <div class="dose-row"><span class="dose-label">Paracetamol · por dose</span><span class="dose-val" id="d-para">—</span></div>
+          <div class="dose-row"><span class="dose-label">Paracetamol · máximo em 24 h</span><span class="dose-val" id="d-para-dia">—</span></div>
+          <div class="dose-row"><span class="dose-label">Dipirona · por dose, até de 6/6 h</span><span class="dose-val" id="d-dipi">—</span></div>
+          <div id="d-med-nota" style="margin:6px 0 10px;font-size:11px;color:var(--text-muted)"></div>
+
           <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--group-a);margin:12px 0 6px">🥤 HIDRATAÇÃO ORAL (GRUPOS A E B)</div>
-          <div class="dose-row">
-            <span class="dose-label">Grupo A — Mínimo oral (60 mL/kg/dia)</span>
-            <span class="dose-val" id="d-oral-a">—</span>
-          </div>
-          <div class="dose-row">
-            <span class="dose-label">Grupo B — Oral supervisionado (80 mL/kg/dia)</span>
-            <span class="dose-val" id="d-oral-b">—</span>
-          </div>
+          <div class="dose-row"><span class="dose-label" id="d-oral-label">Volume em 24 h</span><span class="dose-val" id="d-oral">—</span></div>
+          <div class="dose-row"><span class="dose-label">1/3 nas primeiras 4 a 6 h</span><span class="dose-val" id="d-oral-inicio">—</span></div>
+          <div class="dose-row"><span class="dose-label">Sais de reidratação oral (1/3 do total)</span><span class="dose-val" id="d-oral-sro">—</span></div>
+
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--group-c);margin:12px 0 6px">💧 GRUPO C · SORO FISIOLÓGICO 0,9%</div>
+          <div class="dose-row"><span class="dose-label">1ª hora: 10 mL/kg</span><span class="dose-val" id="d-c-1h">—</span></div>
+          <div class="dose-row"><span class="dose-label">2ª hora: 10 mL/kg/h até o hematócrito</span><span class="dose-val" id="d-c-2h">—</span></div>
+          <div class="dose-row"><span class="dose-label">Manutenção, 1ª fase: 25 mL/kg em 6 h</span><span class="dose-val" id="d-c-m1">—</span></div>
+          <div class="dose-row"><span class="dose-label">Manutenção, 2ª fase: 25 mL/kg em 8 h</span><span class="dose-val" id="d-c-m2">—</span></div>
+
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--group-d);margin:12px 0 6px">🚨 GRUPO D</div>
+          <div class="dose-row"><span class="dose-label">SF 0,9%: 20 mL/kg em até 20 min (até 3×)</span><span class="dose-val" id="d-d-exp" style="color:var(--group-d)">—</span></div>
+          <div class="dose-row"><span class="dose-label">Albumina 0,5–1 g/kg (Ht subindo, choque persistente)</span><span class="dose-val" id="d-d-alb" style="color:var(--group-d)">—</span></div>
+          <div class="dose-row"><span class="dose-label">Na falta de albumina: coloide sintético 10 mL/kg/h</span><span class="dose-val" id="d-d-col" style="color:var(--group-d)">—</span></div>
+          <div class="dose-row"><span class="dose-label">Hemorragia: concentrado de hemácias 10–15 mL/kg/dia</span><span class="dose-val" id="d-d-ch" style="color:var(--group-d)">—</span></div>
+          <div class="dose-row"><span class="dose-label">Coagulopatia: plasma fresco 10 mL/kg</span><span class="dose-val" id="d-d-pf" style="color:var(--group-d)">—</span></div>
+          <div class="dose-row"><span class="dose-label">Coagulopatia: crioprecipitado 1 U para cada 5–10 kg</span><span class="dose-val" id="d-d-crio" style="color:var(--group-d)">—</span></div>
         </div>
       </div>
       <div id="dose-empty" style="padding:16px;text-align:center;color:var(--text-muted);font-size:13px">Insira o peso para ver as doses calculadas.</div>
@@ -1331,7 +1378,7 @@
         <div class="field">
           <label>Pressão de Pulso (mmHg)</label>
           <div class="field-computed" id="pp-display">—</div>
-          <div class="field-note">PAS − PAD · Alarme se ≤ 20 mmHg</div>
+          <div class="field-note">PAS − PAD · convergente se ≤ 20 mmHg (choque)</div>
         </div>
         <div class="field">
           <label>Frequência Cardíaca (bpm)</label>
@@ -1366,11 +1413,13 @@
           </select>
           <!-- CONTADOR INTERATIVO -->
           <div id="laco-grid-wrap">
-            <div id="laco-grid-title">🔴 Clique nas bolinhas para contar petéquias na área de 2,5 cm²</div>
+            <div id="laco-grid-title">🔴 Toque nas bolinhas para contar as petéquias no quadrado de 2,5 cm de lado</div>
             <div id="laco-grid"></div>
             <div id="laco-counter" style="color:var(--text-muted)">0</div>
             <div id="laco-status" style="color:var(--text-muted)">—</div>
-            <div style="font-size:10px;text-align:center;color:var(--text-muted);margin-top:4px">Limiar: ≥ 20 petéquias (adultos) · ≥ 10 petéquias (crianças &lt;12 anos)</div>
+            <div style="font-size:10px;text-align:center;color:var(--text-muted);margin-top:4px">Positiva: ≥ 20 petéquias (adultos) · ≥ 10 (crianças &lt; 13 anos)</div>
+            <div id="laco-pam" style="font-size:11px;text-align:center;color:var(--text-muted);margin-top:4px"></div>
+            <div style="font-size:10px;text-align:center;color:var(--text-muted);margin-top:4px">Técnica (MS, Apêndice G): insuflar o manguito no valor médio (PAS + PAD) / 2 por 5 min no adulto e 3 min na criança. Costuma ser negativa na obesidade e no choque, e tem baixo valor para prever gravidade</div>
             <div id="laco-actions">
               <button class="btn btn-secondary" style="font-size:12px;padding:6px 14px" onclick="resetLaco()">🔄 Reiniciar contagem</button>
             </div>
@@ -1395,6 +1444,7 @@
           </select>
         </div>
       </div>
+      <div id="vitais-alertas" style="margin-top:10px"></div>
     </div>
   </div>
 
@@ -1413,13 +1463,18 @@
             <input type="text" inputmode="decimal" autocomplete="off" id="ht" placeholder="Ex: 42" min="10" max="80" step="0.1" oninput="atualizar()"/>
           </div>
           <div class="field">
-            <label>Ref. calculada p/ faixa etária (%)</label>
+            <label>Hematócrito basal do paciente (%)</label>
+            <input type="text" inputmode="decimal" autocomplete="off" id="ht-basal" placeholder="Opcional" oninput="atualizar()"/>
+            <div class="field-note">Exame anterior ou o primeiro da doença</div>
+          </div>
+          <div class="field">
+            <label>Referência por idade e sexo (MS, Apêndice I)</label>
             <div class="field-computed" id="ht-ref">—</div>
           </div>
           <div class="field">
             <label>Δ Hematócrito (%)</label>
             <div class="field-computed" id="ht-delta">—</div>
-            <div class="field-note">Variação vs. referência</div>
+            <div class="field-note">Contra o basal, se houver; senão, contra a referência</div>
           </div>
           <div class="field">
             <label>Plaquetas (/mm³)</label>
@@ -1432,7 +1487,7 @@
         </div>
       </div>
       <div class="form-section">
-        <div class="form-section-title">Bioquímica (opcional)</div>
+        <div class="form-section-title">Bioquímica (albumina e transaminases obrigatórias nos Grupos C e D)</div>
         <div class="form-grid-3">
           <div class="field">
             <label>Albumina (g/L)</label>
@@ -1445,7 +1500,7 @@
           <div class="field">
             <label>Razão Lactato/Albumina</label>
             <div class="field-computed" id="lar-display">—</div>
-            <div class="field-note">Alarme &gt;1,25 (AUC 0,82)</div>
+            <div class="field-note">Indicador de estudos, fora do protocolo do MS</div>
           </div>
           <div class="field">
             <label>AST (U/L)</label>
@@ -1473,27 +1528,28 @@
       <span class="chevron open" id="chevron-sinais">▼</span>
     </div>
     <div class="card-body open" id="body-sinais">
-      <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px">Marque os sinais presentes. Qualquer sinal de alarme classifica o paciente em <strong>Grupo C</strong> no mínimo.</p>
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px">Marque os sinais presentes (Quadro 1, MS 2024). Qualquer sinal de alarme classifica o paciente em <strong>Grupo C</strong> no mínimo. Eles costumam surgir na queda da febre.</p>
       <div class="check-list">
-        <label class="check-item" id="ci-abd"><input type="checkbox" name="alarme" value="abd" onchange="atualizar()"/> <span class="check-label">Dor abdominal intensa, referida ou à palpação, contínua<small>Sinal de extravasamento plasmático peritoneal</small></span></label>
-        <label class="check-item" id="ci-vom"><input type="checkbox" name="alarme" value="vom" onchange="atualizar()"/> <span class="check-label">Vômitos persistentes (≥ 3 episódios/hora)<small>Dificulta hidratação oral; indicação de EV</small></span></label>
-        <label class="check-item" id="ci-hipo"><input type="checkbox" name="alarme" value="hipo" onchange="atualizar()"/> <span class="check-label">Hipotensão postural / Lipotimia</span></label>
-        <label class="check-item" id="ci-hepa"><input type="checkbox" name="alarme" value="hepa" onchange="atualizar()"/> <span class="check-label">Hepatomegalia dolorosa (&gt; 2 cm abaixo do rebordo costal)<small>Hepatite por dengue — sinal de comprometimento orgânico</small></span></label>
-        <label class="check-item" id="ci-sang"><input type="checkbox" name="alarme" value="sang" onchange="atualizar()"/> <span class="check-label">Sangramento de mucosas (epistaxe, gengivorragia, melena, hematêmese)<small>Avaliar AINE prévio — risco hemorrágico amplificado</small></span></label>
-        <label class="check-item" id="ci-letarg"><input type="checkbox" name="alarme" value="letarg" onchange="atualizar()"/> <span class="check-label">Sonolência, letargia ou irritabilidade<small>OR independente para dengue grave — Idrus et al. PLoS NTD, 2023</small></span></label>
-        <label class="check-item" id="ci-derrame"><input type="checkbox" name="alarme" value="derrame" onchange="atualizar()"/> <span class="check-label">Derrames cavitários (pleural, pericárdico, peritoneal)</span></label>
-        <label class="check-item" id="ci-plaq"><input type="checkbox" name="alarme" value="plaq" onchange="atualizar()"/> <span class="check-label">Plaquetas &lt; 50.000/mm³<small>Atenção: &lt;20.000/mm³ = avaliar transfusão</small></span></label>
-        <label class="check-item" id="ci-hemo"><input type="checkbox" name="alarme" value="hemo" onchange="atualizar()"/> <span class="check-label">Elevação do hematócrito &gt; 10% acima do valor basal<small>Hemoconcentração = extravasamento plasmático</small></span></label>
+        <label class="check-item" id="ci-abd"><input type="checkbox" name="alarme" value="abd" onchange="atualizar()"/> <span class="check-label">Dor abdominal intensa (referida ou à palpação) e contínua</span></label>
+        <label class="check-item" id="ci-vom"><input type="checkbox" name="alarme" value="vom" onchange="atualizar()"/> <span class="check-label">Vômitos persistentes</span></label>
+        <label class="check-item" id="ci-derrame"><input type="checkbox" name="alarme" value="derrame" onchange="atualizar()"/> <span class="check-label">Acúmulo de líquidos (ascite, derrame pleural, derrame pericárdico)</span></label>
+        <label class="check-item" id="ci-hipo"><input type="checkbox" name="alarme" value="hipo" onchange="atualizar()"/> <span class="check-label">Hipotensão postural ou lipotimia</span></label>
+        <label class="check-item" id="ci-hepa"><input type="checkbox" name="alarme" value="hepa" onchange="atualizar()"/> <span class="check-label">Hepatomegalia &gt; 2 cm abaixo do rebordo costal<small>Marcada sozinha pelo campo de hepatomegalia</small></span></label>
+        <label class="check-item" id="ci-sang"><input type="checkbox" name="alarme" value="sang" onchange="atualizar()"/> <span class="check-label">Sangramento de mucosa<small>Epistaxe, gengivorragia, metrorragia leve. Sangramento volumoso é Grupo D</small></span></label>
+        <label class="check-item" id="ci-letarg"><input type="checkbox" name="alarme" value="letarg" onchange="atualizar()"/> <span class="check-label">Letargia e/ou irritabilidade</span></label>
+        <label class="check-item" id="ci-hemo"><input type="checkbox" name="alarme" value="hemo" onchange="atualizar()"/> <span class="check-label">Aumento progressivo do hematócrito<small>O app marca sozinho quando o Ht passa 10% do basal (ou da referência); confirme pela evolução</small></span></label>
       </div>
 
       <hr class="separator"/>
-      <p style="font-size:12px;color:var(--group-d);font-weight:700;margin-bottom:10px">SINAIS DE CHOQUE (Grupo D):</p>
+      <p style="font-size:12px;color:var(--group-d);font-weight:700;margin-bottom:10px">SINAIS DE CHOQUE OU DENGUE GRAVE (Grupo D):</p>
       <div class="check-list">
-        <label class="check-item" id="ci-choque1"><input type="checkbox" name="choque" value="hipo_art" onchange="atualizar()"/> <span class="check-label">Hipotensão arterial ou Pressão de Pulso ≤ 20 mmHg<small>Sinal mais específico de SCD</small></span></label>
-        <label class="check-item" id="ci-choque2"><input type="checkbox" name="choque" value="taquic" onchange="atualizar()"/> <span class="check-label">Taquicardia inapropriada para a faixa etária</span></label>
-        <label class="check-item" id="ci-choque3"><input type="checkbox" name="choque" value="extrem" onchange="atualizar()"/> <span class="check-label">Extremidades frias, cianose ou enchimento capilar &gt; 2 segundos</span></label>
-        <label class="check-item" id="ci-choque4"><input type="checkbox" name="choque" value="oliguria" onchange="atualizar()"/> <span class="check-label">Oligúria / Anúria</span></label>
-        <label class="check-item" id="ci-choque5"><input type="checkbox" name="choque" value="grave" onchange="atualizar()"/> <span class="check-label">Sangramento grave ou disfunção grave de órgão<small>Ex.: alteração grave da consciência (confuso/coma), hematêmese volumosa, insuficiência hepática</small></span></label>
+        <label class="check-item" id="ci-choque1"><input type="checkbox" name="choque" value="hipo_art" onchange="atualizar()"/> <span class="check-label">PA convergente (diferencial ≤ 20 mmHg) ou hipotensão arterial<small>Marcado sozinho pela PA. Hipotensão: PAS &lt; 90 ou PAM &lt; 70 no adulto; até 10 anos, PAS &lt; 70 + (2 × idade)</small></span></label>
+        <label class="check-item" id="ci-choque2"><input type="checkbox" name="choque" value="taquic" onchange="atualizar()"/> <span class="check-label">Taquicardia com sinais de má perfusão<small>A FC acima do limite para a idade aparece como aviso em Sinais Vitais; marque se fizer parte do quadro de choque</small></span></label>
+        <label class="check-item" id="ci-choque3"><input type="checkbox" name="choque" value="extrem" onchange="atualizar()"/> <span class="check-label">Extremidades frias, pulso fraco e filiforme, enchimento capilar &gt; 2 s ou cianose</span></label>
+        <label class="check-item" id="ci-choque4"><input type="checkbox" name="choque" value="oliguria" onchange="atualizar()"/> <span class="check-label">Oligúria (&lt; 1,5 mL/kg/h) ou anúria</span></label>
+        <label class="check-item" id="ci-choque6"><input type="checkbox" name="choque" value="resp" onchange="atualizar()"/> <span class="check-label">Desconforto respiratório por extravasamento grave de plasma</span></label>
+        <label class="check-item" id="ci-choque7"><input type="checkbox" name="choque" value="sang_grave" onchange="atualizar()"/> <span class="check-label">Sangramento grave<small>Hematêmese, melena, metrorragia volumosa, sangramento do sistema nervoso central</small></span></label>
+        <label class="check-item" id="ci-choque5"><input type="checkbox" name="choque" value="grave" onchange="atualizar()"/> <span class="check-label">Comprometimento grave de órgão<small>AST/ALT &gt; 1.000, alteração de consciência, miocardite e outros. Marcado sozinho por AST/ALT &gt; 1.000 ou consciência "confuso" ou "coma"</small></span></label>
       </div>
 
       <!-- CAIXA DE ALERTA VERMELHO -->
@@ -1512,7 +1568,7 @@
       <span class="chevron open" id="chevron-medic">▼</span>
     </div>
     <div class="card-body open" id="body-medic">
-      <p style="font-size:12px;color:var(--text-muted);margin-bottom:10px">Registre os medicamentos. O sistema bloqueará AINEs automaticamente.</p>
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:10px">Registre os medicamentos, inclusive os de uso contínuo. O app bloqueia anti-inflamatórios e avisa sobre AAS, anticoagulantes e anti-hipertensivos conforme o MS.</p>
       <div class="field">
         <label>Medicamento a registrar</label>
         <input type="text" id="med-input" placeholder="Ex: Paracetamol 500mg 6/6h" oninput="filtrarMedicamento(this.value)"/>
@@ -1540,7 +1596,7 @@
         <div class="field">
           <label>Volume total acumulado (mL/kg)</label>
           <div class="field-computed" id="vol-total">—</div>
-          <div class="field-note">Limiar crítico: 181 mL/kg/24h</div>
+          <div class="field-note">Referência de estudo: 181 mL/kg/24h (fora do protocolo do MS)</div>
         </div>
       </div>
       <div class="fluid-bar-wrap" id="fluid-bar-wrap" style="display:none">
@@ -1551,7 +1607,7 @@
         <div class="fluid-bar-track">
           <div class="fluid-bar-fill" id="fluid-bar-fill" style="width:0%"></div>
         </div>
-        <div style="font-size:11px;color:var(--text-muted);margin-top:4px">Barra verde → laranja → vermelha conforme se aproxima de 181 mL/kg</div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:4px">Barra verde → laranja → vermelha conforme se aproxima de 181 mL/kg. Pelo MS, o controle da reposição é feito pelo hematócrito, pela diurese e pelos sinais vitais.</div>
       </div>
     </div>
   </div>
@@ -1661,10 +1717,11 @@
     </div>
     <div class="card-body open" id="body-ref-diretrizes">
       <ol style="padding-left:18px;line-height:2.2;font-size:13px;color:#374151">
-        <li>BRASIL. Ministério da Saúde. Secretaria de Vigilância em Saúde. <strong>Dengue: diagnóstico e manejo clínico — adulto e criança</strong>. 5. ed. Brasília: Ministério da Saúde, 2016. 58 p. (Série A. Normas e Manuais Técnicos).</li>
+        <li>BRASIL. Ministério da Saúde. Secretaria de Vigilância em Saúde e Ambiente. Departamento de Doenças Transmissíveis. <strong>Dengue: diagnóstico e manejo clínico: adulto e criança</strong>. 6. ed. Brasília: Ministério da Saúde, 2024. 80 p. Disponível em: http://bvsms.saude.gov.br/bvs/publicacoes/dengue_diagnostico_manejo_clinico_6ed.pdf. <em>Referência principal do app.</em></li>
+        <li>BRASIL. Ministério da Saúde. <strong>Cartão de acompanhamento do paciente com suspeita de dengue</strong>. Brasília: Ministério da Saúde, [202-].</li>
         <li>WORLD HEALTH ORGANIZATION. <strong>Dengue: guidelines for diagnosis, treatment, prevention and control</strong>. New edition. Geneva: WHO, 2009. 160 p. ISBN 978-92-4-154787-1.</li>
-        <li>PAN AMERICAN HEALTH ORGANIZATION. <strong>Dengue: guías para la atención de enfermos en la región de las Américas</strong>. 2. ed. Washington: PAHO, 2016.</li>
-        <li>BRASIL. Ministério da Saúde. <strong>Nota Informativa nº 21/2016 — CGPNCMD/DEVIT/SVS/MS</strong>: orientações sobre manejo clínico da dengue. Brasília: MS, 2016.</li>
+        <li>PAN AMERICAN HEALTH ORGANIZATION. <strong>Dengue: guidelines for patient care in the Region of the Americas</strong>. 2. ed. Washington, D.C.: PAHO, 2017.</li>
+        <li>PAN AMERICAN HEALTH ORGANIZATION. <strong>Tool for diagnosis and care of patients with suspected arboviral disease</strong>. Washington, D.C.: PAHO, 2016.</li>
       </ol>
     </div>
   </div>
@@ -1740,7 +1797,7 @@
       <span class="chevron open" id="chevron-ref-open">▼</span>
     </div>
     <div class="card-body open" id="body-ref-open">
-      <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px">Consultas realizadas via Open Evidence e incorporadas ao conteúdo do aplicativo:</p>
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px">Consultas realizadas via Open Evidence. <strong>Quando divergem do manual do MS (6ª ed., 2024), vale o MS:</strong> os itens 1 (o MS admite paracetamol 500 mg de 4/4 h no adulto), 6 (limiar de 181 mL/kg não consta no MS) e 7 (o MS usa soro fisiológico 0,9% na expansão) ficam só como registro do trabalho.</p>
       <ol style="padding-left:18px;line-height:2.2;font-size:13px;color:#374151">
         <li><strong>Paracetamol na dengue — qual a frequência posológica segura?</strong> → Vasikasin et al. 2019: q6h vs q4h (transaminases 10% vs 22%); encerramento precoce por segurança.</li>
         <li><strong>Mecanismo molecular da contraindicação de AINEs na dengue</strong> → Inibição da COX-1 plaquetária; sinergia hemorrágica com trombocitopenia; Liang X et al. JMV 2025.</li>
@@ -1768,13 +1825,13 @@
 <div id="nsaid-overlay">
   <div id="nsaid-modal">
     <div class="modal-icon">🚫</div>
-    <h2>CONTRAINDICAÇÃO ABSOLUTA</h2>
+    <h2>NÃO UTILIZAR NA DENGUE</h2>
     <p>
-      <strong>AINEs (Ibuprofeno, Cetoprofeno, Diclofenaco, AAS/Aspirina)</strong> são contraindicados na dengue.<br/><br/>
+      <strong>Anti-inflamatórios não esteroides (ibuprofeno, cetoprofeno, diclofenaco, nimesulida) e salicilatos como analgésico</strong> não devem ser usados na dengue (MS, 2024).<br/><br/>
       A inibição da COX-1 plaquetária amplifica a trombocitopenia já presente, aumentando drasticamente o risco hemorrágico. O paciente registrado no caso clínico de farmacologia (G.S.S., dengue com ibuprofeno) desenvolveu hematêmese e dor abdominal intensa por esta interação.<br/><br/>
-      <strong>Use Paracetamol (10–15 mg/kg) ou Dipirona (15 mg/kg).</strong>
+      <strong>Use paracetamol e/ou dipirona (crianças: 10 mg/kg/dose até de 6/6 h).</strong>
     </p>
-    <button class="modal-btn modal-btn-primary" onclick="fecharModal()">Entendi — Remover AINE da prescrição</button>
+    <button class="modal-btn modal-btn-primary" onclick="fecharModal()">Entendi, remover da prescrição</button>
   </div>
 </div>
 
@@ -1802,7 +1859,7 @@
 
 <footer>
   DengueCare · Projeto de Intervenção · UBS Nacional, Contagem · Medicina de Família e Comunidade · PUC Minas · 2026<br/>Preceptor: Patrik Ferreira de Carvalho Pinto · Alunos: Patricia Gazire de Marco, Guilherme de Oliveira Rodrigues, Walterez Geralda de Araujo Barbosa, Marcus Vinicius Tolentino, Pedro Andrade Rüger<br/>
-  Baseado em: Ministério da Saúde BR · OMS · Open Evidence · Pediatria Ambulatorial 6ª Ed · Medicina de Emergência FMUSP 19ª Ed · Rang &amp; Dale Farmacologia 9ª Ed<br/>
+  Baseado em: Ministério da Saúde, <em>Dengue: diagnóstico e manejo clínico</em>, 6ª ed., 2024 · OMS · OPAS · Open Evidence · Pediatria Ambulatorial 6ª Ed · Medicina de Emergência FMUSP 19ª Ed · Rang &amp; Dale Farmacologia 9ª Ed<br/>
   <em>Este aplicativo é ferramenta de apoio educacional. Não substitui o julgamento clínico do profissional de saúde.</em>
 </footer>
 
@@ -1869,25 +1926,52 @@ async function baixarArquivo(nome, conteudo, mime){
 }
 function nomeArquivo(base){ return String(base||'paciente').trim().replace(/[^\p{L}\p{N}]+/gu,'_').replace(/^_|_$/g,'') || 'paciente'; }
 
-// ── Painel de medicamentos ──
+// ── Painel de medicamentos (MS 2024: item 6.1.2 e capítulos 7 e 11) ──
 let medicamentos = [];
-const NSAIDS = ['ibuprofeno','cetoprofeno','dexcetoprofeno','ketoprofeno','diclofenaco','aceclofenaco','naproxeno','aspirina','aas','acido acetilsalicilico','acetilsalicilico','indometacina','piroxicam','tenoxicam','meloxicam','nimesulida','ketorolac','cetorolaco','celecoxibe','etoricoxibe',
-  // nomes comerciais comuns no Brasil
-  'advil','alivium','buscofem','voltaren','cataflam','profenid','nisulid','toragesic','arcoxia','celebra','doril','melhoral','sonrisal','engov'];
-const CORTICOID = ['prednisona','prednisolona','dexametasona','hidrocortisona','betametasona','metilprednisolona'];
-const RE_NSAID = new RegExp('\\b(' + NSAIDS.join('|') + ')\\b');
-const RE_CORT = new RegExp('\\b(' + CORTICOID.join('|') + ')\\b');
+const lista = arr => new RegExp('\\b(' + arr.join('|') + ')\\b');
+// Bloqueados: anti-inflamatórios e analgésicos que contêm AAS
+const RE_NSAID = lista(['ibuprofeno','cetoprofeno','dexcetoprofeno','ketoprofeno','diclofenaco','aceclofenaco','naproxeno','indometacina','piroxicam','tenoxicam','meloxicam','nimesulida','ketorolac','cetorolaco','celecoxibe','etoricoxibe','acido mefenamico',
+  'advil','alivium','buscofem','voltaren','cataflam','profenid','nisulid','toragesic','arcoxia','celebra','ponstan','doril','melhoral','sonrisal','engov']);
+// Avisos (não bloqueia): o MS permite manter AAS antiagregante e anticoagulantes conforme as plaquetas
+const RE_ANTIAGREG = lista(['aas','aspirina','acido acetilsalicilico','acetilsalicilico','clopidogrel','ticagrelor','prasugrel']);
+const RE_ANTICOAG = lista(['varfarina','marevan','coumadin','rivaroxabana','xarelto','apixabana','eliquis','dabigatrana','pradaxa','edoxabana','edoxabano','lixiana','heparina','enoxaparina','clexane']);
+const RE_DIUR_VASO = lista(['furosemida','lasix','hidroclorotiazida','clortalidona','indapamida','espironolactona','hidralazina']);
+const RE_BB_CLON = lista(['propranolol','atenolol','metoprolol','bisoprolol','carvedilol','nebivolol','clonidina']);
+const RE_OUTROS_HAS = lista(['captopril','enalapril','lisinopril','ramipril','losartana','valsartana','olmesartana','anlodipino','nifedipino','metildopa']);
+const RE_CORT = lista(['prednisona','prednisolona','dexametasona','hidrocortisona','betametasona','metilprednisolona','deflazacorte']);
+
+function faixaPlaquetas(){
+  const p = intNum('plaquetas');
+  if(!p) return 'Informe as plaquetas para saber a faixa.';
+  if(p > 50000) return `Plaquetas atuais ${p.toLocaleString('pt-BR')}: faixa &gt; 50 mil.`;
+  if(p >= 30000) return `Plaquetas atuais ${p.toLocaleString('pt-BR')}: faixa de 30 a 50 mil.`;
+  return `Plaquetas atuais ${p.toLocaleString('pt-BR')}: faixa &lt; 30 mil.`;
+}
+
+function avisosMedicamento(val){
+  const v = normalizar(val);
+  const avisos = [];
+  if(RE_ANTIAGREG.test(v)) avisos.push('⚠️ <strong>AAS / antiagregante:</strong> como analgésico ou antitérmico, <strong>não usar</strong>. Se for antiagregante (stent, IAM ou AVC prévio), siga o MS (cap. 11): plaquetas &gt; 50 mil, manter e contar plaquetas diariamente; 30 a 50 mil, manter e observar em leito; &lt; 30 mil, suspender e observar até &gt; 50 mil. ' + faixaPlaquetas());
+  if(RE_ANTICOAG.test(v)) avisos.push('⚠️ <strong>Anticoagulante:</strong> varfarina com plaquetas &gt; 50 mil, TAP ambulatorial e plaquetas diárias; 30 a 50 mil, internar e trocar por heparina não fracionada quando INR &lt; 2; &lt; 30 mil, suspender e internar. Anticoagulantes orais diretos: &lt; 50 mil, internar e trocar por heparina não fracionada 24 h após a última dose (MS, cap. 11). ' + faixaPlaquetas());
+  if(RE_DIUR_VASO.test(v)) avisos.push('ℹ️ <strong>Diurético ou vasodilatador:</strong> suspender, em princípio, se houver desidratação ou necessidade de hidratação venosa (MS, cap. 7).');
+  if(RE_BB_CLON.test(v)) avisos.push('ℹ️ <strong>Betabloqueador ou clonidina:</strong> ponderar antes de suspender, pelo risco de hipertensão rebote (MS, cap. 7).');
+  if(RE_OUTROS_HAS.test(v)) avisos.push('ℹ️ <strong>Anti-hipertensivo:</strong> sem sinais de alarme e com PA normal, manter. Em dengue grave com extravasamento importante, suspender os hipotensores (MS, cap. 7).');
+  if(RE_CORT.test(v)) avisos.push('⚠️ <strong>Corticosteroide:</strong> o MS orienta não utilizar corticosteroides no tratamento da dengue.');
+  return avisos;
+}
 
 function filtrarMedicamento(val){
-  const v = normalizar(val);
   const warn = $('med-warning');
-  if(RE_NSAID.test(v)){
+  if(RE_NSAID.test(normalizar(val))){
     warn.style.display='block';
-    warn.innerHTML='⛔ <strong>CONTRAINDICADO:</strong> '+escapeHTML(val)+' é AINE/AAS, contraindicado na dengue pelo risco hemorrágico. Use Paracetamol ou Dipirona.';
+    warn.innerHTML='⛔ <strong>NÃO UTILIZAR:</strong> '+escapeHTML(val)+' é anti-inflamatório ou contém AAS como analgésico. Use paracetamol e/ou dipirona.';
     $('nsaid-overlay').classList.add('show');
-  } else if(RE_CORT.test(v)){
+    return;
+  }
+  const avisos = avisosMedicamento(val);
+  if(avisos.length){
     warn.style.display='block';
-    warn.innerHTML='⚠️ <strong>NÃO RECOMENDADO:</strong> Corticosteroides não têm benefício comprovado na dengue (Cochrane 2014) e causam hiperglicemia.';
+    warn.innerHTML = avisos.join('<br/><br/>');
   } else {
     warn.style.display='none';
   }
@@ -1909,7 +1993,7 @@ function renderMeds(){
   if(!medicamentos.length){ el.innerHTML=''; return; }
   el.innerHTML = '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:8px">Medicamentos registrados:</div>'
     + medicamentos.map((m,i) => `<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;background:var(--white-clinical);border:1px solid var(--platinum);border-radius:8px;margin-bottom:6px;font-size:13px">
-      <span>💊 ${escapeHTML(m)}</span>
+      <span>💊 ${escapeHTML(m)}${avisosMedicamento(m).length ? '<br/><small style="color:var(--group-c)">' + avisosMedicamento(m).join('<br/>') + '</small>' : ''}</span>
       <button onclick="removerMed(${i})" aria-label="Remover" style="border:none;background:none;cursor:pointer;color:var(--group-d);font-size:20px;line-height:1;padding:4px 8px">×</button>
     </div>`).join('');
 }
@@ -1954,9 +2038,15 @@ function autoMarcar(valor, ligado){
   if(ligado){ if(!cb.checked){ cb.checked = true; cb.dataset.auto = '1'; } }
   else if(cb.dataset.auto==='1'){ cb.checked = false; delete cb.dataset.auto; }
 }
+function autoMarcarId(id, ligado){
+  const cb = $(id);
+  if(!cb || cb.dataset.manual==='1') return;
+  if(ligado){ if(!cb.checked){ cb.checked = true; cb.dataset.auto = '1'; } }
+  else if(cb.dataset.auto==='1'){ cb.checked = false; delete cb.dataset.auto; }
+}
 document.addEventListener('change', e=>{
   const t = e.target;
-  if(t && t.type==='checkbox' && t.name){ t.dataset.manual='1'; delete t.dataset.auto; }
+  if(t && t.type==='checkbox' && (t.name || t.id.startsWith('tri-'))){ t.dataset.manual='1'; delete t.dataset.auto; }
 }, true);
 
 // ── Atualização central: todos os campos clínicos chamam esta função ──
@@ -2010,33 +2100,66 @@ function triagemSincData(){
 // ── Sinais vitais ──
 function idadeInformada(){ return has('idade'); }
 
+// Limites do MS (Apêndices C e D). Sem idade informada, usa o adulto.
+function limiteFC(){
+  if(!idadeInformada()) return 100;
+  const i = num('idade');
+  if(i < 3/12) return 205;
+  if(i < 2) return 190;
+  if(i <= 10) return 140;
+  return 100;
+}
+function limiteFR(){
+  if(!idadeInformada()) return 20;
+  const i = num('idade');
+  if(i < 2/12) return 60;
+  if(i < 1) return 50;
+  if(i < 5) return 40;
+  if(i < 13) return 30;
+  return 20;
+}
+// Hipotensão (MS, item 2.2.2.1): adulto PAS < 90 ou PAM < 70; até 10 anos, PAS < 70 + 2 × idade
+function hipotenso(pas, pam){
+  if(idadeInformada() && num('idade') <= 10){
+    const i = num('idade');
+    return pas < (i < 1 ? 70 : 70 + 2*Math.floor(i));
+  }
+  return pas < 90 || pam < 70;
+}
+
 function calcularVitais(){
   const ppEl = $('pp-display');
+  const alertas = [];
   if(has('pas') && has('pad')){
-    const pp = num('pas') - num('pad');
+    const pas = num('pas'), pad = num('pad');
+    const pp = pas - pad;
+    const pam = (pas + 2*pad) / 3;
     if(pp < 0){
       ppEl.textContent = 'PAD maior que PAS?'; ppEl.style.color='var(--group-d)'; ppEl.style.fontWeight='700';
       autoMarcar('hipo_art', false);
     } else {
-      ppEl.textContent = pp + ' mmHg';
-      ppEl.style.color = pp<=20 ? 'var(--group-d)' : pp<=30 ? 'var(--group-c)' : 'var(--group-b)';
+      const hipo = hipotenso(pas, pam);
+      ppEl.textContent = pp + ' mmHg · PAM ' + Math.round(pam);
+      ppEl.style.color = (pp<=20 || hipo) ? 'var(--group-d)' : pp<=30 ? 'var(--group-c)' : 'var(--group-b)';
       ppEl.style.fontWeight = '900';
-      autoMarcar('hipo_art', pp<=20);
+      autoMarcar('hipo_art', pp<=20 || hipo);
+      if(hipo) alertas.push(['var(--group-d)', `Hipotensão para a idade (PAS ${pas}, PAM ${Math.round(pam)}): sinal de choque.`]);
+      if(pp<=20) alertas.push(['var(--group-d)', `Pressão arterial convergente (diferencial ${pp} mmHg): sinal de choque.`]);
     }
+    $('laco-pam').textContent = `Insuflar o manguito em ${Math.round((pas+pad)/2)} mmHg (média de PAS e PAD).`;
   } else {
     ppEl.textContent='—'; ppEl.style.color=''; ppEl.style.fontWeight='';
     autoMarcar('hipo_art', false);
+    $('laco-pam').textContent = 'Preencha a PA para ver a pressão do manguito.';
   }
 
-  // Taquicardia: sem idade informada usa o limite do adulto
-  // (antes, idade vazia virava 0 anos e aplicava o limite do lactente, 160 bpm)
-  const idade = num('idade');
-  let taqLimite = 100;
-  if(idadeInformada()){
-    if(idade<1) taqLimite=160;
-    else if(idade<=10) taqLimite=120;
-  }
-  autoMarcar('taquic', has('fc') && num('fc')>taqLimite);
+  // FC e FR acima do limite viram aviso, não Grupo D automático:
+  // na fase febril a taquicardia é comum e sozinha não define choque.
+  if(has('fc') && num('fc') > limiteFC()) alertas.push(['var(--group-c)', `FC ${num('fc')} acima do limite para a idade (${limiteFC()}). Procure outros sinais de choque.`]);
+  if(has('fr') && num('fr') > limiteFR()) alertas.push(['var(--group-c)', `FR ${num('fr')} acima do limite para a idade (${limiteFR()}): taquipneia.`]);
+  if(has('spo2') && num('spo2') < 94) alertas.push(['var(--group-c)', `SpO₂ ${num('spo2')}%: avaliar comprometimento respiratório (indicação de internação).`]);
+  $('vitais-alertas').innerHTML = alertas.map(([cor, txt]) =>
+    `<div style="padding:8px 12px;border-left:4px solid ${cor};background:var(--white-clinical);margin-bottom:6px;border-radius:0 8px 8px 0;font-size:12px;font-weight:600;color:${cor}">⚠️ ${txt}</div>`).join('');
 
   autoMarcar('extrem', has('ec') && num('ec')>2);
   autoMarcar('oliguria', $('diurese').value==='ausente');
@@ -2044,25 +2167,26 @@ function calcularVitais(){
 
   const cons = $('consciencia').value;
   autoMarcar('letarg', cons==='sonolento' || cons==='irritavel' || cons==='confuso' || cons==='coma');
-  // Confusão/coma = disfunção grave do SNC (critério de Grupo D)
-  autoMarcar('grave', cons==='confuso' || cons==='coma');
 }
 
 // ── Laboratório ──
+// Hematócrito de referência: MS 2024, Apêndice I (valores médios por idade aproximada)
 function htReferencia(){
-  if(!idadeInformada()){
-    const sx = $('sexo').value;
-    return sx==='M' ? 45 : 40;
-  }
-  const idade = num('idade');
-  if(idade<(1/12)) return 51;
-  if(idade<(2/12)) return 43;
-  if(idade<0.5) return 35;
-  if(idade<2) return 36;
-  if(idade<6) return 37;
-  if(idade<12) return 38;
-  return $('sexo').value==='M' ? 45 : 40;
+  const adulto = () => {
+    if(idadeInformada() && num('idade') > 70) return 41;
+    return $('sexo').value==='M' ? 46 : 42;
+  };
+  if(!idadeInformada()) return adulto();
+  const i = num('idade');
+  if(i < 1/12) return 52;
+  if(i < 4.5/12) return 37;
+  if(i < 9/12) return 35;
+  if(i < 3) return 36;
+  if(i < 7.5) return 37;
+  if(i < 13) return 40;
+  return adulto();
 }
+function htBase(){ return has('ht-basal') ? num('ht-basal') : htReferencia(); }
 
 function calcularLab(){
   const ht = num('ht');
@@ -2074,14 +2198,15 @@ function calcularLab(){
   const bili = num('bili');
 
   const htRef = htReferencia();
+  const base = htBase();
   const htRefEl = $('ht-ref');
   const htDeltaEl = $('ht-delta');
   const temBase = idadeInformada() || $('sexo').value;
-  htRefEl.textContent = (has('ht') || temBase) ? htRef + '%' + (temBase ? '' : ' (adulto, sexo não inf.)') : '—';
+  htRefEl.textContent = (has('ht') || temBase) ? htRef + '%' + (temBase ? '' : ' (adulto, sexo não informado)') : '—';
 
   if(has('ht')){
-    const deltaNum = (ht - htRef)/htRef*100;
-    htDeltaEl.textContent = (deltaNum>0?'+':'') + deltaNum.toFixed(1).replace('.',',') + '% vs. ref.';
+    const deltaNum = (ht - base)/base*100;
+    htDeltaEl.textContent = (deltaNum>0?'+':'') + deltaNum.toFixed(1).replace('.',',') + (has('ht-basal') ? '% vs. basal' : '% vs. ref.');
     htDeltaEl.style.color = deltaNum>20 ? 'var(--group-d)' : deltaNum>10 ? 'var(--group-c)' : 'var(--group-b)';
     htDeltaEl.style.fontWeight='900';
     autoMarcar('hemo', deltaNum>10);
@@ -2099,15 +2224,18 @@ function calcularLab(){
     larEl.style.fontWeight='900';
   } else { larEl.textContent='—'; larEl.style.color=''; larEl.style.fontWeight=''; }
 
-  autoMarcar('plaq', plaq>0 && plaq<50000);
+  // Dano hepático importante (AST/ALT > 1.000) = comprometimento grave de órgão (MS, item 10.3)
+  const consGrave = ['confuso','coma'].includes($('consciencia').value);
+  autoMarcar('grave', ast>1000 || alt>1000 || consGrave);
+  const leuco = intNum('leucocitos');
+  autoMarcarId('tri-leuco', leuco>0 && leuco<4000);
 
   const alerts = [];
   if(plaq>0 && plaq<1000) alerts.push({txt:`Plaquetas ${plaq}/mm³: confira se o número foi digitado completo (ex.: 85000, não 85)`,color:'var(--group-c)'});
-  if(ast>400) alerts.push({txt:`AST ${ast} U/L (&gt;400): OR 3,0 para dengue grave`,color:'var(--group-c)'});
-  if(alt>400) alerts.push({txt:`ALT ${alt} U/L (&gt;400): OR 6,6 para dengue grave`,color:'var(--group-d)'});
-  if(bili>17) alerts.push({txt:`Bilirrubina ${bili} µmol/L (&gt;17): OR 4,6 para dengue grave`,color:'var(--group-c)'});
-  if(albumina>0 && albumina<35) alerts.push({txt:`Albumina ${albumina} g/L (&lt;35): OR 3,3 para dengue grave (dias 1–3)`,color:'var(--group-c)'});
-  if(plaq>=1000 && plaq<20000) alerts.push({txt:`Plaquetas ${plaq.toLocaleString('pt-BR')}/mm³: avaliar transfusão de plaquetas se sangramento ativo`,color:'var(--group-d)'});
+  if(ast>1000 || alt>1000) alerts.push({txt:`AST/ALT &gt; 1.000: comprometimento hepático grave, dengue grave (Grupo D)`,color:'var(--group-d)'});
+  if(albumina>0 && albumina<35) alerts.push({txt:`Albumina ${albumina} g/L: albumina baixa sugere extravasamento plasmático (MS)`,color:'var(--group-c)'});
+  if(plaq>=1000 && plaq<50000) alerts.push({txt:`Plaquetas ${plaq.toLocaleString('pt-BR')}/mm³: plaquetas baixas não são sinal de alarme pelo MS, mas mudam a conduta de quem usa AAS, clopidogrel ou anticoagulante (ver Medicações). Transfusão só com sangramento persistente não controlado, após corrigir coagulação e choque.`,color:'var(--group-c)'});
+  if(leuco>0 && leuco<4000) alerts.push({txt:`Leucopenia (${leuco.toLocaleString('pt-BR')}/mm³): manifestação do caso suspeito de dengue`,color:'var(--group-a)'});
 
   const labAl = $('lab-alerts');
   if(alerts.length){
@@ -2119,7 +2247,8 @@ function calcularLab(){
 // Fator de risco por idade marcado sozinho
 function calcularFatoresAuto(){
   const idade = num('idade');
-  autoMarcar('menor2', idadeInformada() && (idade<2 || idade>=65));
+  autoMarcar('menor2', idadeInformada() && idade<2);
+  autoMarcar('idoso', idadeInformada() && idade>65);
 }
 
 // ── Classificação de grupo ──
@@ -2131,11 +2260,11 @@ function rotuloCheck(cb){
 }
 
 function sangramentoPele(){
-  return $('prova-laco').value==='positiva' || $('tri-petq').checked;
+  return $('prova-laco').value==='positiva' || $('tri-petq').checked || $('tri-laco').checked;
 }
 
 function temDados(){
-  const ids = ['idade','peso','data-inicio','pas','pad','fc','fr','spo2','temp','ec','hepato-cm','ht','plaquetas','leucocitos','albumina','lactato','ast','alt','bili'];
+  const ids = ['idade','peso','data-inicio','pas','pad','fc','fr','spo2','temp','ec','hepato-cm','ht','ht-basal','plaquetas','leucocitos','albumina','lactato','ast','alt','bili'];
   if(ids.some(id => $(id) && $(id).value.trim()!=='')) return true;
   if(document.querySelector('#tab-pratica input[type=checkbox][name]:checked')) return true;
   if($('prova-laco').value || $('diurese').value!=='normal' || $('consciencia').value!=='normal') return true;
@@ -2206,23 +2335,23 @@ function avaliarGrupo(){
     $('alert-group-name').style.color = STATUS_CORES[grupo];
 
     $('alert-body-text').innerHTML = (grupo==='D'
-      ? 'Choque ou dengue grave. Iniciar ressuscitação volêmica <strong>imediata</strong>. Acionar equipe de UTI/emergência.'
-      : 'Sinal(is) de alarme detectado(s). Paciente necessita de <strong>internação</strong> e <strong>hidratação intravenosa urgente</strong>.')
+      ? 'Choque ou dengue grave. Iniciar a expansão <strong>imediatamente</strong>, em qualquer nível de atenção, mesmo sem exames e durante a transferência. Oferecer O₂. Leito de UTI.'
+      : 'Sinal(is) de alarme. Iniciar a <strong>reposição volêmica imediata</strong>, em qualquer ponto de atenção, mesmo sem exames e durante a transferência. Leito de internação por no mínimo 48 h.')
       + '<br/><small>Motivo: ' + motivos.map(escapeHTML).join(' · ') + '</small>';
 
     if(peso>0){
       let vol, tempo, info;
       if(grupo==='D'){
         vol = (peso*20).toFixed(0);
-        tempo='15–20 min (bolus rápido)';
-        info='Repetir bolus se sem melhora. Considerar coloide (dextran 70) após 2–3 bolus sem resposta. (MS 2016 / WHO 2009)';
+        tempo='até 20 minutos';
+        info='Repetir até 3 vezes conforme avaliação. Reavaliar a cada 15–30 min e hematócrito a cada 2 h. Com melhora, voltar à expansão do Grupo C. Choque persistente com Ht subindo: albumina 0,5–1 g/kg. (MS 2024)';
       } else {
         vol = (peso*10).toFixed(0);
         tempo='1 hora';
-        info='Se melhora: reduzir para 5 mL/kg/h (2h) → 3 mL/kg/h. Repetir 10 mL/kg/h se sem melhora, até 2–3×. Limiar: volume acumulado &gt;181 mL/kg/24h. (MS 2016)';
+        info=`Reavaliar após 1 h. Manter 10 mL/kg/h (${vol} mL) na 2ª hora até o hematócrito. Sem melhora, repetir a fase até 3 vezes; com melhora, manutenção de 25 mL/kg em 6 h e depois em 8 h. (MS 2024)`;
       }
       $('alert-calc-text').innerHTML =
-        `💧 Ringer com Lactato: <strong>${vol} mL</strong> EV em <strong>${tempo}</strong> (${String(peso).replace('.',',')} kg × ${grupo==='D'?20:10} mL/kg)<br/><small style="font-weight:400">${info}</small>`;
+        `💧 Soro fisiológico 0,9%: <strong>${vol} mL</strong> EV em <strong>${tempo}</strong> (${String(peso).replace('.',',')} kg × ${grupo==='D'?20:10} mL/kg)<br/><small style="font-weight:400">${info}</small>`;
     } else {
       $('alert-calc-text').innerHTML = '⚠️ Insira o peso do paciente para calcular o volume.';
     }
@@ -2233,50 +2362,87 @@ function avaliarGrupo(){
   gerarConduta(grupo, peso, motivos);
 }
 
+// Criança para o MS = menor de 13 anos (Quadro 3). Sem idade, decide pelo peso.
+function ehCrianca(){
+  if(idadeInformada()) return num('idade') < 13;
+  const p = num('peso') || num('dose-peso');
+  return p > 0 && p < 40;
+}
+// Hidratação oral (MS, Quadro 3): adulto 60 mL/kg/dia; criança 130/100/80 mL/kg/dia conforme o peso
+function mlKgOral(peso, crianca){
+  if(!crianca) return 60;
+  if(peso <= 10) return 130;
+  if(peso <= 20) return 100;
+  return 80;
+}
+const fmtMl = v => Math.round(v).toLocaleString('pt-BR') + ' mL';
+
+function textoAntitermico(peso){
+  if(ehCrianca()){
+    if(!peso) return 'Paracetamol e/ou dipirona 10 mg/kg/dose até de 6/6 h (inserir peso para calcular)';
+    const mg = Math.min(peso*10, 1000);
+    return `Paracetamol ${Math.round(mg)} mg/dose (${Math.round(mg/10)} gotas da solução 200 mg/mL) e/ou dipirona ${Math.round(mg)} mg/dose (${Math.round(mg/25)} gotas da solução 500 mg/mL), até de 6/6 h (10 mg/kg/dose; respeitar a dose máxima para peso e idade)`;
+  }
+  return 'Paracetamol 500 mg até de 4/4 h ou 1 g até de 6/6 h (máx. 4 g/24 h) e/ou dipirona 500 mg até de 6/6 h';
+}
+
+function textoHidratacaoOral(peso){
+  if(!peso) return 'Hidratação oral: adultos 60 mL/kg/dia; crianças 80 a 130 mL/kg/dia conforme o peso; 1/3 com SRO e 1/3 do volume nas primeiras 4 a 6 h (inserir peso para calcular)';
+  const crianca = ehCrianca();
+  const total = peso * mlKgOral(peso, crianca);
+  return `Hidratação oral: ${fmtMl(total)}/dia (${mlKgOral(peso, crianca)} mL/kg/dia), sendo ${fmtMl(total/3)} de SRO e ${fmtMl(total/3)} nas primeiras 4 a 6 h; começar ainda na sala de espera e manter até 24–48 h após a febre`;
+}
+
 function condutasDoGrupo(grupo, peso){
   const p = String(peso).replace('.',',');
+  const sf = (mlkg) => peso>0 ? `${fmtMl(peso*mlkg)} (${p} kg × ${mlkg} mL/kg)` : `${mlkg} mL/kg`;
   const condutas = {
     A:[
-      'Paracetamol 10–15 mg/kg/dose VO a cada 6h se febre/dor (máx. 4 g/dia em adultos)',
-      'NÃO usar AINEs, aspirina ou corticosteroides',
-      'Hidratação oral: mínimo 60 mL/kg/dia (SRO preferencial)',
-      'Repouso relativo',
-      'Notificar caso suspeito (2 vias: epidemiologia + laboratório)',
-      'Preencher Cartão da Dengue',
-      'Retorno imediato se surgir qualquer sinal de alarme',
-      'Retorno de acompanhamento no dia da defervescência (início da fase crítica)',
+      'Acompanhamento ambulatorial. Exames complementares a critério médico',
+      textoHidratacaoOral(peso),
+      textoAntitermico(peso),
+      'NÃO usar salicilatos, anti-inflamatórios não esteroides nem corticosteroides; não se automedicar',
+      'Repouso. Procurar a urgência imediatamente se houver sangramento ou sinal de alarme',
+      'Retorno no dia da melhora da febre (possível início da fase crítica); se não houver defervescência, retornar no 5º dia da doença',
+      'Preencher e entregar o Cartão de Acompanhamento do Paciente com Suspeita de Dengue',
+      'Orientar eliminação de criadouros do Aedes aegypti e uso de repelente (na viremia o paciente pode infectar o mosquito)',
+      'Notificar o caso, se esta for a primeira unidade de atendimento. Exames específicos não são necessários para a conduta',
     ],
     B:[
-      'Solicitar hemograma completo + plaquetas na urgência',
-      'Paracetamol 10–15 mg/kg/dose VO a cada 6h (NÃO AINEs)',
-      'Hidratação oral supervisionada: 60–80 mL/kg/dia',
-      'Se plaquetas alteradas ou sinais de alarme → internação imediata',
-      'Monitorizar sinais vitais de 4/4h',
-      'NS1 (dias 1–4) ou Sorologia (a partir do 6º dia)',
-      'Gestantes e &lt;2 anos: internar eletivamente para observação',
+      'Hemograma completo obrigatório: colher no atendimento e liberar o resultado em até 2 h (no máximo 4 h)',
+      'Comorbidade de difícil controle ou descompensada: exames específicos conforme a situação clínica',
+      'Manter em observação até o resultado dos exames, com hidratação oral como no Grupo A. ' + textoHidratacaoOral(peso),
+      textoAntitermico(peso),
+      '<strong>Hemoconcentração ou surgimento de sinal de alarme: conduzir como Grupo C</strong>',
+      'Hematócrito normal: tratamento ambulatorial com reavaliação clínica e laboratorial diária até 48 h após a queda da febre, ou imediata se surgir sinal de alarme',
+      'Internar se: recusa de líquidos, comprometimento respiratório, impossibilidade de retorno, comorbidade descompensada (diabetes, hipertensão, insuficiência cardíaca, uso de dicumarínicos, crise asmática, anemia falciforme)',
+      'Preencher o Cartão de Acompanhamento; orientar criadouros e repelente; notificar se for a primeira unidade',
     ],
     C:[
-      'Internação imediata — leito de observação com monitorização contínua',
-      'Acesso venoso periférico calibroso (2 acessos se possível)',
-      peso>0 ? `💧 Ringer com Lactato: ${(peso*10).toFixed(0)} mL EV em 1 hora (${p} kg × 10 mL/kg). Se melhora: reduzir para 5→3 mL/kg/h. Repetir se sem melhora (até 2–3×)` : '💧 Ringer com Lactato: 10 mL/kg EV em 1 hora. Se melhora, reduzir progressivamente (inserir peso para calcular)',
-      'Reavaliação hemodinâmica a cada 15–30 min',
-      'Hemograma, hematócrito, plaquetas — repetir a cada 4–6h',
-      'Controle rigoroso de diurese (sonda vesical se indicado)',
-      'NÃO usar AINEs, aspirina, corticosteroides',
-      'Se sem melhora após 3 bolus → considerar coloide (dextran 70)',
-      'Monitorar volume acumulado — limiar crítico: 181 mL/kg/24h',
+      `💧 Reposição volêmica imediata, em qualquer ponto de atenção e mesmo sem exames: soro fisiológico 0,9% ${sf(10)} na 1ª hora`,
+      'Reavaliar após 1 h: sinais vitais, PA e diurese (desejável 1 mL/kg/h)',
+      `Manter ${sf(10)} por hora na 2ª hora até o hematócrito, colhido em até 2 h. Máximo de 20 mL/kg em 2 h por fase de expansão`,
+      'Sem melhora do hematócrito ou da hemodinâmica: repetir a fase de expansão até 3 vezes; persistindo, conduzir como Grupo D',
+      peso>0 ? `Com melhora clínica e laboratorial: manutenção com SF 0,9%, 1ª fase ${fmtMl(peso*25)} em 6 h (${fmtMl(peso*25/6)}/h); se melhorar, 2ª fase ${fmtMl(peso*25)} em 8 h (${fmtMl(peso*25/8)}/h)` : 'Com melhora: manutenção 25 mL/kg em 6 h e depois 25 mL/kg em 8 h, com SF 0,9%',
+      'Exames obrigatórios: hemograma, albumina sérica e transaminases. Imagem: RX de tórax (PA, perfil e Hjelm-Laurell) e USG de abdome',
+      'Leito de internação até estabilização, no mínimo 48 h. Avaliação contínua pela enfermagem; reavaliação médica imediata se houver agravamento',
+      'Idosos e cardiopatas: maior risco de sobrecarga; procurar crepitações. Insuficiência cardíaca: protocolo do cap. 8 (Módulo 2)',
+      'Exames de confirmação obrigatórios, mas não essenciais para a conduta: NS1/RT-PCR até o 5º dia; IgM a partir do 6º dia',
+      textoAntitermico(peso) + '. Sem anti-inflamatórios, salicilatos ou corticosteroides',
+      'Alta (todos): estabilidade hemodinâmica por 48 h, sem febre por 24 h, melhora clínica, hematócrito normal e estável por 24 h, plaquetas subindo. Depois, retorno como Grupo B',
     ],
     D:[
-      'ATIVAR CÓDIGO DE EMERGÊNCIA — UTI imediata',
-      `💧 Ressuscitação: ${peso>0?(peso*20).toFixed(0)+' mL':'20 mL/kg'} Ringer Lactato EV em 15–20 min. Repetir se sem melhora`,
-      'Monitorização invasiva: PAM, débito urinário horário',
-      'Oxigenioterapia — avaliar IOT se Glasgow reduzido',
-      'Se sem resposta após 3 bolus de cristaloide: coloide (dextran 70 10 mL/kg ou gelatina)',
-      'Solicitar: hemograma, coagulograma, bioquímica completa, gasometria, ECG',
-      'Se hepatopatia grave: Plasmalyte em vez de Ringer Lactato (evitar lactato)',
-      'NÃO usar AINEs, aspirina, corticosteroides',
-      'Transfusão de hemácias: considerar se Hb &lt;10 g/dL com sangramento ativo',
-      'Transfusão de plaquetas: somente se &lt;20.000/mm³ com sangramento ativo ou procedimento invasivo',
+      `🚨 Expansão rápida imediata, em qualquer nível de complexidade e durante a transferência: soro fisiológico 0,9% ${sf(20)} em até 20 minutos; repetir até 3 vezes conforme avaliação`,
+      'Reavaliação clínica a cada 15 a 30 min e hematócrito a cada 2 h; monitoramento contínuo',
+      'Com melhora clínica e laboratorial: voltar à fase de expansão do Grupo C',
+      'Oferecer O₂ em toda situação de choque. Leito de UTI até estabilização (mínimo 48 h); sem UTI acessível, iniciar o manejo mesmo assim',
+      peso>0 ? `Choque persistente com hematócrito subindo: albumina 0,5 a 1 g/kg (${Math.round(peso*0.5)} a ${Math.round(peso)} g) em solução a 5%; na falta, coloide sintético ${fmtMl(peso*10)}/h` : 'Choque persistente com hematócrito subindo: albumina 0,5 a 1 g/kg em solução a 5%; na falta, coloide sintético 10 mL/kg/h',
+      peso>0 ? `Choque persistente com hematócrito caindo: investigar hemorragia e coagulação. Hemorragia: concentrado de hemácias ${fmtMl(peso*10)} a ${fmtMl(peso*15)}/dia. Coagulopatia: plasma fresco ${fmtMl(peso*10)}, vitamina K EV e crioprecipitado 1 U para cada 5–10 kg` : 'Choque persistente com hematócrito caindo: investigar hemorragia; concentrado de hemácias 10–15 mL/kg/dia; coagulopatia: plasma fresco 10 mL/kg, vitamina K EV, crioprecipitado 1 U/5–10 kg',
+      'Plaquetas: somente com sangramento persistente não controlado, após corrigir coagulação e choque, com trombocitopenia e INR &gt; 1,5',
+      'Hematócrito caindo, sem sangramento e sem choque, com desconforto respiratório ou sinais de ICC: pensar em hiper-hidratação; reduzir a infusão, diurético e inotrópico se necessário',
+      'Reduzir ou suspender a infusão quando: terminar o extravasamento, PA, pulso e perfusão normalizarem, hematócrito cair sem sangramento, diurese normalizar e sintomas abdominais resolverem',
+      'Exames obrigatórios: hemograma, albumina e transaminases; RX de tórax e USG de abdome; glicemia, ureia, creatinina, eletrólitos, gasometria, TPAE e ecocardiograma conforme necessidade',
+      'Evitar procedimentos invasivos desnecessários (toracocentese, paracentese, pericardiocentese)',
     ]
   };
   return condutas[grupo];
@@ -2784,40 +2950,49 @@ function interpretarEPreencher(){
   else if(menciona(/\bsonolent[oa]\b|\bletargic[oa]\b/)) setField('consciencia','sonolento','Consciência');
   else if(menciona(/\birritavel\b/)) setField('consciencia','irritavel','Consciência');
 
-  // ── TRIAGEM — SINTOMAS ──
+  // ── TRIAGEM — MANIFESTAÇÕES (MS, item 10.1) ──
   if(menciona(/\bfebre\b|\bfebril\b/)) checkById('tri-febre','Febre (triagem)');
-  if(menciona(/cefal|dor\s+de\s+cabeca|dor\s+retro|dor\s+atras\s+dos\s+olhos/)) checkById('tri-cef','Cefaleia/retroorbitária');
-  if(menciona(/mialgia|artralgia|dor\s+muscular|dor\s+no\s+corpo|dor\s+nas\s+juntas|dor\s+articular|quebra.osso/)) checkById('tri-mio','Mialgia/artralgia');
-  if(menciona(/prostrac|astenia|fraqueza|prostrad/)) checkById('tri-prost','Prostração');
+  if(menciona(/\bnausea|enjoo/)) checkById('tri-naus','Náuseas');
+  if(menciona(/vomit/)) checkById('tri-vom','Vômitos');
   if(menciona(/exantema|\brash\b|manchas?\s+vermelhas?|manchas?\s+na\s+pele/)) checkById('tri-exan','Exantema');
-  if(menciona(/nausea|enjoo|vomit/)) checkById('tri-naus','Náusea/vômito');
-  if(menciona(/petequi|prova\s+do\s+laco\s+positiva/)) checkById('tri-petq','Petéquias / prova do laço +');
-  if(/prova\s+do\s+laco\s+positiva/.test(texto)) setField('prova-laco','positiva','Prova do laço');
+  if(menciona(/mialgia|dor\s+muscular|dor\s+no\s+corpo|quebra.osso/)) checkById('tri-mial','Mialgias');
+  if(menciona(/artralgia|dor\s+nas\s+juntas|dor\s+articular/)) checkById('tri-art','Artralgias');
+  if(menciona(/cefal|dor\s+de\s+cabeca/)) checkById('tri-cef','Cefaleia');
+  if(menciona(/dor\s+retro|dor\s+atras\s+dos\s+olhos/)) checkById('tri-retro','Dor retro-orbital');
+  if(menciona(/petequi/)) checkById('tri-petq','Petéquias');
+  if(menciona(/leucopenia/)) checkById('tri-leuco','Leucopenia');
+  if(/prova\s+do\s+laco\s+positiva/.test(texto)){ setField('prova-laco','positiva','Prova do laço'); checkById('tri-laco','Prova do laço positiva'); }
   else if(/prova\s+do\s+laco\s+negativa/.test(texto)) setField('prova-laco','negativa','Prova do laço');
+  if(menciona(/sem\s+foco/)) checkById('tri-crianca','Criança febril sem foco aparente');
 
-  // ── SINAIS DE ALARME ──
+  // ── SINAIS DE ALARME (Quadro 1) ──
   if(menciona(/dor\s+abdominal/)) checkBox('alarme','abd','Dor abdominal');
   if(menciona(/vomitos?\s+persistentes?|vomitando\s+muito/)) checkBox('alarme','vom','Vômitos persistentes');
-  if(menciona(/hipotensao\s+postural|lipotimia/)) checkBox('alarme','hipo','Hipotensão postural');
-  if(menciona(/hepatomegalia\s+dolorosa|figado\s+dolo/)) checkBox('alarme','hepa','Hepatomegalia dolorosa');
-  if(menciona(/sangramento|epistaxe|gengivorragia|melena|hematemese/)) checkBox('alarme','sang','Sangramento de mucosas');
-  if(menciona(/sonolencia|letargia|irritabilidade/)) checkBox('alarme','letarg','Sonolência/letargia');
-  if(menciona(/derrame\s+pleural|ascite|derrame\s+pericardico/)) checkBox('alarme','derrame','Derrames cavitários');
+  if(menciona(/hipotensao\s+postural|lipotimia/)) checkBox('alarme','hipo','Hipotensão postural ou lipotimia');
+  if(menciona(/hepatomegalia|figado\s+aumentado/)) checkBox('alarme','hepa','Hepatomegalia');
+  if(menciona(/sangramento\s+de\s+mucosa|epistaxe|gengivorragia|sangramento\s+(?:nasal|gengival)/)) checkBox('alarme','sang','Sangramento de mucosa');
+  if(menciona(/sonolencia|letargia|irritabilidade/)) checkBox('alarme','letarg','Letargia/irritabilidade');
+  if(menciona(/derrame\s+pleural|ascite|derrame\s+pericardico/)) checkBox('alarme','derrame','Acúmulo de líquidos');
 
-  // ── SINAIS DE CHOQUE ── ("pressão de pulso" não marca: ela é calculada pela PA)
+  // ── CHOQUE E DENGUE GRAVE ── ("pressão de pulso" não marca: ela é calculada pela PA)
   if(menciona(/\bchoque\b|hipotensao\s+arterial/)) checkBox('choque','hipo_art','Hipotensão/choque');
-  if(menciona(/extremidades\s+frias|cianose/)) checkBox('choque','extrem','Extremidades frias');
+  if(menciona(/extremidades\s+frias|cianose|pulso\s+(?:fino|filiforme|fraco)/)) checkBox('choque','extrem','Má perfusão');
   if(menciona(/\boliguria\b|\banuria\b/)) checkBox('choque','oliguria','Oligúria/anúria');
+  if(menciona(/desconforto\s+respiratorio/)) checkBox('choque','resp','Desconforto respiratório');
+  if(menciona(/hematemese|melena|metrorragia|sangramento\s+(?:grave|volumoso|intenso)/)) checkBox('choque','sang_grave','Sangramento grave');
 
-  // ── FATORES DE RISCO ──
+  // ── CONDIÇÕES ESPECIAIS E COMORBIDADES (Grupo B) ──
   if(menciona(/gestante|gravida/)) checkBox('fator','gestante','Gestante');
-  if(menciona(/hipertens|\bhas\b/)) checkBox('fator','hipertensao','HAS');
+  if(menciona(/hipertens|\bhas\b|cardiopatia|insuficiencia\s+cardiaca/)) checkBox('fator','hipertensao','HAS/doença cardiovascular');
   if(menciona(/diabet|\bdm\b/)) checkBox('fator','diabetes','Diabetes');
+  if(menciona(/\bdpoc\b/)) checkBox('fator','dpoc','DPOC');
+  if(menciona(/\basma\b|asmatic/)) checkBox('fator','asma','Asma');
+  if(menciona(/obesidade|obes[oa]\b/)) checkBox('fator','obesidade','Obesidade');
   if(menciona(/renal\s+cronica|\bdrc\b/)) checkBox('fator','renal','DRC');
   if(menciona(/hepatopatia|doenca\s+hepatica|cirrose/)) checkBox('fator','hepato','Hepatopatia');
-  if(menciona(/imunossuprimid|imunossupressao/)) checkBox('fator','imuno','Imunossupressão');
-  if(menciona(/cardiopatia|\bdpoc\b|\basma\b/)) checkBox('fator','cardio','Cardiopatia/DPOC/asma');
-  if(menciona(/dengue\s+(?:previa|anterior)|ja\s+teve\s+dengue/)) checkBox('fator','dengue_prev','Dengue prévia');
+  if(menciona(/anemia\s+falciforme|doenca\s+hematologica/)) checkBox('fator','hematol','Doença hematológica');
+  if(menciona(/gastrite|ulcera|doenca\s+acido/)) checkBox('fator','acidopeptica','Doença ácido-péptica');
+  if(menciona(/\blupus\b|autoimune|artrite\s+reumatoide/)) checkBox('fator','autoimune','Doença autoimune');
 
   // ── RECALCULAR TUDO ──
   sincPeso();
@@ -2837,15 +3012,16 @@ function interpretarEPreencher(){
   switchTab('pratica');
 }
 
-// ╔══════════════ TRIAGEM DIAGNÓSTICA ══════════════╗
-const TRI_SINTOMAS = ['tri-cef','tri-mio','tri-prost','tri-exan','tri-naus','tri-petq'];
+// ╔══════════════ TRIAGEM DIAGNÓSTICA (MS 2024, item 10) ══════════════╗
+const TRI_SINTOMAS = ['tri-naus','tri-vom','tri-exan','tri-mial','tri-art','tri-cef','tri-retro','tri-petq','tri-laco','tri-leuco'];
 
 function triagemPreenchida(){
-  return $('tri-febre').checked || TRI_SINTOMAS.some(id=>$(id).checked) || $('tri-exame').value || has('triagem-temp') || $('triagem-data-inicio').value;
+  return $('tri-febre').checked || $('tri-crianca').checked || TRI_SINTOMAS.some(id=>$(id).checked) || $('tri-exame').value || has('triagem-temp') || $('triagem-data-inicio').value;
 }
 
 function avaliarTriagem(){
   const febre = $('tri-febre').checked;
+  const crianca = $('tri-crianca').checked;
   const sintomas = TRI_SINTOMAS.filter(id => $(id).checked).length;
   const exame = $('tri-exame').value;
   const epi = $('tri-epi').value;
@@ -2854,57 +3030,60 @@ function avaliarTriagem(){
 
   const febreItem = $('tri-febre-item');
   febreItem.classList.toggle('checked', febre);
-  febreItem.classList.toggle('checked-d', !febre && sintomas>0);
-  TRI_SINTOMAS.forEach(id=>{ const el = $(id+'-item'); if(el) el.classList.toggle('checked', $(id).checked); });
+  febreItem.classList.toggle('checked-d', !febre && (sintomas>0 || crianca));
+  [...TRI_SINTOMAS, 'tri-crianca'].forEach(id=>{ const el = $(id+'-item'); if(el) el.classList.toggle('checked', $(id).checked); });
 
   const result = $('triagem-result');
   const btnConfirmar = $('btn-confirmar-dengue');
   result.style.display = 'block';
 
-  const labConfirmado = ['ns1pos','igmpos','pcr'].includes(exame);
+  const labConfirmado = ['ns1pos','igmpos','pcr','clinico'].includes(exame);
   const labNegativo = ['ns1neg','igmneg'].includes(exame);
-
-  let nivel;
-  if(labConfirmado) nivel = 'confirmado';
-  else if(febre && sintomas >= 2 && epi === 'sim') nivel = 'provavel';
-  else if(febre && sintomas >= 1) nivel = 'possivel';
-  else nivel = 'improvavel';
+  const clinicoOk = febre && (sintomas >= 2 || crianca);
 
   let titulo = '', corpo = '', corBorda = '', corFundo = '';
-  if(nivel === 'confirmado'){
-    titulo = '✅ DENGUE CONFIRMADA LABORATORIALMENTE';
-    corpo = `Resultado laboratorial positivo (${exame==='ns1pos'?'NS1':exame==='igmpos'?'IgM':'PCR'}). Prosseguir com classificação por grupo e conduta.`;
+  if(labConfirmado){
+    const nome = {ns1pos:'NS1 reagente', igmpos:'IgM reagente', pcr:'RT-PCR detectável', clinico:'vínculo clínico-epidemiológico'}[exame];
+    titulo = '✅ CASO CONFIRMADO DE DENGUE';
+    corpo = `Confirmação por ${nome}. Classificar em A, B, C ou D e seguir a conduta.`;
     corBorda = 'var(--group-b)'; corFundo = '#F0FDF4';
     btnConfirmar.style.display = 'block';
-  } else if(nivel === 'provavel'){
-    titulo = '⚠️ DENGUE PROVÁVEL (critérios clínicos + epidemiologia)';
-    corpo = `Febre ✓ + ${sintomas} sintomas associados ✓ + área endêmica ✓. Critérios clínicos de suspeita preenchidos. Solicitar NS1 se dias 1–4, ou sorologia se ≥ 6º dia. Iniciar manejo como dengue suspeita.`;
+  } else if(clinicoOk && epi !== 'nao'){
+    titulo = '⚠️ CASO SUSPEITO DE DENGUE';
+    corpo = (crianca && sintomas < 2)
+      ? 'Criança com febre aguda sem foco aparente em área com transmissão: caso suspeito pelo MS. '
+      : `Febre ✓ + ${sintomas} manifestações ✓. `;
+    if(epi === 'talvez') corpo += 'Confirme a exposição (área com casos ou viagem nos últimos 14 dias). ';
+    corpo += '<strong>Notificar</strong>, classificar em A, B, C ou D e iniciar a hidratação já. Exame específico: NS1 ou RT-PCR até o 5º dia; IgM a partir do 6º dia.';
     corBorda = 'var(--group-c)'; corFundo = '#FFF7ED';
     btnConfirmar.style.display = 'block';
-  } else if(nivel === 'possivel'){
-    titulo = '🟡 DENGUE POSSÍVEL';
-    corpo = `Febre ✓ · ${sintomas} sintoma(s) associado(s) (mínimo 2). `
-      + (sintomas<2 ? `Marque pelo menos mais ${2-sintomas} sintoma(s) para suspeita clínica. ` : 'Sem contexto epidemiológico confirmado: considerar os diagnósticos diferenciais. ')
-      + 'Na dúvida, manejar como caso suspeito.';
+  } else if(clinicoOk){
+    titulo = '🟡 QUADRO COMPATÍVEL, SEM VÍNCULO EPIDEMIOLÓGICO';
+    corpo = 'Há critérios clínicos, mas sem residência em área com casos nem viagem recente. Investigar os diagnósticos diferenciais. Nos primeiros dias, na dúvida, manejar como dengue (MS).';
     corBorda = '#F59E0B'; corFundo = '#FFFBEB';
-    btnConfirmar.style.display = sintomas>=2 ? 'block' : 'none';
+    btnConfirmar.style.display = 'block';
+  } else if(febre){
+    titulo = '🟡 CRITÉRIOS INCOMPLETOS';
+    corpo = `Febre ✓ · ${sintomas} manifestação(ões); são necessárias 2 (ou criança sem foco aparente). Reavaliar e considerar diferenciais.`;
+    corBorda = '#F59E0B'; corFundo = '#FFFBEB';
+    btnConfirmar.style.display = 'none';
   } else {
-    titulo = '❌ CRITÉRIOS INSUFICIENTES para dengue';
-    corpo = `${!febre?'Febre ausente (critério obrigatório). ':''}${sintomas<2?'Sintomas associados insuficientes ('+sintomas+'/2 mínimo). ':''}Considere outros diagnósticos diferenciais listados acima.`;
+    titulo = '❌ SEM CRITÉRIO DE CASO SUSPEITO';
+    corpo = `Febre ausente (critério obrigatório).${sintomas ? ' ' + sintomas + ' manifestação(ões) marcada(s).' : ''} Considere outros diagnósticos.`;
     corBorda = 'var(--text-muted)'; corFundo = '#F8FAFC';
     btnConfirmar.style.display = 'none';
   }
 
-  // Exame negativo NÃO descarta dengue (antes rebaixava para "improvável")
+  // Exame negativo não descarta dengue
   if(labNegativo){
     corpo += exame==='ns1neg'
-      ? ' ℹ️ NS1 negativo não descarta dengue (sensibilidade menor, sobretudo em infecção secundária e após o 4º dia). Manter o manejo clínico.'
-      : ' ℹ️ IgM negativa não descarta dengue se colhida antes do 6º dia. Repetir se necessário e manter o manejo clínico.';
+      ? ' ℹ️ NS1 não reagente não descarta dengue. Manter o manejo clínico; a partir do 6º dia, pode-se pedir IgM.'
+      : ' ℹ️ IgM não reagente colhida antes do 6º dia não descarta dengue. Manter o manejo clínico.';
   }
-  if(exame==='ns1pos' && dias && dias>5) corpo += ' (NS1 tem melhor desempenho até o 4º–5º dia.)';
-  if(exame==='igmpos' && dias && dias<6) corpo += ' (IgM antes do 6º dia: confira a data de início.)';
+  if((exame==='ns1pos' || exame==='pcr') && dias && dias>5) corpo += ' (NS1 e RT-PCR são indicados até o 5º dia: confira a data de início.)';
+  if(exame==='igmpos' && dias && dias<6) corpo += ' (IgM é indicada a partir do 6º dia: confira a data de início.)';
   if(temp>0 && temp<37.5 && febre){
-    corpo += ' ⚠️ Temperatura atual abaixo de 37,5°C — paciente pode estar em defervescência (início da fase crítica).';
+    corpo += ' ⚠️ Temperatura atual abaixo de 37,5°C: o paciente pode estar na defervescência, início da fase crítica. Pesquise sinais de alarme.';
   }
 
   result.style.borderColor = corBorda;
@@ -2956,7 +3135,7 @@ function atualizarLacoStatus(daGrade){
   const status = $('laco-status');
   const select = $('prova-laco');
   const idade = idadeInformada() ? num('idade') : 99;
-  const limiar = idade < 12 ? 10 : 20;
+  const limiar = idade < 13 ? 10 : 20;
   const positivo = active >= limiar;
 
   counter.textContent = active;
@@ -2968,14 +3147,16 @@ function atualizarLacoStatus(daGrade){
     if(daGrade) select.value = '';
   } else {
     if(positivo){
-      status.textContent = '⚠️ POSITIVA — Sinal hemorrágico presente';
+      status.textContent = '⚠️ POSITIVA: sangramento induzido de pele (Grupo B, se não houver alarme)';
       status.style.color = 'var(--group-d)';
     } else {
-      status.textContent = `Negativa — faltam ${limiar - active} petéquia(s) para positivar (limiar ${limiar})`;
+      status.textContent = `Negativa: faltam ${limiar - active} petéquia(s) para positivar (limiar ${limiar})`;
       status.style.color = 'var(--group-b)';
     }
     select.value = positivo ? 'positiva' : 'negativa';
   }
+  // A triagem acompanha o resultado da prova do laço
+  autoMarcarId('tri-laco', select.value === 'positiva');
 }
 
 function updateLacoCount(){
@@ -2988,7 +3169,7 @@ function resetLaco(){
   updateLacoCount();
 }
 
-// ╔══════════════ CALCULADORA DE DOSES ══════════════╗
+// ╔══════════════ CALCULADORA DE DOSES E HIDRATAÇÃO (MS 2024) ══════════════╗
 function calcularDosePediatrica(){
   const pesoInput = $('dose-peso');
   if(!pesoInput.value && $('peso').value) pesoInput.value = $('peso').value;
@@ -3001,21 +3182,43 @@ function calcularDosePediatrica(){
   results.style.display='block'; empty.style.display='none';
 
   const fmt = v => Math.round(v).toLocaleString('pt-BR');
-  // Com teto: em adultos e crianças grandes o cálculo por kg passava da dose máxima
-  const set = (id, val, unit, teto) => {
-    const capado = teto && val > teto;
-    $(id).innerHTML = fmt(capado ? teto : val) + ' ' + unit + (capado ? ' <span class="dose-warn">(teto adulto)</span>' : '');
-  };
+  const crianca = ehCrianca();
+  const pesoTxt = String(peso).replace('.',',');
+  $('dose-perfil').textContent = crianca
+    ? `Criança (< 13 anos), ${pesoTxt} kg: doses por peso`
+    : `Adulto, ${pesoTxt} kg: doses fixas do Apêndice H`;
 
-  set('d-para-min', peso*10, 'mg/dose', 1000);
-  set('d-para-max', peso*15, 'mg/dose', 1000);
-  set('d-para-dia', peso*60, 'mg/dia', 4000);
-  set('d-dipi', peso*15, 'mg/dose', 1000);
-  set('d-rl-c', peso*10, 'mL');
-  set('d-rl-d', peso*20, 'mL');
-  set('d-limiar', peso*181, 'mL/24h');
-  set('d-oral-a', peso*60, 'mL/dia');
-  set('d-oral-b', peso*80, 'mL/dia');
+  if(crianca){
+    const mg = Math.min(peso*10, 1000);
+    $('d-para').innerHTML = `${fmt(mg)} mg até de 6/6 h<br/><span class="dose-warn">${fmt(mg/10)} gotas (200 mg/mL)</span>`;
+    $('d-para-dia').innerHTML = `${fmt(Math.min(mg*4, 4000))} mg`;
+    $('d-dipi').innerHTML = `${fmt(mg)} mg<br/><span class="dose-warn">${fmt(mg/25)} gotas (500 mg/mL) ou ${(mg/50).toFixed(1).replace('.',',')} mL (50 mg/mL)</span>`;
+    $('d-med-nota').textContent = '10 mg/kg/dose para os dois (MS, Apêndice H). Respeitar a dose máxima para peso e idade; doses acima da recomendada de paracetamol são hepatotóxicas.';
+  } else {
+    $('d-para').innerHTML = '500 mg até de 4/4 h<br/><span class="dose-warn">ou 1 g até de 6/6 h</span>';
+    $('d-para-dia').innerHTML = '4.000 mg';
+    $('d-dipi').innerHTML = '500 mg<br/><span class="dose-warn">20 gotas ou 1 comprimido</span>';
+    $('d-med-nota').textContent = 'Doses do adulto no Apêndice H do MS. Somar o paracetamol de antigripais e analgésicos combinados.';
+  }
+
+  const mlkg = mlKgOral(peso, crianca);
+  const total = peso*mlkg;
+  $('d-oral-label').textContent = `Volume em 24 h (${mlkg} mL/kg/dia)`;
+  $('d-oral').textContent = fmt(total) + ' mL';
+  $('d-oral-inicio').textContent = fmt(total/3) + ' mL';
+  $('d-oral-sro').textContent = fmt(total/3) + ' mL';
+
+  $('d-c-1h').textContent = fmt(peso*10) + ' mL em 1 h';
+  $('d-c-2h').textContent = fmt(peso*10) + ' mL/h';
+  $('d-c-m1').innerHTML = `${fmt(peso*25)} mL<br/><span class="dose-warn">${fmt(peso*25/6)} mL/h</span>`;
+  $('d-c-m2').innerHTML = `${fmt(peso*25)} mL<br/><span class="dose-warn">${fmt(peso*25/8)} mL/h</span>`;
+
+  $('d-d-exp').textContent = fmt(peso*20) + ' mL';
+  $('d-d-alb').innerHTML = `${fmt(peso*0.5)} a ${fmt(peso)} g<br/><span class="dose-warn">${fmt(peso*10)} a ${fmt(peso*20)} mL da solução a 5%</span>`;
+  $('d-d-col').textContent = fmt(peso*10) + ' mL/h';
+  $('d-d-ch').textContent = `${fmt(peso*10)} a ${fmt(peso*15)} mL/dia`;
+  $('d-d-pf').textContent = fmt(peso*10) + ' mL';
+  $('d-d-crio').textContent = `${Math.max(1, Math.round(peso/10))} a ${Math.max(1, Math.round(peso/5))} U`;
 }
 
 // ╔══════════════ INDEXEDDB — HISTÓRICO ══════════════╗
