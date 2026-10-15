@@ -1,0 +1,3300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<meta name="theme-color" content="#1E293B"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="DengueCare"/>
+<meta name="format-detection" content="telephone=no"/>
+<title>DengueCare · UBS Nacional Contagem</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --slate-dark: #1E293B;
+    --slate-darker: #0F172A;
+    --white-clinical: #F8FAFC;
+    --teal: #0D9488;
+    --teal-light: #14B8A6;
+    --platinum: #E2E8F0;
+    --group-a: #2563EB;
+    --group-b: #16A34A;
+    --group-c: #EA580C;
+    --group-d: #DC2626;
+    --text-main: #1E293B;
+    --text-muted: #64748B;
+    --border: #CBD5E1;
+    --card-bg: #FFFFFF;
+    --input-bg: #F1F5F9;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    --header-color: var(--teal);
+    --transition: all 0.3s ease;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--white-clinical);
+    color: var(--text-main);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  #app-header {
+    background: var(--slate-dark);
+    color: white;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  #status-bar {
+    background: var(--header-color);
+    transition: background 0.4s ease;
+    padding: 6px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  #status-text { display: flex; align-items: center; gap: 8px; }
+  #status-dot { width: 10px; height: 10px; border-radius: 50%; background: white; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  .header-content {
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .app-title { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+  .app-title span { color: var(--teal-light); }
+  .app-subtitle { font-size: 11px; color: #94A3B8; margin-top: 2px; }
+  .header-meta { font-size: 11px; color: #94A3B8; text-align: right; max-width: 440px; line-height: 1.5; }
+
+  /* ── TAB NAV ── */
+  .tab-nav {
+    display: flex;
+    background: var(--slate-darker);
+    border-bottom: 2px solid var(--teal);
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 14px 20px;
+    border: none;
+    background: transparent;
+    color: #94A3B8;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    letter-spacing: 0.03em;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+  }
+  .tab-btn:hover { color: white; background: rgba(255,255,255,0.05); }
+  .tab-btn.active { color: var(--teal-light); border-bottom-color: var(--teal-light); background: rgba(13,148,136,0.08); }
+  .tab-icon { margin-right: 6px; }
+
+  /* ── CONTENT AREA ── */
+  .tab-content { display: none; padding: 20px; max-width: 900px; margin: 0 auto; }
+  .tab-content.active { display: block; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 16px;
+    overflow: hidden;
+    border: 1px solid var(--platinum);
+  }
+  .card-header {
+    padding: 14px 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+    border-bottom: 2px solid var(--platinum);
+    background: var(--white-clinical);
+  }
+  .card-header:hover { background: #F0F9FF; }
+  .card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--slate-dark);
+  }
+  .card-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .icon-fisiop { background: #EFF6FF; }
+  .icon-farm { background: #F0FDF4; }
+  .icon-emerg { background: #FFF7ED; }
+  .icon-dados { background: #F0F9FF; }
+  .icon-sinais { background: #FEF2F2; }
+  .icon-conduta { background: #F0FDF4; }
+  .chevron { font-size: 12px; color: var(--text-muted); transition: transform 0.3s; }
+  .chevron.open { transform: rotate(180deg); }
+  .card-body { padding: 18px; display: none; }
+  .card-body.open { display: block; }
+
+  /* ── TYPOGRAPHY ── */
+  h3 { font-size: 14px; font-weight: 700; color: var(--slate-dark); margin: 16px 0 8px; }
+  h3:first-child { margin-top: 0; }
+  p { font-size: 13px; line-height: 1.65; color: #374151; margin-bottom: 10px; }
+  strong { color: var(--slate-dark); }
+
+  /* ── PILLS / BADGES ── */
+  .badge {
+    display: inline-flex; align-items: center;
+    padding: 3px 10px; border-radius: 20px;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .badge-a { background: #DBEAFE; color: var(--group-a); }
+  .badge-b { background: #DCFCE7; color: var(--group-b); }
+  .badge-c { background: #FFEDD5; color: var(--group-c); }
+  .badge-d { background: #FEE2E2; color: var(--group-d); }
+  .badge-ok { background: #F0FDF4; color: #15803D; }
+  .badge-warn { background: #FEF3C7; color: #92400E; }
+  .badge-danger { background: #FEE2E2; color: #991B1B; }
+
+  /* ── PROCESS TIMELINE ── */
+  .timeline { display: flex; gap: 6px; margin: 12px 0; flex-wrap: wrap; }
+  .tl-phase {
+    flex: 1; min-width: 120px; padding: 10px 12px; border-radius: 8px;
+    text-align: center; font-size: 11px; font-weight: 600;
+    border-top: 4px solid;
+  }
+  .tl-febrile { background:#DBEAFE; border-color:var(--group-a); color:var(--group-a); }
+  .tl-critical { background:#FFEDD5; border-color:var(--group-c); color:#9A3412; }
+  .tl-recovery { background:#DCFCE7; border-color:var(--group-b); color:#14532D; }
+  .tl-phase .days { font-size: 18px; font-weight: 900; display: block; margin-bottom: 2px; }
+
+  /* ── DRUG COMPARISON TABLE ── */
+  .drug-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 12px 0; }
+  .drug-card {
+    padding: 12px; border-radius: 10px; border: 2px solid;
+    font-size: 12px;
+  }
+  .drug-safe { border-color: var(--group-b); background: #F0FDF4; }
+  .drug-safe .drug-name { color: var(--group-b); font-weight: 800; font-size: 14px; }
+  .drug-safe2 { border-color: var(--teal); background: #F0FDFA; }
+  .drug-safe2 .drug-name { color: var(--teal); font-weight: 800; font-size: 14px; }
+  .drug-danger { border-color: var(--group-d); background: #FFF1F2; }
+  .drug-danger .drug-name { color: var(--group-d); font-weight: 800; font-size: 14px; }
+  .drug-status { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin-top: 6px; padding: 2px 7px; border-radius: 20px; display: inline-block; }
+  .drug-safe .drug-status { background: var(--group-b); color: white; }
+  .drug-safe2 .drug-status { background: var(--teal); color: white; }
+  .drug-danger .drug-status { background: var(--group-d); color: white; }
+
+  /* ── GROUP TABLE ── */
+  .group-table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; }
+  .group-table th, .group-table td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--platinum); }
+  .group-table th { background: var(--white-clinical); font-weight: 700; color: var(--text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
+  .group-table tr:last-child td { border-bottom: none; }
+  .group-a-row td:first-child { border-left: 4px solid var(--group-a); }
+  .group-b-row td:first-child { border-left: 4px solid var(--group-b); }
+  .group-c-row td:first-child { border-left: 4px solid var(--group-c); }
+  .group-d-row td:first-child { border-left: 4px solid var(--group-d); }
+
+  /* ── EVIDENCE BOX ── */
+  .evidence-box {
+    background: #F8FAFC; border-left: 4px solid var(--teal);
+    padding: 12px 14px; border-radius: 0 8px 8px 0;
+    font-size: 12px; margin: 10px 0; line-height: 1.6;
+  }
+  .evidence-box .ev-title { font-weight: 700; color: var(--teal); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+
+  /* ── FORMS ── */
+  .form-section { margin-bottom: 22px; }
+  .form-section-title {
+    font-size: 12px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .08em; color: var(--text-muted);
+    margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+  }
+  .form-section-title::after {
+    content: ''; flex: 1; height: 1px; background: var(--platinum);
+  }
+  .form-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+  .form-grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field label { font-size: 11px; font-weight: 600; color: var(--text-muted); letter-spacing: .04em; }
+  .field input, .field select, .field textarea {
+    padding: 8px 11px; border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: var(--input-bg);
+    font-size: 13px; color: var(--text-main);
+    transition: border-color 0.2s;
+    font-family: inherit;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none; border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(13,148,136,0.12);
+  }
+  .field.highlight input { border-color: var(--group-c); background: #FFF7ED; }
+  .field.danger input { border-color: var(--group-d); background: #FFF1F2; }
+  .field-note { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+  .field-computed {
+    padding: 8px 11px; border-radius: 8px;
+    background: var(--platinum); border: 1.5px solid var(--border);
+    font-size: 13px; color: var(--text-main); font-weight: 600;
+    min-height: 36px; display: flex; align-items: center;
+  }
+
+  /* ── CHECKBOXES ── */
+  .check-list { display: flex; flex-direction: column; gap: 8px; }
+  .check-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 12px; border-radius: 9px;
+    border: 1.5px solid var(--platinum);
+    background: var(--white-clinical);
+    cursor: pointer; transition: var(--transition);
+    font-size: 13px;
+  }
+  .check-item:hover { border-color: var(--teal); background: #F0FDFA; }
+  .check-item input[type=checkbox] { width: 16px; height: 16px; cursor: pointer; accent-color: var(--group-c); flex-shrink: 0; margin-top: 2px; }
+  .check-item.checked { border-color: var(--group-c); background: #FFF7ED; }
+  .check-item.checked-d { border-color: var(--group-d) !important; background: #FFF1F2 !important; }
+  .check-label { font-size: 13px; line-height: 1.4; }
+  .check-label small { display: block; font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+  /* ── ALERT BOX ── */
+  #alert-box {
+    display: none;
+    padding: 18px 20px; border-radius: 12px;
+    border: 3px solid var(--group-d); background: #FFF1F2;
+    margin: 16px 0; animation: alertpulse 1.2s ease-in-out infinite;
+  }
+  @keyframes alertpulse { 0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,0.4)} 50%{box-shadow:0 0 0 10px rgba(220,38,38,0)} }
+  #alert-box .alert-title {
+    font-size: 16px; font-weight: 900; color: var(--group-d);
+    text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px;
+  }
+  #alert-box .alert-body { font-size: 13px; color: #7F1D1D; line-height: 1.6; }
+  #alert-box .alert-calc { margin-top: 12px; padding: 10px 14px; background: #FECACA; border-radius: 8px; font-weight: 700; font-size: 13px; color: #991B1B; }
+
+  #conduta-box {
+    padding: 14px 16px; border-radius: 10px; margin: 12px 0;
+    border: 2px solid var(--border); background: var(--white-clinical);
+  }
+  .conduta-item { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid var(--platinum); font-size: 13px; }
+  .conduta-item:last-child { border-bottom: none; }
+  .conduta-num { background: var(--teal); color: white; font-size: 11px; font-weight: 700; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+
+  /* ── NSAID POPUP ── */
+  #nsaid-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+    z-index: 1000; align-items: center; justify-content: center;
+  }
+  #nsaid-overlay.show { display: flex; }
+  #nsaid-modal {
+    background: white; border-radius: 16px; padding: 28px; max-width: 460px;
+    width: 90%; border-top: 6px solid var(--group-d); box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  #nsaid-modal .modal-icon { font-size: 40px; text-align: center; margin-bottom: 10px; }
+  #nsaid-modal h2 { font-size: 18px; color: var(--group-d); text-align: center; margin-bottom: 8px; }
+  #nsaid-modal p { font-size: 13px; color: #374151; text-align: center; line-height: 1.6; margin-bottom: 16px; }
+  .modal-btn { width: 100%; padding: 12px; border: none; border-radius: 9px; font-size: 14px; font-weight: 700; cursor: pointer; }
+  .modal-btn-primary { background: var(--group-d); color: white; }
+  .modal-btn-primary:hover { background: #B91C1C; }
+
+  /* ── PROGRESS / FLUID BAR ── */
+  .fluid-bar-wrap { margin: 10px 0; }
+  .fluid-bar-label { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+  .fluid-bar-track { height: 10px; background: var(--platinum); border-radius: 10px; overflow: hidden; }
+  .fluid-bar-fill { height: 100%; border-radius: 10px; background: var(--group-b); transition: width 0.4s, background 0.4s; }
+
+  /* ── HEMATOCRIT REF ── */
+  .hct-ref { font-size: 11px; background: #F0F9FF; border: 1px solid #BAE6FD; border-radius: 7px; padding: 8px 10px; margin: 8px 0; }
+
+  /* ── BUTTONS ── */
+  .btn {
+    padding: 10px 20px; border-radius: 9px; border: none;
+    font-size: 13px; font-weight: 700; cursor: pointer; transition: var(--transition);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary { background: var(--teal); color: white; }
+  .btn-primary:hover { background: var(--teal-light); }
+  .btn-secondary { background: var(--platinum); color: var(--text-main); }
+  .btn-secondary:hover { background: #CBD5E1; }
+  .btn-danger { background: var(--group-d); color: white; }
+  .btn-save { background: var(--slate-dark); color: white; }
+  .btn-save:hover { background: var(--group-a); }
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--platinum); }
+
+  /* ── EVOLUTION LOG ── */
+  #evo-log { background: var(--input-bg); border: 1.5px solid var(--border); border-radius: 8px; padding: 10px 12px; font-size: 12px; width: 100%; min-height: 100px; font-family: 'Courier New', monospace; color: var(--text-main); resize: vertical; }
+
+  /* ── EVIDENCE TAGS ── */
+  .ref-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .ref-tag {
+    font-size: 10px; padding: 3px 8px; border-radius: 20px;
+    background: #EFF6FF; color: #1E40AF; font-weight: 600;
+    border: 1px solid #BFDBFE;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center; padding: 20px;
+    font-size: 11px; color: var(--text-muted);
+    border-top: 1px solid var(--platinum);
+    margin-top: 10px;
+  }
+
+  /* ── UTILITY ── */
+  .flex-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .mt-8 { margin-top: 8px; }
+  .mb-0 { margin-bottom: 0 !important; }
+  .text-danger { color: var(--group-d); }
+  .text-success { color: var(--group-b); }
+  .text-warn { color: var(--group-c); }
+  .separator { border: none; border-top: 1px solid var(--platinum); margin: 14px 0; }
+  ul.clinical-list { padding-left: 18px; }
+  ul.clinical-list li { font-size: 13px; margin-bottom: 5px; line-height: 1.5; }
+  .nomogram-box {
+    background: #FFFBEB; border: 2px solid #FCD34D; border-radius: 10px;
+    padding: 14px; margin: 12px 0; font-size: 12px;
+  }
+  .nomogram-box .nom-title { font-weight: 700; color: #92400E; margin-bottom: 8px; font-size: 13px; }
+  .nomogram-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #FDE68A; }
+  .nomogram-row:last-child { border-bottom: none; }
+
+  /* ── VOZ ── */
+  #voz-fab {
+    position: fixed; bottom: 24px; right: 24px; z-index: 500;
+    width: 58px; height: 58px; border-radius: 50%;
+    background: var(--teal); color: white; border: none;
+    font-size: 24px; cursor: pointer; box-shadow: 0 4px 20px rgba(13,148,136,0.5);
+    transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+  }
+  #voz-fab:hover { background: var(--teal-light); transform: scale(1.08); }
+  #voz-fab.recording { background: var(--group-d); animation: voz-pulse 1s infinite; }
+  @keyframes voz-pulse { 0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,0.5)} 50%{box-shadow:0 0 0 14px rgba(220,38,38,0)} }
+
+  #voz-panel {
+    position: fixed; bottom: 96px; right: 16px; z-index: 499;
+    width: min(480px, calc(100vw - 32px));
+    background: white; border-radius: 16px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+    border: 2px solid var(--teal);
+    display: none; flex-direction: column; overflow: hidden;
+  }
+  #voz-panel.open { display: flex; }
+  #voz-panel-header {
+    background: var(--slate-dark); color: white;
+    padding: 12px 16px; display: flex; justify-content: space-between; align-items: center;
+    font-size: 13px; font-weight: 700;
+  }
+  #voz-status-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #94A3B8; display: inline-block; margin-right: 8px;
+    transition: background 0.3s;
+  }
+  #voz-status-dot.active { background: #EF4444; animation: voz-pulse 1s infinite; }
+  #voz-transcript {
+    padding: 14px 16px; min-height: 100px; max-height: 200px;
+    overflow-y: auto; font-size: 13px; line-height: 1.7;
+    color: var(--text-main); background: var(--input-bg);
+    border-bottom: 1px solid var(--platinum);
+    white-space: pre-wrap;
+  }
+  #voz-transcript .interim { color: #94A3B8; font-style: italic; }
+  #voz-controls { padding: 12px 16px; display: flex; gap: 8px; flex-wrap: wrap; background: white; }
+  #voz-result-box {
+    display: none; padding: 12px 16px; background: #F0FDF4;
+    border-top: 2px solid var(--group-b); font-size: 12px; line-height: 1.8;
+  }
+
+  /* ── TRIAGEM DIAGNÓSTICA ── */
+  #triagem-result {
+    border-radius: 10px; padding: 14px 16px; margin-top: 14px;
+    display: none; border: 2px solid; transition: all 0.3s;
+  }
+  #triagem-result .tr-title { font-size: 15px; font-weight: 900; margin-bottom: 6px; }
+  #triagem-result .tr-body { font-size: 13px; line-height: 1.6; }
+  .triagem-dias-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--slate-dark); color: white;
+    font-size: 20px; font-weight: 900;
+    padding: 6px 16px; border-radius: 30px; margin: 8px 0;
+  }
+  #btn-confirmar-dengue {
+    display: none; margin-top: 14px;
+    width: 100%; padding: 13px; border: none; border-radius: 10px;
+    font-size: 14px; font-weight: 800; cursor: pointer;
+    background: var(--teal); color: white; letter-spacing: .03em;
+    transition: background 0.2s;
+  }
+  #btn-confirmar-dengue:hover { background: var(--teal-light); }
+
+  /* ── DOSE CALC ── */
+  .dose-result { background: #F0FDF4; border: 2px solid var(--group-b); border-radius: 10px; padding: 14px; margin-top: 14px; }
+  .dose-row { display: flex; justify-content: space-between; align-items: baseline; padding: 6px 0; border-bottom: 1px solid #BBF7D0; font-size: 13px; }
+  .dose-row:last-child { border-bottom: none; }
+  .dose-label { font-weight: 600; color: var(--slate-dark); }
+  .dose-val { font-weight: 900; color: var(--group-b); font-size: 15px; }
+  .dose-warn { color: var(--group-c); font-size: 11px; }
+
+  /* ── CHARTS ── */
+  .chart-wrap { position: relative; height: 220px; margin: 10px 0; }
+  .trend-entry-form { background: var(--input-bg); border-radius: 10px; padding: 14px; margin-top: 14px; }
+
+  /* ── HISTORICO TAB ── */
+  #tab-historico .hist-card {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 16px; background: var(--white-clinical);
+    border: 1.5px solid var(--platinum); border-radius: 10px;
+    margin-bottom: 8px; font-size: 13px;
+    transition: var(--transition);
+  }
+  #tab-historico .hist-card:hover { border-color: var(--teal); background: #F0FDFA; }
+  #tab-historico .hist-card .hist-meta { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+  #tab-historico .hist-btns { display: flex; gap: 6px; }
+  #tab-historico .hist-btn {
+    padding: 6px 12px; border: none; border-radius: 7px;
+    font-size: 12px; font-weight: 700; cursor: pointer;
+  }
+  .hist-btn-load { background: var(--teal); color: white; }
+  .hist-btn-del { background: #FEE2E2; color: var(--group-d); }
+  #hist-empty { text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px; }
+
+  /* ── PROVA DO LAÇO INTERATIVA ── */
+  #laco-grid-wrap {
+    margin-top: 14px; padding: 14px;
+    background: var(--white-clinical); border: 1.5px solid var(--platinum);
+    border-radius: 10px;
+  }
+  #laco-grid-title { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px; }
+  #laco-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 26px);
+    gap: 6px;
+    width: fit-content;
+    margin: 0 auto 12px;
+  }
+  .laco-dot {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: #E2E8F0; border: 2px solid #CBD5E1;
+    cursor: pointer; transition: all 0.15s;
+  }
+  @media (hover: hover) {
+    .laco-dot:hover { background: #FECACA; border-color: #FCA5A5; transform: scale(1.15); }
+  }
+  .laco-dot.active { background: #DC2626; border-color: #991B1B; }
+  #laco-counter {
+    text-align: center; font-size: 28px; font-weight: 900;
+    transition: color 0.3s;
+  }
+  #laco-status {
+    text-align: center; margin-top: 4px;
+    font-size: 13px; font-weight: 700;
+  }
+  #laco-actions { display: flex; gap: 8px; justify-content: center; margin-top: 12px; }
+
+  /* ── AJUSTES GERAIS (versão celular) ── */
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body { padding-bottom: calc(90px + env(safe-area-inset-bottom)); }
+  button, .card-header, .check-item, .laco-dot { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+  .app-top { background: var(--slate-dark); color: white; padding-top: env(safe-area-inset-top); }
+  .card { scroll-margin-top: 110px; }
+  .field.full { grid-column: 1 / -1; }
+  .table-scroll { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .table-scroll .group-table { min-width: 560px; }
+  .tab-short { display: none; }
+  #status-label { overflow: hidden; text-overflow: ellipsis; }
+  #voz-texto {
+    width: 100%; min-height: 110px; max-height: 220px; border: none; resize: vertical;
+    padding: 14px 16px; font-size: 14px; line-height: 1.6; font-family: inherit;
+    color: var(--text-main); background: var(--input-bg); border-bottom: 1px solid var(--platinum);
+  }
+  #voz-texto:focus { outline: 2px solid var(--teal); outline-offset: -2px; }
+  #voz-interim { padding: 0 16px; min-height: 0; font-size: 12px; color: #94A3B8; font-style: italic; background: var(--input-bg); }
+  #voz-interim:not(:empty) { padding: 4px 16px 8px; }
+  .chart-msg { display: flex; align-items: center; justify-content: center; height: 100%; font-size: 12px; color: var(--text-muted); text-align: center; border: 1px dashed var(--border); border-radius: 8px; padding: 10px; }
+  .grupo-motivos { font-size: 12px; color: var(--text-muted); margin: -4px 0 10px; line-height: 1.5; }
+
+  /* ── CELULAR ── */
+  @media (max-width: 640px) {
+    .header-content { padding: 10px 14px; }
+    .app-title { font-size: 18px; }
+    .header-meta { display: none; }
+    #status-bar { padding: 6px 12px; font-size: 10.5px; gap: 8px; }
+    #status-text { min-width: 0; flex: 1; }
+    #status-label { white-space: nowrap; }
+    .tab-btn { padding: 8px 2px 9px; font-size: 11.5px; letter-spacing: 0; line-height: 1.2; }
+    .tab-icon { display: block; margin: 0 0 2px; font-size: 17px; }
+    .tab-long { display: none; }
+    .tab-short { display: inline; }
+    .tab-content { padding: 12px; }
+    .card-header { padding: 12px 14px; }
+    .card-title { font-size: 13.5px; }
+    .card-body { padding: 14px; }
+    p { font-size: 14px; }
+    ul.clinical-list li { font-size: 14px; }
+    .drug-grid { grid-template-columns: 1fr !important; }
+    .timeline { flex-direction: column; }
+    .tl-phase { min-width: 0; }
+    .form-grid, .form-grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .field label { font-size: 11.5px; }
+    /* 16px evita o zoom automático do iPhone ao tocar no campo */
+    .field input, .field select, .field textarea, #evo-log, #med-input { font-size: 16px; padding: 10px 11px; }
+    .field-computed { font-size: 15px; min-height: 42px; }
+    .check-item { padding: 12px; }
+    .check-item input[type=checkbox] { width: 20px; height: 20px; margin-top: 0; }
+    .check-label { font-size: 14px; }
+    .nomogram-row, .dose-row { gap: 10px; flex-wrap: wrap; }
+    .dose-val { margin-left: auto; }
+    .btn-row .btn { flex: 1 1 100%; justify-content: center; padding: 13px 16px; font-size: 14px; }
+    .btn { padding: 11px 16px; }
+    #tab-historico .hist-card { flex-direction: column; align-items: stretch; gap: 10px; }
+    #tab-historico .hist-btns .hist-btn { flex: 1; padding: 10px 12px; }
+    #laco-grid { grid-template-columns: repeat(8, 30px); }
+    .laco-dot { width: 30px; height: 30px; }
+    .chart-wrap { height: 200px; }
+    #voz-fab { right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); }
+    #voz-panel { left: 8px; right: 8px; width: auto; bottom: calc(84px + env(safe-area-inset-bottom)); max-height: calc(100vh - 120px); overflow-y: auto; }
+    #nsaid-modal { padding: 20px; max-height: 90vh; overflow-y: auto; }
+    .triagem-dias-badge { font-size: 17px; }
+  }
+  @media (max-width: 360px) {
+    .form-grid, .form-grid-3 { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ╔══════════════════════ HEADER ══════════════════════╗ -->
+<div class="app-top">
+  <div class="header-content">
+    <div>
+      <div class="app-title">🦟 Dengue<span>Care</span></div>
+      <div class="app-subtitle">Projeto de Intervenção · UBS Nacional, Contagem · MFC · PUC Minas 2026</div>
+    </div>
+    <div class="header-meta">
+      Preceptor: Patrik Ferreira de Carvalho Pinto<br/>
+      Patricia G. de Marco · Guilherme O. Rodrigues · Walterez G. A. Barbosa · Marcus V. Tolentino · Pedro A. Rüger
+    </div>
+  </div>
+</div>
+<div id="app-header">
+  <div id="status-bar">
+    <div id="status-text">
+      <div id="status-dot"></div>
+      <span id="status-label">Sistema em standby — insira os dados do paciente</span>
+    </div>
+    <div id="group-badge-display"></div>
+  </div>
+  <div class="tab-nav">
+    <button class="tab-btn active" data-tab="teorica" onclick="switchTab('teorica')">
+      <span class="tab-icon">📚</span><span class="tab-long">Aba 1 · Biblioteca Teórica</span><span class="tab-short">Teoria</span>
+    </button>
+    <button class="tab-btn" data-tab="pratica" onclick="switchTab('pratica')">
+      <span class="tab-icon">🩺</span><span class="tab-long">Aba 2 · Calculadora à Beira do Leito</span><span class="tab-short">Calculadora</span>
+    </button>
+    <button class="tab-btn" data-tab="historico" onclick="switchTab('historico')">
+      <span class="tab-icon">📂</span><span class="tab-long">Aba 3 · Histórico</span><span class="tab-short">Histórico</span>
+    </button>
+    <button class="tab-btn" data-tab="referencias" onclick="switchTab('referencias')">
+      <span class="tab-icon">📖</span><span class="tab-long">Aba 4 · Referências</span><span class="tab-short">Referências</span>
+    </button>
+  </div>
+</div>
+
+<!-- ╔══════════════════════ ABA 1 — TEÓRICA ══════════════════════╗ -->
+<div id="tab-teorica" class="tab-content active">
+
+  <!-- ── MÓDULO FISIOPATOLOGIA ── -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard('fisiop')">
+      <div class="card-title">
+        <div class="card-icon icon-fisiop">🔬</div>
+        Módulo 1 · Fisiopatologia da Dengue
+      </div>
+      <span class="chevron" id="chevron-fisiop">▼</span>
+    </div>
+    <div class="card-body open" id="body-fisiop">
+
+      <!-- INTRODUÇÃO GERAL -->
+      <div style="background:linear-gradient(135deg,#EFF6FF,#F0FDFA);border:2px solid var(--teal);border-radius:12px;padding:16px 18px;margin-bottom:18px">
+        <div style="font-size:13px;font-weight:800;color:var(--teal);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">🦟 Visão Geral — O que é a Dengue?</div>
+        <p style="margin-bottom:8px">A <strong>dengue</strong> é uma arbovirose febril aguda causada pelo vírus dengue (DENV), transmitida pela picada da fêmea do <em>Aedes aegypti</em>. É a arbovirose de maior impacto em saúde pública nas Américas, com estimativa de 390 milhões de infecções anuais no mundo (Bhatt et al., Nature, 2013).</p>
+        <p style="margin-bottom:8px">A doença segue um <strong>curso trifásico previsível</strong>: fase febril (dias 1–3), fase crítica (dias 4–7) e fase de recuperação (dias 7–10). A transição entre a fase febril e a crítica — marcada pela <strong>defervescência</strong> — é o momento de maior risco de complicações: o vírus induz extravasamento capilar maciço, trombocitopenia e coagulopatia que, se não reconhecidos a tempo, evoluem para choque e óbito.</p>
+        <p style="margin-bottom:0">O manejo é <strong>essencialmente clínico e de suporte</strong>: não há antiviral específico aprovado. A correta classificação do paciente em Grupos A/B/C/D (Ministério da Saúde / OMS) e a hidratação dirigida são os pilares que reduzem a mortalidade de até 20% (sem tratamento) para menos de 1% (com tratamento adequado).</p>
+      </div>
+
+      <h3>Agente Etiológico e Vetor</h3>
+      <p>O vírus dengue (DENV) é um arbovírus RNA de fita simples da família <strong>Flaviviridae</strong>, com 4 sorotipos distintos (DENV-1 a DENV-4). A transmissão ocorre principalmente pela picada da fêmea do mosquito <em>Aedes aegypti</em> (e secundariamente <em>Aedes albopictus</em>). O período de incubação extrínseca no mosquito é de 8–12 dias; no humano, de <strong>4–10 dias</strong>.</p>
+
+      <h3>Curso Clínico em 3 Fases</h3>
+      <div class="timeline">
+        <div class="tl-phase tl-febrile">
+          <span class="days">Dias 1–3</span>
+          Fase Febril<br/><small>Febre alta, mialgia, cefaleia, exantema, leucopenia, início da trombocitopenia</small>
+        </div>
+        <div class="tl-phase tl-critical">
+          <span class="days">Dias 4–7</span>
+          Fase Crítica ⚠️<br/><small>Defervescência, extravasamento plasmático, risco de choque e hemorragia</small>
+        </div>
+        <div class="tl-phase tl-recovery">
+          <span class="days">Dias 7–10</span>
+          Fase de Recuperação<br/><small>Reabsorção do plasma extravasado, trombocitose reativa, risco de hipervolemia</small>
+        </div>
+      </div>
+
+      <h3>Replicação Viral e Células-Alvo</h3>
+      <p>O DENV infecta preferencialmente células dendríticas, monócitos e macrófagos do sistema reticuloendotelial. Após a replicação, partículas virais e a proteína não-estrutural <strong>NS1</strong> são liberadas na circulação. A NS1 solúvel liga-se a células endoteliais e induz a expressão de sialidases e heparanase, levando à <strong>degradação do glicocálice endotelial</strong> — camada protetora fundamental para a integridade vascular.</p>
+
+      <div class="evidence-box">
+        <div class="ev-title">🧬 Evidência — Open Evidence / PLoS Pathogens 2016</div>
+        A proteína NS1 ativa a catepsina L, que cliva e ativa a heparanase enzimaticamente. Isso resulta na degradação do sulfato de heparano e do ácido siálico do glicocálice, causando aumento da permeabilidade vascular independentemente de vírus viável.
+        <div class="ref-list">
+          <span class="ref-tag">Puerta-Guardo et al. PLoS Pathogens, 2016</span>
+          <span class="ref-tag">Guzman & Harris. Lancet, 2015</span>
+        </div>
+      </div>
+
+      <h3>Cascata Inflamatória e Extravasamento Plasmático</h3>
+      <p>Na fase crítica, ocorre tempestade de citocinas com elevação de <strong>TNF-α, IL-6, IL-8</strong> e metaloproteinases de matriz. O fator ativador de plaquetas (PAF) e os leucotrienos são particularmente importantes como mediadores lipídicos inflamatórios. Essa cascata amplifica a disfunção endotelial, resultando em extravasamento de plasma para o terceiro espaço (pleural, peritoneal, pericárdico).</p>
+
+      <h3>Trombocitopenia — Mecanismo Duplo</h3>
+      <ul class="clinical-list">
+        <li><strong>Supressão da megacariopoese:</strong> infecção viral direta da medula óssea reduz a produção plaquetária</li>
+        <li><strong>Destruição imunomediada:</strong> anticorpos anti-NS1 com reatividade cruzada contra plaquetas; ativação do NLRP3 inflamassoma → produção de IL-1β pelas plaquetas</li>
+        <li><strong>Sequestro esplênico</strong> e ativação/consumo plaquetário periférico</li>
+      </ul>
+
+      <h3>Facilitação Dependente de Anticorpos (ADE)</h3>
+      <p>Na infecção secundária por sorotipo heterólogo, os anticorpos preexistentes facilitam a entrada viral nos macrófagos via receptores Fc, amplificando a replicação e a carga viral. Isso explica o <strong>maior risco de dengue grave na segunda infecção</strong>, especialmente com DENV-2 após DENV-1.</p>
+
+      <div class="evidence-box">
+        <div class="ev-title">📊 Nomograma Preditivo de Choque (AUC 0,83)</div>
+        Um estudo com 4.522 crianças do Sudeste Asiático (J Med Virol, 2024) validou modelo preditivo de Síndrome do Choque da Dengue usando 5 variáveis — detectável já no 2º dia de febre:
+        <div class="nomogram-box" style="margin-top:10px">
+          <div class="nom-title">🎯 5 Variáveis com Maior Poder Preditivo para CSD:</div>
+          <div class="nomogram-row"><span>⚖️ Peso corporal</span><span><em>correlação inversa com risco</em></span></div>
+          <div class="nomogram-row"><span>🤢 Histórico de vômitos persistentes</span><span><em>sinal de alarme</em></span></div>
+          <div class="nomogram-row"><span>🫀 Tamanho do fígado (cm)</span><span><em>hepatomegalia</em></span></div>
+          <div class="nomogram-row"><span>🩸 Hematócrito (%)</span><span><em>hemoconcentração</em></span></div>
+          <div class="nomogram-row"><span>🔴 Plaquetas (/mm³)</span><span><em>trombocitopenia</em></span></div>
+        </div>
+        <div class="ref-list">
+          <span class="ref-tag">Tran PNT et al. J Med Virol, 2024</span>
+          <span class="ref-tag">Especificidade 78% · Sensibilidade 74%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MÓDULO FARMACOLOGIA ── -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard('farm')">
+      <div class="card-title">
+        <div class="card-icon icon-farm">💊</div>
+        Módulo 2 · Farmacologia — Indicações e Contraindicações
+      </div>
+      <span class="chevron" id="chevron-farm">▼</span>
+    </div>
+    <div class="card-body open" id="body-farm">
+
+      <h3>Fármacos na Dengue: Panorama Geral</h3>
+      <div class="drug-grid">
+        <div class="drug-card drug-safe">
+          <div class="drug-name">Paracetamol</div>
+          <div class="drug-status">✓ INDICADO</div>
+          <p style="font-size:11px;margin-top:6px;margin-bottom:0">10–15 mg/kg/dose a cada 6h<br/>Máx: 75 mg/kg/dia (crianças)<br/>Máx: 4g/dia (adultos)</p>
+        </div>
+        <div class="drug-card drug-safe2">
+          <div class="drug-name">Dipirona</div>
+          <div class="drug-status">✓ INDICADO</div>
+          <p style="font-size:11px;margin-top:6px;margin-bottom:0">15 mg/kg/dose a cada 6h<br/>Adultos: 500–1000 mg/dose<br/>Via oral ou IV</p>
+        </div>
+        <div class="drug-card drug-danger">
+          <div class="drug-name">AINEs / AAS</div>
+          <div class="drug-status">✗ CONTRAINDICADO</div>
+          <p style="font-size:11px;margin-top:6px;margin-bottom:0">Ibuprofeno, Cetoprofeno,<br/>Diclofenaco, Naproxeno,<br/>Aspirina (AAS)</p>
+        </div>
+      </div>
+
+      <h3>Mecanismo do Paracetamol — Por Que É Seguro?</h3>
+      <p>O paracetamol inibe preferencialmente a síntese de prostaglandinas no <strong>sistema nervoso central</strong>, via inibição da COX central (possivelmente via canais de endocanabinoides), sem efeito significativo sobre a COX-1 plaquetária periférica. Por isso <strong>não compromete a função plaquetária</strong> nem a integridade da mucosa gástrica, sendo o analgésico/antipirético de escolha na dengue.</p>
+
+      <h3>Mecanismo da Dipirona — Por Que É Segura?</h3>
+      <p>A dipirona (metamizol) inibe a COX de forma reversível e também atua via ativação de vias endocanabinoides. Seu perfil é semelhante ao paracetamol em termos de segurança plaquetária. Tem a vantagem do <strong>potente efeito antipirético e analgésico</strong>, podendo ser administrada via intravenosa para casos de difícil controle térmico.</p>
+
+      <h3>Por Que os AINEs São Contraindicados? — Mecanismo Molecular</h3>
+      <div class="evidence-box">
+        <div class="ev-title">⚠️ Evidência — Open Evidence / NSAIDs em Dengue</div>
+        Os AINEs inibem a <strong>ciclooxigenase-1 (COX-1)</strong> plaquetária, bloqueando a conversão do ácido araquidônico em tromboxano A2 — essencial para a agregação plaquetária. Em pacientes com dengue que já têm trombocitopenia, qualquer inibição adicional da função plaquetária cria <strong>sinergia hemorrágica</strong>. Adicionalmente, a inibição das prostaglandinas protetoras do endotélio gástrico (PGE₂, PGI₂) causa gastrite, úlcera e risco de hemorragia digestiva.
+        <div class="ref-list">
+          <span class="ref-tag">Liang X et al. J Med Virology, 2025</span>
+          <span class="ref-tag">Malavige & Ogg. Immunology, 2017</span>
+          <span class="ref-tag">WHO Guidelines — Acetaminofen preferencial</span>
+        </div>
+      </div>
+
+      <h3>Corticosteroides — Evidência Contrária ao Uso</h3>
+      <p>A revisão Cochrane (Zhang & Kramer, 2014) com múltiplos ensaios clínicos em crianças &lt;15 anos com choque por dengue demonstrou <strong>nenhum benefício em mortalidade, hemorragia, transfusão ou tempo de hospitalização</strong>. Riscos documentados incluem <strong>hiperglicemia</strong> (prednisolona 2mg/kg) e ausência de resposta plaquetária. A OMS e o Ministério da Saúde <strong>NÃO recomendam</strong> corticosteroides na dengue.</p>
+
+      <h3>Fluidoterapia — Cristaloides Balanceados vs. Soro Fisiológico</h3>
+      <ul class="clinical-list">
+        <li><strong>Ringer com Lactato (preferencial):</strong> menor incidência de injúria renal aguda, redução de 58% na necessidade de terapia de substituição renal vs. SF 0,9%</li>
+        <li><strong>Plasmalyte:</strong> alternativa ao RL em casos de disfunção hepática grave (evitar lactato)</li>
+        <li><strong>SF 0,9%:</strong> risco de acidose metabólica hiperclorêmica em grandes volumes; alternativa quando cristaloides balanceados indisponíveis, ou na hiponatremia</li>
+        <li><strong>Limiar crítico:</strong> &gt; 181 mL/kg acumulado em 24h → risco elevado de ventilação mecânica (AUC 0,871)</li>
+      </ul>
+      <div class="evidence-box">
+        <div class="ev-title">💉 Transição Cristaloide → Coloide</div>
+        Indicar coloide (dextran 70 ou gelatina) quando: falha a 3 bolus de cristaloide OU hematócrito persistentemente elevado apesar de hidratação adequada. O dextran 70 promoveu normalização mais rápida do índice cardíaco e hematócrito vs. cristaloides (Dung et al, CID 1999).
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MÓDULO EMERGÊNCIA ── -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard('emerg')">
+      <div class="card-title">
+        <div class="card-icon icon-emerg">🚨</div>
+        Módulo 3 · Emergência — Classificação e Condutas por Grupo
+      </div>
+      <span class="chevron" id="chevron-emerg">▼</span>
+    </div>
+    <div class="card-body open" id="body-emerg">
+
+      <h3>Diagnóstico Clínico — Critérios de Suspeição</h3>
+      <p><strong>Febre ≤ 7 dias</strong> + pelo menos 2 dos seguintes: cefaleia/dor retrorbital, mialgia, artralgia, prostração, exantema máculo-papular, náuseas/vômitos ou petéquias.</p>
+      <p>Realizar <strong>Prova do Laço</strong> em todos os casos suspeitos. Positiva: ≥ 20 petéquias/2,5cm² (adultos) ou ≥ 10 petéquias/2,5cm² (crianças).</p>
+
+      <h3>Diagnóstico Etiológico</h3>
+      <ul class="clinical-list">
+        <li><strong>NS1 (antígeno):</strong> 1º ao 4º dia de sintomas</li>
+        <li><strong>Sorologia IgM/IgG:</strong> a partir do 6º dia</li>
+        <li><strong>Pacientes no 5º dia:</strong> coletar simultaneamente NS1 + sorologia</li>
+      </ul>
+
+      <h3>Classificação por Grupos (Ministério da Saúde / OMS)</h3>
+      <div class="table-scroll"><table class="group-table">
+        <thead>
+          <tr><th>Grupo</th><th>Critério</th><th>Conduta Principal</th><th>Hidratação</th></tr>
+        </thead>
+        <tbody>
+          <tr class="group-a-row">
+            <td><span class="badge badge-a">A</span></td>
+            <td>Sem sinais de alarme · Sem comorbidades · Sem fatores de risco</td>
+            <td>Alta domiciliar · Paracetamol/Dipirona · Notificar</td>
+            <td><strong>Oral:</strong> ≥ 60 mL/kg/dia · SRO</td>
+          </tr>
+          <tr class="group-b-row">
+            <td><span class="badge badge-b">B</span></td>
+            <td>Sem sinais de alarme COM fatores de risco (comorbidade, gestante, &lt;2 anos, ≥65 anos) ou prova do laço positiva / petéquias</td>
+            <td>Observação · Hemograma + plaquetas · Se plaquetas alteradas → internação</td>
+            <td><strong>Oral:</strong> 60–80 mL/kg/dia · EV se necessário</td>
+          </tr>
+          <tr class="group-c-row">
+            <td><span class="badge badge-c">C</span></td>
+            <td><strong>Sinais de alarme presentes</strong> (qualquer um)</td>
+            <td>Internação imediata · Expansão volêmica EV urgente · Monitorização contínua</td>
+            <td><strong>EV:</strong> Ringer Lactato 10 mL/kg em 1 hora · Repetir até 2–3× se necessário · Reduzir progressivamente se melhora</td>
+          </tr>
+          <tr class="group-d-row">
+            <td><span class="badge badge-d">D</span></td>
+            <td><strong>Choque / Dengue Grave</strong> com disfunção orgânica ou hemorragia grave</td>
+            <td>UTI · Ressuscitação vigorosa · Suporte avançado · Avaliar coloide</td>
+            <td><strong>EV:</strong> 20 mL/kg o mais rápido possível · Repetir · Considerar coloide</td>
+          </tr>
+        </tbody>
+      </table></div>
+
+      <div class="evidence-box" style="margin-top:4px">
+        <div class="ev-title">✅ Verificação de Condutas — Referências Primárias</div>
+        As condutas acima foram revisadas e confrontadas com: <strong>(1)</strong> Brasil. Ministério da Saúde. <em>Dengue: diagnóstico e manejo clínico</em>. 5ª ed, 2016. <strong>(2)</strong> WHO. <em>Dengue guidelines for diagnosis, treatment, prevention and control</em>. Geneva, 2009. <strong>(3)</strong> PAHO. <em>Dengue: guías para la atención de enfermos en la región de las Américas</em>. 2ª ed, 2016.
+        <br/><br/>
+        <strong>Pontos revisados e confirmados:</strong> Grupo A = alta domiciliar + paracetamol q6h + hidratação oral ≥60 mL/kg/dia ✓ · Grupo B = hemograma + observação + hidratação oral supervisionada 60 mL/kg/dia ✓ · Grupo C = internação + Ringer Lactato 10 mL/kg <strong>em 1 hora</strong> (corrigido de "20 min" — o bolus rápido em 20 min é protocolo do Grupo D) ✓ · Grupo D = ressuscitação com 20 mL/kg em 15–20 min + UTI ✓ · Limiar de fluidos 181 mL/kg/24h (AUC 0,871) ✓ · Transfusão plaquetas apenas &lt;20.000/mm³ com sangramento ativo ✓
+      </div>
+
+      <h3>Sinais de Alarme — Memo Clínico</h3>
+      <ul class="clinical-list">
+        <li>Dor abdominal intensa, referida ou à palpação, contínua</li>
+        <li>Vômitos persistentes</li>
+        <li>Hipotensão postural / lipotimia</li>
+        <li>Hepatomegalia dolorosa (&gt; 2 cm abaixo do rebordo costal)</li>
+        <li>Sangramento de mucosas</li>
+        <li>Sonolência ou irritabilidade</li>
+        <li>Derrames cavitários (pleural, pericárdico, peritoneal)</li>
+        <li>Plaquetas &lt; 50.000/mm³</li>
+        <li>Elevação do hematócrito &gt; 10% acima do valor basal</li>
+      </ul>
+
+      <h3>Sinais de Choque (Grupo D)</h3>
+      <ul class="clinical-list">
+        <li>Hipotensão arterial ou Pressão de Pulso ≤ 20 mmHg <span class="badge badge-danger">mais específico</span></li>
+        <li>Taquicardia: adultos &gt;100bpm · crianças 1–10a &gt;120bpm · &lt;1a &gt;160bpm</li>
+        <li>Extremidades frias e cianose · enchimento capilar &gt; 2 segundos</li>
+        <li>Redução da diurese · Taquipneia</li>
+      </ul>
+
+      <h3>Hematócrito — Valores de Referência Pediátricos</h3>
+      <div class="hct-ref">
+        <strong>Crianças:</strong> &lt;1 mês: 51% · 1 mês: 43% · 2–6 meses: 35% · 6m–2a: 36% · 2–6a: 37% · 6–12a: 38%<br/>
+        <strong>Adultos:</strong> Homens: 45% · Mulheres: 40%<br/>
+        <strong>Alerta:</strong> Aumento &gt;10% → Grupo C/D · Aumento &gt;20% → hemoconcentração grave
+      </div>
+
+      <h3>Biomarcadores Laboratoriais de Alto Valor Preditivo</h3>
+      <div class="drug-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="drug-card" style="border-color:#2563EB;background:#EFF6FF">
+          <div style="font-size:12px;font-weight:700;color:#1E40AF;margin-bottom:6px">Dias 1–3 (Fase Febril)</div>
+          <p style="font-size:11px;margin:0">Albumina &lt;35g/L (OR 3,3)<br/>Razão Lactato/Albumina &gt;1,25 (AUC 0,82)<br/>Plaquetas ≤100 G/L (OR 2,2)</p>
+        </div>
+        <div class="drug-card" style="border-color:#EA580C;background:#FFF7ED">
+          <div style="font-size:12px;font-weight:700;color:#9A3412;margin-bottom:6px">Dias 4–6 (Fase Crítica)</div>
+          <p style="font-size:11px;margin:0">AST &gt;400 U/L (OR 3,0)<br/>ALT &gt;400 U/L (OR 6,6)<br/>Bilirrubina &gt;17 µmol/L (OR 4,6)</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- ── MÓDULO HEPATOTOXICIDADE ── -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard('hepatotox')">
+      <div class="card-title">
+        <div class="card-icon" style="background:#FFF7ED">🧬</div>
+        Módulo 4 · Hepatotoxicidade do Paracetamol na Dengue
+      </div>
+      <span class="chevron" id="chevron-hepatotox">▼</span>
+    </div>
+    <div class="card-body" id="body-hepatotox">
+
+      <h3>Paradoxo Clínico — Fármaco Seguro com Risco Hepático Específico na Dengue</h3>
+      <p>O paracetamol é o analgésico/antipirético de escolha na dengue por não inibir a COX-1 plaquetária. No entanto, a própria dengue causa <strong>hepatite viral direta</strong> por replicação do DENV nos hepatócitos, elevando AST e ALT em até 80% dos casos. Nesse contexto de hepatócito já lesionado, o metabolismo do paracetamol pode ser alterado.</p>
+
+      <h3>Mecanismo de Hepatotoxicidade</h3>
+      <p>O paracetamol é metabolizado principalmente por glucuronidação (55%) e sulfatação (35%) no fígado. Uma fração menor (≈10%) é oxidada pela <strong>CYP2E1/CYP3A4</strong> gerando o metabólito tóxico <strong>NAPQI</strong> (N-acetil-p-benzoquinonaimina). Em condições normais, o NAPQI é rapidamente conjugado com glutationa. Na dengue grave, o estresse oxidativo hepático depleta a glutationa, tornando os hepatócitos mais vulneráveis à toxicidade por NAPQI mesmo em doses terapêuticas.</p>
+
+      <div class="evidence-box">
+        <div class="ev-title">🔬 Evidência Central — RCT Tailandês (Vasikasin et al., 2019)</div>
+        <p style="margin-bottom:8px">Ensaio clínico randomizado conduzido na Tailândia comparou dois esquemas posológicos de paracetamol em pacientes com dengue confirmada:</p>
+        <div class="drug-grid" style="grid-template-columns:1fr 1fr">
+          <div class="drug-card" style="border-color:var(--group-b);background:#F0FDF4">
+            <div class="drug-name" style="color:var(--group-b)">Esquema q6h ✓</div>
+            <p style="font-size:11px;margin-top:6px;margin-bottom:4px">10–15 mg/kg a cada <strong>6 horas</strong></p>
+            <div style="font-size:13px;font-weight:900;color:var(--group-b)">10% elevação de transaminases</div>
+          </div>
+          <div class="drug-card" style="border-color:var(--group-d);background:#FFF1F2">
+            <div class="drug-name" style="color:var(--group-d)">Esquema q4h ✗</div>
+            <p style="font-size:11px;margin-top:6px;margin-bottom:4px">10–15 mg/kg a cada <strong>4 horas</strong></p>
+            <div style="font-size:13px;font-weight:900;color:var(--group-d)">22% elevação de transaminases</div>
+          </div>
+        </div>
+        <p style="margin-top:10px;font-size:12px;color:#991B1B;font-weight:700">⚠️ O estudo foi encerrado precocemente pelo comitê de segurança devido à diferença significativa de hepatotoxicidade. A dose q4h dobra o risco de lesão hepática.</p>
+        <div class="ref-list">
+          <span class="ref-tag">Vasikasin V et al. Int J Infect Dis, 2019</span>
+          <span class="ref-tag">DSMB — encerramento precoce por segurança</span>
+        </div>
+      </div>
+
+      <h3>Implicações Clínicas Práticas</h3>
+      <ul class="clinical-list">
+        <li><strong>Usar SEMPRE q6h</strong> — nunca q4h em dengue, mesmo que o paciente refira dor ou febre persistentes entre doses</li>
+        <li><strong>Dose máxima diária:</strong> 60 mg/kg/dia (crianças) — 4 doses de 15 mg/kg — nunca ultrapassar</li>
+        <li><strong>Monitorar AST/ALT</strong> em pacientes com dengue moderada/grave, especialmente nos dias 4–7 (fase crítica)</li>
+        <li><strong>Hepatopatia prévia:</strong> reduzir dose para 10 mg/kg/dose q8h e considerar dipirona como alternativa</li>
+        <li><strong>Atenção ao paracetamol "oculto"</strong> em formulações combinadas (antigripais, analgésicos compostos) — risco de dose acumulada inadvertida</li>
+      </ul>
+
+      <h3>Monitoramento Laboratorial Recomendado</h3>
+      <div class="drug-grid" style="grid-template-columns:1fr 1fr 1fr">
+        <div class="drug-card" style="border-color:#2563EB;background:#EFF6FF">
+          <div style="font-weight:700;color:#1E40AF;margin-bottom:6px;font-size:12px">AST/ALT normais</div>
+          <p style="font-size:11px;margin:0">Manter q6h · Repetir lab em 48–72h se fase crítica</p>
+        </div>
+        <div class="drug-card" style="border-color:var(--group-c);background:#FFF7ED">
+          <div style="font-weight:700;color:#9A3412;margin-bottom:6px;font-size:12px">AST/ALT 1–5× LSN</div>
+          <p style="font-size:11px;margin:0">Reduzir para 10 mg/kg q8h · Aumentar hidratação · Considerar dipirona</p>
+        </div>
+        <div class="drug-card" style="border-color:var(--group-d);background:#FFF1F2">
+          <div style="font-weight:700;color:#991B1B;margin-bottom:6px;font-size:12px">AST/ALT &gt; 5× LSN</div>
+          <p style="font-size:11px;margin:0">Suspender paracetamol · Usar dipirona · Avaliar N-acetilcisteína · Hepatologista</p>
+        </div>
+      </div>
+
+      <div class="evidence-box" style="margin-top:12px">
+        <div class="ev-title">💡 Limiar Clínico de Referência (Open Evidence)</div>
+        AST ou ALT &gt; 400 U/L = OR 3,0 e 6,6 respectivamente para dengue grave. Bilirrubina &gt; 17 µmol/L = OR 4,6. Esses valores devem disparar reavaliação urgente de conduta e suspensão do paracetamol.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MÓDULO GBWT ULTRASSOM ── -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard('gbwt')">
+      <div class="card-title">
+        <div class="card-icon" style="background:#F0F9FF">🔊</div>
+        Módulo 5 · Ultrassonografia GBWT — Espessamento da Parede da Vesícula Biliar
+      </div>
+      <span class="chevron" id="chevron-gbwt">▼</span>
+    </div>
+    <div class="card-body" id="body-gbwt">
+
+      <h3>O que é o GBWT?</h3>
+      <p><strong>Gallbladder Wall Thickening (GBWT)</strong> — espessamento da parede da vesícula biliar — é um marcador ultrassonográfico de extravasamento plasmático na dengue. O DENV causa aumento da permeabilidade vascular local pela ação da proteína NS1 sobre o endotélio biliar, resultando em edema submucoso detectável à ultrassonografia com boa antecedência clínica.</p>
+
+      <h3>Por que é Clinicamente Relevante?</h3>
+      <p>O GBWT torna-se mensurável nos <strong>dias 2–3</strong> da doença, <strong>antes</strong> das alterações hemodinâmicas evidentes e antes da queda de plaquetas para níveis críticos. Isso o posiciona como biomarcador precoce de risco de internação — detectável em uma janela terapêutica ainda ampla.</p>
+
+      <div class="evidence-box">
+        <div class="ev-title">📊 Evidência — Litricas e Thresholds (Open Evidence)</div>
+        <div class="nomogram-box" style="margin-top:8px">
+          <div class="nom-title">🎯 Valores de Corte e Poder Preditivo:</div>
+          <div class="nomogram-row">
+            <span>GBWT &gt; <strong>3,0 mm</strong></span>
+            <span style="color:var(--group-c);font-weight:700">67% de risco de hospitalização</span>
+          </div>
+          <div class="nomogram-row">
+            <span>GBWT &gt; <strong>5,0 mm</strong></span>
+            <span style="color:var(--group-d);font-weight:700">Alta especificidade para dengue grave</span>
+          </div>
+          <div class="nomogram-row">
+            <span>Padrão reticular ("honeycomb")</span>
+            <span style="color:var(--group-d);font-weight:700">87,9% dos casos graves</span>
+          </div>
+          <div class="nomogram-row">
+            <span>Detecção precoce</span>
+            <span>Dias 2–3 (antes de alterações hemodinâmicas)</span>
+          </div>
+        </div>
+        <div class="ref-list">
+          <span class="ref-tag">Open Evidence — Dengue GBWT, 2024</span>
+          <span class="ref-tag">Sensibilidade e especificidade validadas prospectivamente</span>
+        </div>
+      </div>
+
+      <h3>Técnica Ultrassonográfica</h3>
+      <ul class="clinical-list">
+        <li><strong>Transdutor:</strong> convexo 3,5–5 MHz (ou linear se paciente magro/criança)</li>
+        <li><strong>Posição:</strong> decúbito dorsal ou lateral esquerdo; subcostal direito</li>
+        <li><strong>Medição:</strong> parede anterior da vesícula biliar, em jejum mínimo de 4h, perpendicular ao eixo maior</li>
+        <li><strong>Padrão honeycomb:</strong> aspecto reticular de múltiplas camadas hipoecoicas — indica edema grave</li>
+        <li>Avaliar também: líquido livre pericolecístico, ascite, derrame pleural (sinais de extravasamento)</li>
+      </ul>
+
+      <h3>Integração com a Classificação Clínica</h3>
+      <div class="table-scroll"><table class="group-table">
+        <thead>
+          <tr><th>GBWT (mm)</th><th>Interpretação</th><th>Conduta sugerida</th></tr>
+        </thead>
+        <tbody>
+          <tr class="group-a-row">
+            <td><strong>&lt; 3,0 mm</strong></td>
+            <td>Normal — baixo risco de extravasamento</td>
+            <td>Manter grupo clínico atual · Repetir se evolução desfavorável</td>
+          </tr>
+          <tr class="group-c-row">
+            <td><strong>3,0 – 5,0 mm</strong></td>
+            <td>Espessamento moderado — extravasamento iniciando</td>
+            <td>Considerar upgrade para Grupo C · Internação · Monitorização</td>
+          </tr>
+          <tr class="group-d-row">
+            <td><strong>&gt; 5,0 mm</strong> ou padrão honeycomb</td>
+            <td>Extravasamento grave · Risco elevado de choque</td>
+            <td>Grupo C/D confirmado · Expansão volêmica urgente</td>
+          </tr>
+        </tbody>
+      </table></div>
+
+      <h3>Limitações</h3>
+      <ul class="clinical-list">
+        <li>Colecistite, hipoalbuminemia, insuficiência cardíaca e hepatite também causam GBWT — diagnóstico diferencial obrigatório</li>
+        <li>Operador-dependente: necessita experiência em ultrassom à beira do leito (POCUS)</li>
+        <li>Ausência de GBWT não exclui dengue grave — valor preditivo negativo moderado</li>
+      </ul>
+
+      <div class="evidence-box">
+        <div class="ev-title">💡 Uso Prático Recomendado</div>
+        Em contextos com POCUS disponível, realizar GBWT nos dias 2–4 em todos os pacientes suspeitos de dengue Grupo B ou superior. Um GBWT &gt; 3,0 mm deve ser tratado como sinal de alarme precoce, mesmo na ausência de outros critérios de Grupo C, especialmente em crianças e idosos.
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-teorica -->
+
+
+<!-- ╔══════════════════════ ABA 2 — PRÁTICA ══════════════════════╗ -->
+<div id="tab-pratica" class="tab-content">
+
+  <!-- ── TRIAGEM DIAGNÓSTICA ── -->
+  <div class="card" style="border-top: 4px solid var(--teal)">
+    <div class="card-header" onclick="toggleCard('triagem')">
+      <div class="card-title"><div class="card-icon" style="background:#F0FDFA">🔍</div>Triagem Diagnóstica — Suspeita de Dengue</div>
+      <span class="chevron open" id="chevron-triagem">▼</span>
+    </div>
+    <div class="card-body open" id="body-triagem">
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:14px">
+        Preencha antes de confirmar o diagnóstico. Caso o diagnóstico já esteja confirmado, pule para os dados clínicos abaixo. <strong>Critérios: MS 2016 / WHO 2009.</strong>
+      </p>
+
+      <!-- DATA DE INÍCIO E DIAS -->
+      <div class="form-section">
+        <div class="form-section-title">Início dos Sintomas</div>
+        <div class="form-grid">
+          <div class="field">
+            <label>Data de início dos sintomas</label>
+            <input type="date" id="triagem-data-inicio" oninput="triagemSincData(); avaliarTriagem()"/>
+          </div>
+          <div class="field">
+            <label>Dias de doença (calculado)</label>
+            <div class="field-computed" id="triagem-dias" style="font-size:18px;font-weight:900">—</div>
+            <div class="field-note">Fase crítica: dias 4–7 (defervescência)</div>
+          </div>
+          <div class="field">
+            <label>Temperatura atual (°C)</label>
+            <input type="text" inputmode="decimal" autocomplete="off" id="triagem-temp" placeholder="Ex: 38.8" min="34" max="43" step="0.1" oninput="avaliarTriagem()"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- CRITÉRIO OBRIGATÓRIO -->
+      <div class="form-section">
+        <div class="form-section-title">Critério Obrigatório</div>
+        <div class="check-list">
+          <label class="check-item" id="tri-febre-item">
+            <input type="checkbox" id="tri-febre" onchange="avaliarTriagem()"/>
+            <span class="check-label">
+              Febre aguda ≤ 7 dias (geralmente 38,5–40°C, início súbito)
+              <small>Critério obrigatório — sem febre, dengue improvável</small>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <!-- SINTOMAS ASSOCIADOS (precisa ≥2) -->
+      <div class="form-section">
+        <div class="form-section-title">Sintomas Associados — marque os presentes (necessário ≥ 2)</div>
+        <div class="check-list">
+          <label class="check-item" id="tri-cef-item">
+            <input type="checkbox" id="tri-cef" onchange="avaliarTriagem()"/>
+            <span class="check-label">Cefaleia intensa / Dor retroorbitária<small>Dor atrás dos olhos, piora com movimento</small></span>
+          </label>
+          <label class="check-item" id="tri-mio-item">
+            <input type="checkbox" id="tri-mio" onchange="avaliarTriagem()"/>
+            <span class="check-label">Mialgia e/ou artralgia ("febre quebra-ossos")<small>Dor muscular e articular intensa, característica da dengue</small></span>
+          </label>
+          <label class="check-item" id="tri-prost-item">
+            <input type="checkbox" id="tri-prost" onchange="avaliarTriagem()"/>
+            <span class="check-label">Prostração / Astenia intensa<small>Fraqueza desproporcional ao quadro febril</small></span>
+          </label>
+          <label class="check-item" id="tri-exan-item">
+            <input type="checkbox" id="tri-exan" onchange="avaliarTriagem()"/>
+            <span class="check-label">Exantema máculo-papular<small>Aparece geralmente no 3º–5º dia, centrífugo, poupa palmas e plantas</small></span>
+          </label>
+          <label class="check-item" id="tri-naus-item">
+            <input type="checkbox" id="tri-naus" onchange="avaliarTriagem()"/>
+            <span class="check-label">Náuseas / Vômitos<small>Muito frequentes; vômitos persistentes = sinal de alarme</small></span>
+          </label>
+          <label class="check-item" id="tri-petq-item">
+            <input type="checkbox" id="tri-petq" onchange="avaliarTriagem()"/>
+            <span class="check-label">Petéquias espontâneas e/ou Prova do Laço positiva<small>Sinal hemorrágico leve — use o contador interativo abaixo em Sinais Vitais</small></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- DIAGNÓSTICO ETIOLÓGICO -->
+      <div class="form-section">
+        <div class="form-section-title">Confirmação Laboratorial (quando disponível)</div>
+        <div class="form-grid">
+          <div class="field">
+            <label>Exame realizado</label>
+            <select id="tri-exame" onchange="avaliarTriagem()">
+              <option value="">Ainda não realizado</option>
+              <option value="ns1pos">NS1 Positivo (dias 1–4)</option>
+              <option value="ns1neg">NS1 Negativo</option>
+              <option value="igmpos">IgM Positivo (a partir do 6º dia)</option>
+              <option value="igmneg">IgM Negativo</option>
+              <option value="pcr">PCR Positivo</option>
+              <option value="clinico">Diagnóstico clínico-epidemiológico</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Contexto epidemiológico</label>
+            <select id="tri-epi" onchange="avaliarTriagem()">
+              <option value="sim">Área endêmica / surto ativo</option>
+              <option value="talvez">Sem informação</option>
+              <option value="nao">Sem contexto epidemiológico</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-top:8px;font-size:11px;background:#F0F9FF;border:1px solid #BAE6FD;border-radius:7px;padding:8px 12px;color:#0369A1">
+          <strong>Quando pedir cada teste:</strong> NS1 → dias 1–4 de sintomas · IgM/IgG → a partir do 6º dia · No 5º dia: pedir NS1 + sorologia simultaneamente.
+        </div>
+      </div>
+
+      <!-- DIAGNÓSTICOS DIFERENCIAIS -->
+      <div class="form-section">
+        <div class="form-section-title">Principais Diagnósticos Diferenciais a Excluir</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px">
+          <div style="padding:8px 12px;background:var(--white-clinical);border:1px solid var(--platinum);border-radius:8px;font-size:12px">🦟 <strong>Zika / Chikungunya</strong><br/><span style="color:var(--text-muted)">Exantema mais precoce, artralgia mais intensa (chik)</span></div>
+          <div style="padding:8px 12px;background:var(--white-clinical);border:1px solid var(--platinum);border-radius:8px;font-size:12px">🦠 <strong>Malária</strong><br/><span style="color:var(--text-muted)">Febre cíclica; área endêmica Norte/Centro-Oeste</span></div>
+          <div style="padding:8px 12px;background:var(--white-clinical);border:1px solid var(--platinum);border-radius:8px;font-size:12px">🌡️ <strong>Influenza</strong><br/><span style="color:var(--text-muted)">Predomina sintomas respiratórios; sem exantema típico</span></div>
+          <div style="padding:8px 12px;background:var(--white-clinical);border:1px solid var(--platinum);border-radius:8px;font-size:12px">🩸 <strong>Febre Tifoide</strong><br/><span style="color:var(--text-muted)">Febre escalonada, bradicardia relativa, manchas rosadas</span></div>
+          <div style="padding:8px 12px;background:var(--white-clinical);border:1px solid var(--platinum);border-radius:8px;font-size:12px">🔴 <strong>Leptospirose</strong><br/><span style="color:var(--text-muted)">Contato com água/lama, icterícia, sufusão conjuntival</span></div>
+          <div style="padding:8px 12px;background:var(--white-clinical);border:1px solid var(--platinum);border-radius:8px;font-size:12px">🧒 <strong>Sarampo / Rubéola</strong><br/><span style="color:var(--text-muted)">Exantema confluente céfalo-caudal; Koplik (sarampo)</span></div>
+        </div>
+      </div>
+
+      <!-- RESULTADO DA TRIAGEM -->
+      <div id="triagem-result"></div>
+      <button id="btn-confirmar-dengue" onclick="confirmarDengue()">
+        ✅ Dengue confirmada — preencher dados clínicos completos
+      </button>
+    </div>
+  </div>
+
+  <!-- ── DADOS DO PACIENTE ── -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard('dados')">
+      <div class="card-title"><div class="card-icon icon-dados">👤</div>Dados do Paciente</div>
+      <span class="chevron open" id="chevron-dados">▼</span>
+    </div>
+    <div class="card-body open" id="body-dados">
+      <div class="form-section">
+        <div class="form-section-title">Identificação</div>
+        <div class="form-grid">
+          <div class="field full">
+            <label>Nome do Paciente</label>
+            <input type="text" id="nome" placeholder="Nome completo"/>
+          </div>
+          <div class="field">
+            <label>Registro / Prontuário</label>
+            <input type="text" id="prontuario" placeholder="Nº do prontuário"/>
+          </div>
+          <div class="field">
+            <label>Data de Atendimento</label>
+            <input type="date" id="data-atend" value=""/>
+          </div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-section-title">Dados Clínicos Iniciais</div>
+        <div class="form-grid">
+          <div class="field">
+            <label>Idade (anos)</label>
+            <input type="text" inputmode="decimal" autocomplete="off" id="idade" placeholder="Ex: 8" min="0" max="120" oninput="atualizar()"/>
+            <div class="field-note">Menores de 1 ano: use fração (6 meses = 0,5)</div>
+          </div>
+          <div class="field">
+            <label>Sexo</label>
+            <select id="sexo" onchange="atualizar()">
+              <option value="">Não informado</option>
+              <option value="F">Feminino</option>
+              <option value="M">Masculino</option>
+            </select>
+            <div class="field-note">Define o hematócrito de referência no adulto</div>
+          </div>
+          <div class="field">
+            <label>Peso (kg)</label>
+            <input type="text" inputmode="decimal" autocomplete="off" id="peso" placeholder="Ex: 30" min="1" max="200" step="0.1" oninput="atualizar()"/>
+          </div>
+          <div class="field">
+            <label>Data início dos sintomas</label>
+            <input type="date" id="data-inicio" oninput="sincDataInicio(); atualizar()"/>
+          </div>
+          <div class="field">
+            <label>Dias de doença</label>
+            <div class="field-computed" id="dias-doenca">—</div>
+            <div class="field-note">Calculado automaticamente</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-section-title">Fatores de Risco Pregressos</div>
+        <div style="font-size:11px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:8px 12px;margin-bottom:10px;color:#1E40AF">
+          <strong>Base:</strong> Qualquer fator abaixo classifica o paciente em <strong>Grupo B no mínimo</strong>, mesmo sem sinais de alarme. (MS 2016, p. 24 — Quadro 3)
+        </div>
+        <div class="check-list" id="fatores-risco">
+          <label class="check-item"><input type="checkbox" name="fator" value="dengue_prev" onchange="atualizar()"/> <span class="check-label">Infecção prévia por dengue<small>↑ risco de dengue grave — ADE (Facilitação Dependente de Anticorpos)</small></span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="menor2" onchange="atualizar()"/> <span class="check-label">Criança &lt; 2 anos ou idoso ≥ 65 anos<small>Faixa etária de risco — marcado automaticamente pela idade</small></span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="gestante" onchange="atualizar()"/> <span class="check-label">Gestante<small>Protocolo especial — internação preferencial</small></span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="hipertensao" onchange="atualizar()"/> <span class="check-label">Hipertensão Arterial Sistêmica</span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="diabetes" onchange="atualizar()"/> <span class="check-label">Diabetes Mellitus</span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="renal" onchange="atualizar()"/> <span class="check-label">Doença Renal Crônica</span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="hepato" onchange="atualizar()"/> <span class="check-label">Hepatopatia / Doença Hepática Crônica<small>Contraindicação para Ringer Lactato — preferir Plasmalyte</small></span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="imuno" onchange="atualizar()"/> <span class="check-label">Imunossupressão (medicamentosa ou doença)</span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="cardio" onchange="atualizar()"/> <span class="check-label">Cardiopatia / DPOC / Asma</span></label>
+          <label class="check-item"><input type="checkbox" name="fator" value="hematol" onchange="atualizar()"/> <span class="check-label">Doença Hematológica (anemia falciforme, plaquetopenia crônica)</span></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CALCULADORA DE DOSES PEDIÁTRICAS ── -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard('doses')">
+      <div class="card-title"><div class="card-icon icon-farm" style="background:#F5F3FF">💉</div>Calculadora de Doses Pediátricas</div>
+      <span class="chevron open" id="chevron-doses">▼</span>
+    </div>
+    <div class="card-body open" id="body-doses">
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px">Preenche automaticamente com o peso do paciente. Atualize o peso na aba "Dados do Paciente" para recalcular.</p>
+      <div class="form-grid">
+        <div class="field">
+          <label>Peso para cálculo (kg)</label>
+          <input type="text" inputmode="decimal" autocomplete="off" id="dose-peso" placeholder="Ex: 30" min="1" max="200" step="0.1" oninput="calcularDosePediatrica()"/>
+          <div class="field-note">Sincronizado com campo de peso</div>
+        </div>
+      </div>
+      <div id="dose-results" style="display:none">
+        <div class="dose-result">
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--group-b);margin-bottom:10px">💊 RESULTADOS POR DOSE</div>
+          <!-- Paracetamol -->
+          <div class="dose-row">
+            <span class="dose-label">Paracetamol (10 mg/kg/dose) · a cada 6h</span>
+            <span class="dose-val" id="d-para-min">—</span>
+          </div>
+          <div class="dose-row">
+            <span class="dose-label">Paracetamol (15 mg/kg/dose) · a cada 6h</span>
+            <span class="dose-val" id="d-para-max">—</span>
+          </div>
+          <div class="dose-row" style="border-bottom:1px solid #BBF7D0">
+            <span class="dose-label">Paracetamol — Dose máxima/dia (60 mg/kg/dia)</span>
+            <span class="dose-val" id="d-para-dia">—</span>
+          </div>
+          <div style="margin:6px 0 10px;font-size:11px;background:#FEF9C3;border:1px solid #FDE047;border-radius:6px;padding:6px 10px;color:#854D0E">
+            ⚠️ <strong>Protocolo dengue:</strong> 10–15 mg/kg q6h (NÃO q4h). Estudo tailandês (Vasikasin 2019): regime q4h elevou transaminases em 22% vs 10% — ensaio interrompido precocemente.
+          </div>
+          <!-- Dipirona -->
+          <div class="dose-row">
+            <span class="dose-label">Dipirona (15 mg/kg/dose) · a cada 6h</span>
+            <span class="dose-val" id="d-dipi">—</span>
+          </div>
+          <div style="margin:6px 0 10px;font-size:11px;color:var(--text-muted)">Dipirona IV disponível para casos de difícil controle térmico · Adultos: 500–1000 mg/dose</div>
+          <!-- Fluidos EV -->
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--group-c);margin:12px 0 6px">💧 VOLUMES DE FLUIDOS EV (RINGER COM LACTATO)</div>
+          <div class="dose-row">
+            <span class="dose-label">Grupo C — Expansão volêmica (10 mL/kg) em 1 hora</span>
+            <span class="dose-val" id="d-rl-c">—</span>
+          </div>
+          <div class="dose-row">
+            <span class="dose-label">Grupo D — Ressuscitação (20 mL/kg) em 15–20 min</span>
+            <span class="dose-val" id="d-rl-d" style="color:var(--group-d)">—</span>
+          </div>
+          <div class="dose-row">
+            <span class="dose-label">Limiar crítico de volume acumulado (181 mL/kg/24h)</span>
+            <span class="dose-val" id="d-limiar" style="color:var(--group-d)">—</span>
+          </div>
+          <!-- Hidratação oral -->
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--group-a);margin:12px 0 6px">🥤 HIDRATAÇÃO ORAL (GRUPOS A E B)</div>
+          <div class="dose-row">
+            <span class="dose-label">Grupo A — Mínimo oral (60 mL/kg/dia)</span>
+            <span class="dose-val" id="d-oral-a">—</span>
+          </div>
+          <div class="dose-row">
+            <span class="dose-label">Grupo B — Oral supervisionado (80 mL/kg/dia)</span>
+            <span class="dose-val" id="d-oral-b">—</span>
+          </div>
+        </div>
+      </div>
+      <div id="dose-empty" style="padding:16px;text-align:center;color:var(--text-muted);font-size:13px">Insira o peso para ver as doses calculadas.</div>
+    </div>
+  </div>
+
+  <!-- ── SINAIS VITAIS ── -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard('vitais')">
+      <div class="card-title"><div class="card-icon icon-sinais">💓</div>Sinais Vitais e Exame Físico</div>
+      <span class="chevron open" id="chevron-vitais">▼</span>
+    </div>
+    <div class="card-body open" id="body-vitais">
+      <div class="form-grid">
+        <div class="field">
+          <label>PA Sistólica (mmHg)</label>
+          <input type="text" inputmode="numeric" autocomplete="off" id="pas" placeholder="Ex: 90" min="40" max="250" oninput="atualizar()"/>
+        </div>
+        <div class="field">
+          <label>PA Diastólica (mmHg)</label>
+          <input type="text" inputmode="numeric" autocomplete="off" id="pad" placeholder="Ex: 70" min="20" max="150" oninput="atualizar()"/>
+        </div>
+        <div class="field">
+          <label>Pressão de Pulso (mmHg)</label>
+          <div class="field-computed" id="pp-display">—</div>
+          <div class="field-note">PAS − PAD · Alarme se ≤ 20 mmHg</div>
+        </div>
+        <div class="field">
+          <label>Frequência Cardíaca (bpm)</label>
+          <input type="text" inputmode="numeric" autocomplete="off" id="fc" placeholder="Ex: 110" min="30" max="250" oninput="atualizar()"/>
+        </div>
+        <div class="field">
+          <label>Frequência Respiratória (rpm)</label>
+          <input type="text" inputmode="numeric" autocomplete="off" id="fr" placeholder="Ex: 24" min="5" max="80" oninput="atualizar()"/>
+        </div>
+        <div class="field">
+          <label>SpO₂ (%)</label>
+          <input type="text" inputmode="numeric" autocomplete="off" id="spo2" placeholder="Ex: 97" min="50" max="100" oninput="atualizar()"/>
+        </div>
+        <div class="field">
+          <label>Temperatura Axilar (°C)</label>
+          <input type="text" inputmode="decimal" autocomplete="off" id="temp" placeholder="Ex: 38.5" min="34" max="43" step="0.1" oninput="atualizar()"/>
+        </div>
+        <div class="field">
+          <label>Enchimento Capilar (seg)</label>
+          <input type="text" inputmode="decimal" autocomplete="off" id="ec" placeholder="Ex: 2" min="0" max="10" step="0.5" oninput="atualizar()"/>
+        </div>
+        <div class="field">
+          <label>Hepatomegalia (cm abaixo do RC)</label>
+          <input type="text" inputmode="decimal" autocomplete="off" id="hepato-cm" placeholder="Ex: 0" min="0" max="20" step="0.5" oninput="atualizar()"/>
+        </div>
+        <div class="field full">
+          <label>Prova do Laço</label>
+          <select id="prova-laco" onchange="atualizar()">
+            <option value="">Não realizada</option>
+            <option value="negativa">Negativa</option>
+            <option value="positiva">Positiva ⚠️</option>
+          </select>
+          <!-- CONTADOR INTERATIVO -->
+          <div id="laco-grid-wrap">
+            <div id="laco-grid-title">🔴 Clique nas bolinhas para contar petéquias na área de 2,5 cm²</div>
+            <div id="laco-grid"></div>
+            <div id="laco-counter" style="color:var(--text-muted)">0</div>
+            <div id="laco-status" style="color:var(--text-muted)">—</div>
+            <div style="font-size:10px;text-align:center;color:var(--text-muted);margin-top:4px">Limiar: ≥ 20 petéquias (adultos) · ≥ 10 petéquias (crianças &lt;12 anos)</div>
+            <div id="laco-actions">
+              <button class="btn btn-secondary" style="font-size:12px;padding:6px 14px" onclick="resetLaco()">🔄 Reiniciar contagem</button>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Diurese</label>
+          <select id="diurese" onchange="atualizar()">
+            <option value="normal">Normal</option>
+            <option value="reduzida">Reduzida</option>
+            <option value="ausente">Ausente / Anúria</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Nível de Consciência</label>
+          <select id="consciencia" onchange="atualizar()">
+            <option value="normal">Alerta / Normal</option>
+            <option value="sonolento">Sonolento</option>
+            <option value="irritavel">Irritável</option>
+            <option value="confuso">Confuso / Agitado</option>
+            <option value="coma">Coma / Inconsciente</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── LABORATÓRIO ── -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard('lab')">
+      <div class="card-title"><div class="card-icon icon-farm">🧪</div>Dados Laboratoriais</div>
+      <span class="chevron open" id="chevron-lab">▼</span>
+    </div>
+    <div class="card-body open" id="body-lab">
+      <div class="form-section">
+        <div class="form-section-title">Hemograma</div>
+        <div class="form-grid">
+          <div class="field">
+            <label>Hematócrito (%)</label>
+            <input type="text" inputmode="decimal" autocomplete="off" id="ht" placeholder="Ex: 42" min="10" max="80" step="0.1" oninput="atualizar()"/>
+          </div>
+          <div class="field">
+            <label>Ref. calculada p/ faixa etária (%)</label>
+            <div class="field-computed" id="ht-ref">—</div>
+          </div>
+          <div class="field">
+            <label>Δ Hematócrito (%)</label>
+            <div class="field-computed" id="ht-delta">—</div>
+            <div class="field-note">Variação vs. referência</div>
+          </div>
+          <div class="field">
+            <label>Plaquetas (/mm³)</label>
+            <input type="text" inputmode="numeric" autocomplete="off" id="plaquetas" placeholder="Ex: 120000" min="0" max="1000000" oninput="atualizar()"/>
+          </div>
+          <div class="field">
+            <label>Leucócitos (/mm³)</label>
+            <input type="text" inputmode="numeric" autocomplete="off" id="leucocitos" placeholder="Ex: 4500" min="0" max="50000" oninput="atualizar()"/>
+          </div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-section-title">Bioquímica (opcional)</div>
+        <div class="form-grid-3">
+          <div class="field">
+            <label>Albumina (g/L)</label>
+            <input type="text" inputmode="decimal" autocomplete="off" id="albumina" placeholder="Ex: 38" min="0" max="60" step="0.1" oninput="atualizar()"/>
+          </div>
+          <div class="field">
+            <label>Lactato (mmol/L)</label>
+            <input type="text" inputmode="decimal" autocomplete="off" id="lactato" placeholder="Ex: 1.2" min="0" max="20" step="0.1" oninput="atualizar()"/>
+          </div>
+          <div class="field">
+            <label>Razão Lactato/Albumina</label>
+            <div class="field-computed" id="lar-display">—</div>
+            <div class="field-note">Alarme &gt;1,25 (AUC 0,82)</div>
+          </div>
+          <div class="field">
+            <label>AST (U/L)</label>
+            <input type="text" inputmode="numeric" autocomplete="off" id="ast" placeholder="Ex: 45" min="0" max="5000" oninput="atualizar()"/>
+          </div>
+          <div class="field">
+            <label>ALT (U/L)</label>
+            <input type="text" inputmode="numeric" autocomplete="off" id="alt" placeholder="Ex: 38" min="0" max="5000" oninput="atualizar()"/>
+          </div>
+          <div class="field">
+            <label>Bilirrubina Total (µmol/L)</label>
+            <input type="text" inputmode="decimal" autocomplete="off" id="bili" placeholder="Ex: 12" min="0" max="500" step="0.1" oninput="atualizar()"/>
+          </div>
+        </div>
+      </div>
+
+      <div id="lab-alerts" style="display:none;margin-top:10px"></div>
+    </div>
+  </div>
+
+  <!-- ── SINAIS DE ALARME ── -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard('sinais')">
+      <div class="card-title"><div class="card-icon icon-sinais">⚠️</div>Fluxograma de Sinais de Alarme</div>
+      <span class="chevron open" id="chevron-sinais">▼</span>
+    </div>
+    <div class="card-body open" id="body-sinais">
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px">Marque os sinais presentes. Qualquer sinal de alarme classifica o paciente em <strong>Grupo C</strong> no mínimo.</p>
+      <div class="check-list">
+        <label class="check-item" id="ci-abd"><input type="checkbox" name="alarme" value="abd" onchange="atualizar()"/> <span class="check-label">Dor abdominal intensa, referida ou à palpação, contínua<small>Sinal de extravasamento plasmático peritoneal</small></span></label>
+        <label class="check-item" id="ci-vom"><input type="checkbox" name="alarme" value="vom" onchange="atualizar()"/> <span class="check-label">Vômitos persistentes (≥ 3 episódios/hora)<small>Dificulta hidratação oral; indicação de EV</small></span></label>
+        <label class="check-item" id="ci-hipo"><input type="checkbox" name="alarme" value="hipo" onchange="atualizar()"/> <span class="check-label">Hipotensão postural / Lipotimia</span></label>
+        <label class="check-item" id="ci-hepa"><input type="checkbox" name="alarme" value="hepa" onchange="atualizar()"/> <span class="check-label">Hepatomegalia dolorosa (&gt; 2 cm abaixo do rebordo costal)<small>Hepatite por dengue — sinal de comprometimento orgânico</small></span></label>
+        <label class="check-item" id="ci-sang"><input type="checkbox" name="alarme" value="sang" onchange="atualizar()"/> <span class="check-label">Sangramento de mucosas (epistaxe, gengivorragia, melena, hematêmese)<small>Avaliar AINE prévio — risco hemorrágico amplificado</small></span></label>
+        <label class="check-item" id="ci-letarg"><input type="checkbox" name="alarme" value="letarg" onchange="atualizar()"/> <span class="check-label">Sonolência, letargia ou irritabilidade<small>OR independente para dengue grave — Idrus et al. PLoS NTD, 2023</small></span></label>
+        <label class="check-item" id="ci-derrame"><input type="checkbox" name="alarme" value="derrame" onchange="atualizar()"/> <span class="check-label">Derrames cavitários (pleural, pericárdico, peritoneal)</span></label>
+        <label class="check-item" id="ci-plaq"><input type="checkbox" name="alarme" value="plaq" onchange="atualizar()"/> <span class="check-label">Plaquetas &lt; 50.000/mm³<small>Atenção: &lt;20.000/mm³ = avaliar transfusão</small></span></label>
+        <label class="check-item" id="ci-hemo"><input type="checkbox" name="alarme" value="hemo" onchange="atualizar()"/> <span class="check-label">Elevação do hematócrito &gt; 10% acima do valor basal<small>Hemoconcentração = extravasamento plasmático</small></span></label>
+      </div>
+
+      <hr class="separator"/>
+      <p style="font-size:12px;color:var(--group-d);font-weight:700;margin-bottom:10px">SINAIS DE CHOQUE (Grupo D):</p>
+      <div class="check-list">
+        <label class="check-item" id="ci-choque1"><input type="checkbox" name="choque" value="hipo_art" onchange="atualizar()"/> <span class="check-label">Hipotensão arterial ou Pressão de Pulso ≤ 20 mmHg<small>Sinal mais específico de SCD</small></span></label>
+        <label class="check-item" id="ci-choque2"><input type="checkbox" name="choque" value="taquic" onchange="atualizar()"/> <span class="check-label">Taquicardia inapropriada para a faixa etária</span></label>
+        <label class="check-item" id="ci-choque3"><input type="checkbox" name="choque" value="extrem" onchange="atualizar()"/> <span class="check-label">Extremidades frias, cianose ou enchimento capilar &gt; 2 segundos</span></label>
+        <label class="check-item" id="ci-choque4"><input type="checkbox" name="choque" value="oliguria" onchange="atualizar()"/> <span class="check-label">Oligúria / Anúria</span></label>
+        <label class="check-item" id="ci-choque5"><input type="checkbox" name="choque" value="grave" onchange="atualizar()"/> <span class="check-label">Sangramento grave ou disfunção grave de órgão<small>Ex.: alteração grave da consciência (confuso/coma), hematêmese volumosa, insuficiência hepática</small></span></label>
+      </div>
+
+      <!-- CAIXA DE ALERTA VERMELHO -->
+      <div id="alert-box" role="alert">
+        <div class="alert-title">🚨 ALERTA — <span id="alert-group-name">GRUPO C</span></div>
+        <div class="alert-body" id="alert-body-text">Sinal de alarme detectado. Ação imediata requerida.</div>
+        <div class="alert-calc" id="alert-calc-text"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MEDICAÇÕES ── -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard('medic')">
+      <div class="card-title"><div class="card-icon icon-farm">💊</div>Medicações em Uso / Prescrição</div>
+      <span class="chevron open" id="chevron-medic">▼</span>
+    </div>
+    <div class="card-body open" id="body-medic">
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:10px">Registre os medicamentos. O sistema bloqueará AINEs automaticamente.</p>
+      <div class="field">
+        <label>Medicamento a registrar</label>
+        <input type="text" id="med-input" placeholder="Ex: Paracetamol 500mg 6/6h" oninput="filtrarMedicamento(this.value)"/>
+      </div>
+      <div id="med-warning" style="display:none;margin-top:8px;padding:10px 14px;background:#FEE2E2;border:2px solid var(--group-d);border-radius:8px;font-size:12px;color:#991B1B;font-weight:600">
+        ⛔ ATENÇÃO: Este medicamento está contraindicado na dengue.
+      </div>
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="adicionarMedicamento()">+ Adicionar</button>
+        <button class="btn btn-secondary" onclick="limparMedInput()">Limpar</button>
+      </div>
+      <div id="med-list" style="margin-top:14px"></div>
+
+      <hr class="separator"/>
+      <div class="form-section-title">Volume Acumulado de Fluidos (últimas 24h)</div>
+      <div class="form-grid">
+        <div class="field">
+          <label>Volume EV administrado (mL)</label>
+          <input type="text" inputmode="numeric" autocomplete="off" id="vol-ev" placeholder="Ex: 500" min="0" oninput="atualizar()"/>
+        </div>
+        <div class="field">
+          <label>Volume oral administrado (mL)</label>
+          <input type="text" inputmode="numeric" autocomplete="off" id="vol-oral" placeholder="Ex: 1200" min="0" oninput="atualizar()"/>
+        </div>
+        <div class="field">
+          <label>Volume total acumulado (mL/kg)</label>
+          <div class="field-computed" id="vol-total">—</div>
+          <div class="field-note">Limiar crítico: 181 mL/kg/24h</div>
+        </div>
+      </div>
+      <div class="fluid-bar-wrap" id="fluid-bar-wrap" style="display:none">
+        <div class="fluid-bar-label">
+          <span>Volume acumulado</span>
+          <span id="fluid-pct-label">0%</span>
+        </div>
+        <div class="fluid-bar-track">
+          <div class="fluid-bar-fill" id="fluid-bar-fill" style="width:0%"></div>
+        </div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:4px">Barra verde → laranja → vermelha conforme se aproxima de 181 mL/kg</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── GRÁFICOS DE TENDÊNCIA ── -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard('graficos')">
+      <div class="card-title"><div class="card-icon" style="background:#EFF6FF">📈</div>Gráficos de Tendência Cinética</div>
+      <span class="chevron" id="chevron-graficos">▼</span>
+    </div>
+    <div class="card-body" id="body-graficos">
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:14px">Registre medições seriadas para acompanhar a evolução cinética das plaquetas e do hematócrito ao longo dos dias de doença.</p>
+
+      <div class="trend-entry-form">
+        <div class="form-section-title" style="margin-bottom:10px">Adicionar Medição</div>
+        <div class="form-grid">
+          <div class="field">
+            <label>Dia de doença</label>
+            <input type="text" inputmode="decimal" autocomplete="off" id="t-dia" placeholder="Ex: 3" min="1" max="14"/>
+          </div>
+          <div class="field">
+            <label>Plaquetas (/mm³)</label>
+            <input type="text" inputmode="numeric" autocomplete="off" id="t-plaq" placeholder="Ex: 95000" min="0"/>
+          </div>
+          <div class="field">
+            <label>Hematócrito (%)</label>
+            <input type="text" inputmode="decimal" autocomplete="off" id="t-ht" placeholder="Ex: 42" min="0" max="80" step="0.1"/>
+          </div>
+        </div>
+        <div style="margin-top:10px;display:flex;gap:8px">
+          <button class="btn btn-primary" onclick="addTrendEntry()">+ Adicionar Ponto</button>
+          <button class="btn btn-secondary" onclick="clearTrend()">Limpar Gráficos</button>
+        </div>
+      </div>
+
+      <div id="trend-entries-list" style="margin-top:10px;font-size:12px;color:var(--text-muted)"></div>
+
+      <div style="margin-top:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--group-d);margin-bottom:6px">Plaquetas ao longo dos dias (linhas de risco: 100k e 50k/mm³)</div>
+        <div class="chart-wrap"><canvas id="chart-plaq"></canvas></div>
+      </div>
+      <div style="margin-top:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--group-c);margin-bottom:6px">Hematócrito ao longo dos dias (limiar de alarme: +10% do ref.)</div>
+        <div class="chart-wrap"><canvas id="chart-ht"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CONDUTA CALCULADA ── -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard('conduta')">
+      <div class="card-title"><div class="card-icon icon-conduta">📋</div>Conduta Recomendada (Calculada Automaticamente)</div>
+      <span class="chevron open" id="chevron-conduta">▼</span>
+    </div>
+    <div class="card-body open" id="body-conduta">
+      <div id="grupo-atual" style="font-size:13px;color:var(--text-muted);margin-bottom:12px">
+        Insira os dados do paciente para gerar a conduta automaticamente.
+      </div>
+      <div id="conduta-box"></div>
+
+      <hr class="separator"/>
+      <div class="form-section-title">Evolução Clínica / Observações</div>
+      <textarea id="evo-log" placeholder="Registre aqui a evolução clínica, intercorrências, reavaliações..."></textarea>
+
+      <div class="btn-row">
+        <button class="btn btn-save" onclick="salvarPaciente()">💾 Salvar Dados do Paciente</button>
+        <button class="btn btn-secondary" onclick="gerarRelatorio()">📄 Gerar Relatório</button>
+        <button class="btn btn-danger" onclick="limparFormulario()">🗑️ Novo Paciente</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-pratica -->
+
+<!-- ╔══════════════════════ ABA 3 — HISTÓRICO ══════════════════════╗ -->
+<div id="tab-historico" class="tab-content">
+  <div class="card">
+    <div class="card-header" onclick="toggleCard('hist-main')">
+      <div class="card-title"><div class="card-icon" style="background:#F0FDF4">📂</div>Histórico de Pacientes Atendidos</div>
+      <span class="chevron open" id="chevron-hist-main">▼</span>
+    </div>
+    <div class="card-body open" id="body-hist-main">
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:14px">
+        Os dados são salvos localmente neste navegador (IndexedDB). Clique em "Salvar Dados do Paciente" na Aba 2 para criar um registro. Carregar um registro preenche automaticamente o formulário.
+        <br/><strong>No celular:</strong> os registros ficam só neste aparelho e neste navegador. Para levar a outro aparelho, use Exportar e depois Importar.
+      </p>
+      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="renderHistorico()">🔄 Atualizar Lista</button>
+        <button class="btn btn-secondary" onclick="exportarHistorico()">📥 Exportar Todos (JSON)</button>
+        <button class="btn btn-secondary" onclick="document.getElementById('importar-arquivo').click()">📤 Importar (JSON)</button>
+        <input type="file" id="importar-arquivo" accept=".json,application/json" style="display:none" onchange="importarHistorico(this)"/>
+      </div>
+      <div id="hist-list">
+        <div id="hist-empty">📋 Nenhum registro salvo ainda. Salve os dados de um paciente para começar.</div>
+      </div>
+    </div>
+  </div>
+</div><!-- /tab-historico -->
+
+<!-- ╔══════════════════════ ABA 4 — REFERÊNCIAS ABNT ══════════════════════╗ -->
+<div id="tab-referencias" class="tab-content">
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard('ref-diretrizes')">
+      <div class="card-title"><div class="card-icon" style="background:#EFF6FF">🏛️</div>Diretrizes e Documentos Oficiais</div>
+      <span class="chevron open" id="chevron-ref-diretrizes">▼</span>
+    </div>
+    <div class="card-body open" id="body-ref-diretrizes">
+      <ol style="padding-left:18px;line-height:2.2;font-size:13px;color:#374151">
+        <li>BRASIL. Ministério da Saúde. Secretaria de Vigilância em Saúde. <strong>Dengue: diagnóstico e manejo clínico — adulto e criança</strong>. 5. ed. Brasília: Ministério da Saúde, 2016. 58 p. (Série A. Normas e Manuais Técnicos).</li>
+        <li>WORLD HEALTH ORGANIZATION. <strong>Dengue: guidelines for diagnosis, treatment, prevention and control</strong>. New edition. Geneva: WHO, 2009. 160 p. ISBN 978-92-4-154787-1.</li>
+        <li>PAN AMERICAN HEALTH ORGANIZATION. <strong>Dengue: guías para la atención de enfermos en la región de las Américas</strong>. 2. ed. Washington: PAHO, 2016.</li>
+        <li>BRASIL. Ministério da Saúde. <strong>Nota Informativa nº 21/2016 — CGPNCMD/DEVIT/SVS/MS</strong>: orientações sobre manejo clínico da dengue. Brasília: MS, 2016.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard('ref-fisiopato')">
+      <div class="card-title"><div class="card-icon icon-fisiop">🔬</div>Fisiopatologia e Patogênese</div>
+      <span class="chevron open" id="chevron-ref-fisiopato">▼</span>
+    </div>
+    <div class="card-body open" id="body-ref-fisiopato">
+      <ol style="padding-left:18px;line-height:2.2;font-size:13px;color:#374151">
+        <li>PUERTA-GUARDO, H. et al. Flavivirus NS1 triggers tissue-specific vascular endothelial dysfunction reflecting disease tropism. <strong>Cell Reports</strong>, v. 26, n. 6, p. 1598-1613, 2019. DOI: 10.1016/j.celrep.2019.01.036.</li>
+        <li>GUZMAN, M. G.; HARRIS, E. Dengue. <strong>Lancet</strong>, v. 385, n. 9966, p. 453-465, 2015. DOI: 10.1016/S0140-6736(14)60572-9.</li>
+        <li>MALAVIGE, G. N.; OGG, G. Pathogenesis of dengue viral infections. <strong>Immunology</strong>, v. 151, n. 3, p. 261-269, 2017. DOI: 10.1111/imm.12748.</li>
+        <li>HALSTEAD, S. B. Dengue antibody-dependent enhancement: knowns and unknowns. <strong>Microbiology Spectrum</strong>, v. 2, n. 6, 2014. DOI: 10.1128/microbiolspec.AID-0022-2014.</li>
+        <li>IDRUS, H. H. et al. Neurological manifestations of dengue as predictors of severe dengue: a systematic review. <strong>PLOS Neglected Tropical Diseases</strong>, v. 17, n. 3, 2023. DOI: 10.1371/journal.pntd.0011135.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard('ref-farm')">
+      <div class="card-title"><div class="card-icon icon-farm">💊</div>Farmacologia e Tratamento</div>
+      <span class="chevron open" id="chevron-ref-farm">▼</span>
+    </div>
+    <div class="card-body open" id="body-ref-farm">
+      <ol style="padding-left:18px;line-height:2.2;font-size:13px;color:#374151">
+        <li>VASIKASIN, V. et al. Effect of oral paracetamol on alanine aminotransferase level in dengue fever: a randomised controlled trial. <strong>International Journal of Infectious Diseases</strong>, v. 83, p. 55-60, 2019. DOI: 10.1016/j.ijid.2019.04.006.</li>
+        <li>LIANG, X. et al. Non-steroidal anti-inflammatory drugs are associated with dengue severity: a systematic review and meta-analysis. <strong>Journal of Medical Virology</strong>, v. 97, 2025. DOI: 10.1002/jmv.70001.</li>
+        <li>ZHANG, F.; KRAMER, C. V. Corticosteroids for dengue infection. <strong>Cochrane Database of Systematic Reviews</strong>, n. 7, CD003488, 2014. DOI: 10.1002/14651858.CD003488.pub3.</li>
+        <li>DUNG, N. M. et al. Dextran 70 or albumin as a colloid solution for resuscitation in dengue shock syndrome: a randomized controlled trial. <strong>Clinical Infectious Diseases</strong>, v. 29, n. 4, p. 787-794, 1999. DOI: 10.1086/520435.</li>
+        <li>RANG, H. P. et al. <strong>Rang & Dale Farmacologia</strong>. 9. ed. Rio de Janeiro: Elsevier, 2020. ISBN 978-85-352-8562-7.</li>
+        <li>NGAN, N. T. T. et al. A randomized controlled trial of ringer's lactate versus normal saline in dengue fever. <strong>BMC Infectious Diseases</strong>, v. 18, n. 1, p. 291, 2018. DOI: 10.1186/s12879-018-3200-3.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard('ref-biomarcadores')">
+      <div class="card-title"><div class="card-icon" style="background:#FFF7ED">🧪</div>Biomarcadores e Predição de Gravidade</div>
+      <span class="chevron open" id="chevron-ref-biomarcadores">▼</span>
+    </div>
+    <div class="card-body open" id="body-ref-biomarcadores">
+      <ol style="padding-left:18px;line-height:2.2;font-size:13px;color:#374151">
+        <li>TRAN, P. N. T. et al. Development and validation of a nomogram to predict dengue shock syndrome in children: a prospective multicentre study. <strong>Journal of Medical Virology</strong>, v. 96, n. 1, 2024. DOI: 10.1002/jmv.29349.</li>
+        <li>REYES, M. et al. Lactate-to-albumin ratio as a predictor of severe dengue in children: a prospective cohort study. <strong>Emerging Infectious Diseases</strong>, 2023. DOI: 10.3201/eid2901.220671.</li>
+        <li>CHEN, C. C. et al. Gallbladder wall thickening as an early predictor of severe dengue infection. <strong>PLoS Neglected Tropical Diseases</strong>, v. 9, n. 5, e0003782, 2015. DOI: 10.1371/journal.pntd.0003782.</li>
+        <li>ITHA, S. et al. Profile of liver involvement in dengue virus infection. <strong>Canadian Journal of Gastroenterology</strong>, v. 19, n. 10, p. 623-627, 2005. DOI: 10.1155/2005/165761.</li>
+        <li>JAYARAJ, V. J. et al. Gallbladder wall thickening in dengue: a systematic review. <strong>Journal of Infection and Public Health</strong>, v. 14, n. 11, p. 1562-1569, 2021. DOI: 10.1016/j.jiph.2021.09.011.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard('ref-livros')">
+      <div class="card-title"><div class="card-icon" style="background:#F0FDF4">📚</div>Livros-Texto e Referências Clínicas</div>
+      <span class="chevron open" id="chevron-ref-livros">▼</span>
+    </div>
+    <div class="card-body open" id="body-ref-livros">
+      <ol style="padding-left:18px;line-height:2.2;font-size:13px;color:#374151">
+        <li>MARTINS, M. A. et al. (Ed.). <strong>Medicina de Emergência: abordagem prática</strong>. 19. ed. São Paulo: Manole / FMUSP, 2022. ISBN 978-65-5576-271-3.</li>
+        <li>BURNS, D. A. R.; CAMPOS JUNIOR, D.; LOPEZ, F. A. (Ed.). <strong>Pediatria Ambulatorial</strong>. 6. ed. São Paulo: Sociedade Brasileira de Pediatria / Manole, 2021. ISBN 978-65-5510-162-7.</li>
+        <li>RANG, H. P. et al. <strong>Rang & Dale Farmacologia</strong>. 9. ed. Rio de Janeiro: Elsevier, 2020. ISBN 978-85-352-8562-7.</li>
+        <li>KLIEGMAN, R. M. et al. <strong>Nelson Textbook of Pediatrics</strong>. 21. ed. Philadelphia: Elsevier, 2020. ISBN 978-0-323-52950-1.</li>
+        <li>MANDELL, G. L.; BENNETT, J. E.; DOLIN, R. <strong>Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases</strong>. 9. ed. Philadelphia: Elsevier, 2019. ISBN 978-0-323-48255-4.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard('ref-open')">
+      <div class="card-title"><div class="card-icon" style="background:#F0FDFA">🌐</div>Open Evidence — Respostas Utilizadas neste App</div>
+      <span class="chevron open" id="chevron-ref-open">▼</span>
+    </div>
+    <div class="card-body open" id="body-ref-open">
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px">Consultas realizadas via Open Evidence e incorporadas ao conteúdo do aplicativo:</p>
+      <ol style="padding-left:18px;line-height:2.2;font-size:13px;color:#374151">
+        <li><strong>Paracetamol na dengue — qual a frequência posológica segura?</strong> → Vasikasin et al. 2019: q6h vs q4h (transaminases 10% vs 22%); encerramento precoce por segurança.</li>
+        <li><strong>Mecanismo molecular da contraindicação de AINEs na dengue</strong> → Inibição da COX-1 plaquetária; sinergia hemorrágica com trombocitopenia; Liang X et al. JMV 2025.</li>
+        <li><strong>Ultrassonografia GBWT como preditor precoce de internação</strong> → &gt;3,0mm = 67% risco de hospitalização; padrão honeycomb em 87,9% dos casos graves; detectável dias 2–3.</li>
+        <li><strong>Razão Lactato/Albumina como biomarcador de gravidade</strong> → LAR &gt;1,25 = AUC 0,82 para dengue grave; albumina &lt;35g/L = OR 3,3.</li>
+        <li><strong>Nomograma preditivo de Choque por Dengue (CSD) em crianças</strong> → Tran PNT et al. JMV 2024; 5 variáveis; AUC 0,83; especificidade 78%, sensibilidade 74%.</li>
+        <li><strong>Limiar crítico de volume acumulado de fluidos</strong> → &gt;181 mL/kg/24h associado a risco de ventilação mecânica; AUC 0,871.</li>
+        <li><strong>Ringer Lactato vs SF 0,9% na dengue</strong> → RL reduz risco de injúria renal aguda em 58% vs SF; preferência por cristaloide balanceado.</li>
+        <li><strong>Corticosteroides na dengue</strong> → Cochrane 2014 (Zhang & Kramer): sem benefício em mortalidade, hemorragia ou tempo de hospitalização.</li>
+      </ol>
+      <div class="evidence-box" style="margin-top:14px">
+        <div class="ev-title">ℹ️ Sobre o Open Evidence</div>
+        O Open Evidence é uma plataforma de síntese de evidências médicas com acesso a PubMed, Cochrane, Uptodate e diretrizes internacionais. As respostas geradas foram revisadas pelos autores do projeto e confrontadas com as referências primárias listadas acima.
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:16px;text-align:center;font-size:11px;color:var(--text-muted);border-top:1px solid var(--platinum);margin-top:8px">
+    Referências formatadas conforme <strong>ABNT NBR 6023:2018</strong> · Compiladas para o Projeto de Intervenção na UBS Nacional (Contagem) · Medicina de Família e Comunidade · PUC Minas 2026
+  </div>
+
+</div><!-- /tab-referencias -->
+
+<!-- ── NSAID MODAL ── -->
+<div id="nsaid-overlay">
+  <div id="nsaid-modal">
+    <div class="modal-icon">🚫</div>
+    <h2>CONTRAINDICAÇÃO ABSOLUTA</h2>
+    <p>
+      <strong>AINEs (Ibuprofeno, Cetoprofeno, Diclofenaco, AAS/Aspirina)</strong> são contraindicados na dengue.<br/><br/>
+      A inibição da COX-1 plaquetária amplifica a trombocitopenia já presente, aumentando drasticamente o risco hemorrágico. O paciente registrado no caso clínico de farmacologia (G.S.S., dengue com ibuprofeno) desenvolveu hematêmese e dor abdominal intensa por esta interação.<br/><br/>
+      <strong>Use Paracetamol (10–15 mg/kg) ou Dipirona (15 mg/kg).</strong>
+    </p>
+    <button class="modal-btn modal-btn-primary" onclick="fecharModal()">Entendi — Remover AINE da prescrição</button>
+  </div>
+</div>
+
+<!-- ── PAINEL DE VOZ ── -->
+<button id="voz-fab" title="Ditado por voz" onclick="toggleVozPanel()">🎤</button>
+
+<div id="voz-panel">
+  <div id="voz-panel-header">
+    <div><span id="voz-status-dot"></span><span id="voz-status-label">Pronto para gravar</span></div>
+    <button onclick="toggleVozPanel()" style="background:none;border:none;color:white;font-size:18px;cursor:pointer;line-height:1">×</button>
+  </div>
+  <div style="padding:10px 16px;background:#F8FAFC;font-size:11px;color:var(--text-muted);border-bottom:1px solid var(--platinum)">
+    💡 Fale livremente: <em>"Paciente João, 8 anos, 25 kg, febre há 3 dias, 38.8 graus, PA 90 por 60, FC 110, plaquetas 85 mil, hematócrito 42, dor de cabeça, mialgia"</em>
+  </div>
+  <textarea id="voz-texto" placeholder="A transcrição aparece aqui enquanto você fala. Você também pode digitar ou corrigir o texto antes de interpretar." oninput="vozTextoEditado()"></textarea>
+  <div id="voz-interim"></div>
+  <div id="voz-controls">
+    <button class="btn btn-primary" id="btn-voz-start" onclick="iniciarDitado()" style="font-size:12px;padding:8px 14px">🎙️ Gravar</button>
+    <button class="btn btn-danger" id="btn-voz-stop" onclick="pararDitado()" style="font-size:12px;padding:8px 14px;display:none">⏹ Parar</button>
+    <button class="btn" id="btn-voz-interpretar" onclick="interpretarEPreencher()" style="font-size:12px;padding:8px 14px;background:var(--group-b);color:white;display:none">⚙️ Interpretar e Preencher</button>
+    <button class="btn btn-secondary" onclick="limparTranscricao()" style="font-size:12px;padding:8px 14px">🗑️ Limpar</button>
+  </div>
+  <div id="voz-result-box"></div>
+</div>
+
+<footer>
+  DengueCare · Projeto de Intervenção · UBS Nacional, Contagem · Medicina de Família e Comunidade · PUC Minas · 2026<br/>Preceptor: Patrik Ferreira de Carvalho Pinto · Alunos: Patricia Gazire de Marco, Guilherme de Oliveira Rodrigues, Walterez Geralda de Araujo Barbosa, Marcus Vinicius Tolentino, Pedro Andrade Rüger<br/>
+  Baseado em: Ministério da Saúde BR · OMS · Open Evidence · Pediatria Ambulatorial 6ª Ed · Medicina de Emergência FMUSP 19ª Ed · Rang &amp; Dale Farmacologia 9ª Ed<br/>
+  <em>Este aplicativo é ferramenta de apoio educacional. Não substitui o julgamento clínico do profissional de saúde.</em>
+</footer>
+
+<script>
+// ╔══════════════════════ LÓGICA DO APP ══════════════════════╗
+
+// ── Utilidades ──
+const $ = id => document.getElementById(id);
+
+function escapeHTML(s){
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+// Aceita "38,8", "38.8", "1.200,5"; devolve NaN se vazio ou inválido
+function parseNum(s){
+  s = String(s == null ? '' : s).trim().replace(/\s/g,'');
+  if(!s) return NaN;
+  if(s.includes(',')) s = s.replace(/\./g,'').replace(',','.');
+  const v = parseFloat(s);
+  return isFinite(v) ? v : NaN;
+}
+function num(id){ const el = $(id); const v = el ? parseNum(el.value) : NaN; return isNaN(v) ? 0 : v; }
+function has(id){ const el = $(id); return !!el && !isNaN(parseNum(el.value)); }
+// Contagens (plaquetas, leucócitos): "120.000" e "120000" valem o mesmo
+function intNum(id){ const el = $(id); const s = el ? String(el.value).replace(/[^\d]/g,'') : ''; return s ? parseInt(s,10) : 0; }
+
+// Datas no fuso do aparelho (toISOString usa UTC e, depois das 21h no Brasil, já dá o dia seguinte)
+function isoLocal(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function hojeISO(){ return isoLocal(new Date()); }
+function diasDesde(iso){
+  if(!iso) return null;
+  const [y,m,d] = iso.split('-').map(Number);
+  if(!y || !m || !d) return null;
+  const inicio = new Date(y, m-1, d);
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+  return Math.round((hoje - inicio) / 86400000) + 1;
+}
+
+function normalizar(s){ return String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+
+const EH_TOQUE = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+const EH_MOVEL = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && /Mac/.test(navigator.platform));
+
+// Download que funciona no celular: no aparelho de toque tenta o menu Compartilhar
+// (WhatsApp, Drive, e-mail); se não der, baixa o arquivo.
+async function baixarArquivo(nome, conteudo, mime){
+  const blob = new Blob([conteudo], {type: mime});
+  if(EH_TOQUE && navigator.canShare && window.File){
+    try {
+      const arq = new File([blob], nome, {type: mime});
+      if(navigator.canShare({files:[arq]})){
+        await navigator.share({files:[arq], title: nome});
+        return;
+      }
+    } catch(e){
+      if(e && e.name === 'AbortError') return; // usuário cancelou
+    }
+  }
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = nome; a.rel = 'noopener';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 4000);
+}
+function nomeArquivo(base){ return String(base||'paciente').trim().replace(/[^\p{L}\p{N}]+/gu,'_').replace(/^_|_$/g,'') || 'paciente'; }
+
+// ── Painel de medicamentos ──
+let medicamentos = [];
+const NSAIDS = ['ibuprofeno','cetoprofeno','dexcetoprofeno','ketoprofeno','diclofenaco','aceclofenaco','naproxeno','aspirina','aas','acido acetilsalicilico','acetilsalicilico','indometacina','piroxicam','tenoxicam','meloxicam','nimesulida','ketorolac','cetorolaco','celecoxibe','etoricoxibe',
+  // nomes comerciais comuns no Brasil
+  'advil','alivium','buscofem','voltaren','cataflam','profenid','nisulid','toragesic','arcoxia','celebra','doril','melhoral','sonrisal','engov'];
+const CORTICOID = ['prednisona','prednisolona','dexametasona','hidrocortisona','betametasona','metilprednisolona'];
+const RE_NSAID = new RegExp('\\b(' + NSAIDS.join('|') + ')\\b');
+const RE_CORT = new RegExp('\\b(' + CORTICOID.join('|') + ')\\b');
+
+function filtrarMedicamento(val){
+  const v = normalizar(val);
+  const warn = $('med-warning');
+  if(RE_NSAID.test(v)){
+    warn.style.display='block';
+    warn.innerHTML='⛔ <strong>CONTRAINDICADO:</strong> '+escapeHTML(val)+' é AINE/AAS, contraindicado na dengue pelo risco hemorrágico. Use Paracetamol ou Dipirona.';
+    $('nsaid-overlay').classList.add('show');
+  } else if(RE_CORT.test(v)){
+    warn.style.display='block';
+    warn.innerHTML='⚠️ <strong>NÃO RECOMENDADO:</strong> Corticosteroides não têm benefício comprovado na dengue (Cochrane 2014) e causam hiperglicemia.';
+  } else {
+    warn.style.display='none';
+  }
+}
+
+function adicionarMedicamento(){
+  const input = $('med-input');
+  const val = input.value.trim();
+  if(!val) return;
+  if(RE_NSAID.test(normalizar(val))){ $('nsaid-overlay').classList.add('show'); return; }
+  medicamentos.push(val);
+  renderMeds();
+  input.value = '';
+  $('med-warning').style.display='none';
+}
+
+function renderMeds(){
+  const el = $('med-list');
+  if(!medicamentos.length){ el.innerHTML=''; return; }
+  el.innerHTML = '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:8px">Medicamentos registrados:</div>'
+    + medicamentos.map((m,i) => `<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;background:var(--white-clinical);border:1px solid var(--platinum);border-radius:8px;margin-bottom:6px;font-size:13px">
+      <span>💊 ${escapeHTML(m)}</span>
+      <button onclick="removerMed(${i})" aria-label="Remover" style="border:none;background:none;cursor:pointer;color:var(--group-d);font-size:20px;line-height:1;padding:4px 8px">×</button>
+    </div>`).join('');
+}
+
+function removerMed(i){ medicamentos.splice(i,1); renderMeds(); }
+function limparMedInput(){ $('med-input').value=''; $('med-warning').style.display='none'; }
+function fecharModal(){ $('nsaid-overlay').classList.remove('show'); $('med-input').value=''; $('med-warning').style.display='none'; }
+
+// ── Abas ──
+function switchTab(id){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab===id));
+  $('tab-'+id).classList.add('active');
+  // Volta ao início da aba (no celular, trocar de aba no meio da página deixava o usuário perdido)
+  const topo = document.querySelector('.app-top');
+  const limite = topo ? topo.offsetHeight : 0;
+  if(window.scrollY > limite) window.scrollTo({top: limite});
+  if(id==='historico') renderHistorico();
+}
+
+// ── Cartões recolhíveis ──
+function toggleCard(id){
+  const body = $('body-'+id);
+  const chev = $('chevron-'+id);
+  const open = body.classList.toggle('open');
+  if(chev) chev.classList.toggle('open', open);
+}
+function sincronizarChevrons(){
+  document.querySelectorAll('.card-body[id^="body-"]').forEach(b=>{
+    const c = $('chevron-'+b.id.slice(5));
+    if(c) c.classList.toggle('open', b.classList.contains('open'));
+  });
+}
+
+// ── Marcação automática reversível ──
+// Antes, um valor digitado errado (ex.: PA 90/80) marcava "choque" e, corrigido o valor,
+// a marcação ficava, prendendo o paciente no Grupo D. Agora a marcação automática sai
+// quando o critério deixa de valer. O que o profissional marcar ou desmarcar à mão é respeitado.
+function autoMarcar(valor, ligado){
+  const cb = document.querySelector(`input[type=checkbox][value="${valor}"]`);
+  if(!cb || cb.dataset.manual==='1') return;
+  if(ligado){ if(!cb.checked){ cb.checked = true; cb.dataset.auto = '1'; } }
+  else if(cb.dataset.auto==='1'){ cb.checked = false; delete cb.dataset.auto; }
+}
+document.addEventListener('change', e=>{
+  const t = e.target;
+  if(t && t.type==='checkbox' && t.name){ t.dataset.manual='1'; delete t.dataset.auto; }
+}, true);
+
+// ── Atualização central: todos os campos clínicos chamam esta função ──
+function atualizar(){
+  calcularDias();
+  calcularVitais();
+  calcularLab();
+  calcularFatoresAuto();
+  atualizarLacoStatus(false);
+  calcularFluidos();
+  avaliarGrupo();
+  if(trendData.length) updateCharts();
+}
+// Nomes antigos mantidos para não quebrar chamadas
+function calcularDados(){ atualizar(); }
+
+function sincPeso(){
+  $('dose-peso').value = $('peso').value;
+  calcularDosePediatrica();
+}
+document.addEventListener('input', e=>{ if(e.target && e.target.id==='peso') sincPeso(); });
+
+// ── Dias de doença ──
+function mostrarDias(el, d){
+  if(d===null){ el.textContent='—'; el.style.color=''; el.style.fontWeight=''; el.title=''; return; }
+  if(d<1){
+    el.textContent='Data futura?'; el.style.color='var(--group-d)'; el.style.fontWeight='700'; el.title='A data de início está depois de hoje';
+    return;
+  }
+  el.textContent = d + (d===1?' dia':' dias');
+  if(d>=4 && d<=7){ el.style.color='var(--group-c)'; el.style.fontWeight='900'; el.title='⚠️ Fase crítica: risco de extravasamento plasmático'; }
+  else if(d>7){ el.style.color='var(--group-b)'; el.style.fontWeight='700'; el.title='Fase de recuperação'; }
+  else { el.style.color='var(--group-a)'; el.style.fontWeight='700'; el.title='Fase febril'; }
+}
+function calcularDias(){
+  mostrarDias($('dias-doenca'), diasDesde($('data-inicio').value));
+}
+// As duas datas de início (triagem e dados do paciente) andam juntas
+function sincDataInicio(){
+  const v = $('data-inicio').value;
+  $('triagem-data-inicio').value = v;
+  mostrarDias($('triagem-dias'), diasDesde(v));
+}
+function triagemSincData(){
+  const v = $('triagem-data-inicio').value;
+  $('data-inicio').value = v;
+  mostrarDias($('triagem-dias'), diasDesde(v));
+  atualizar();
+}
+
+// ── Sinais vitais ──
+function idadeInformada(){ return has('idade'); }
+
+function calcularVitais(){
+  const ppEl = $('pp-display');
+  if(has('pas') && has('pad')){
+    const pp = num('pas') - num('pad');
+    if(pp < 0){
+      ppEl.textContent = 'PAD maior que PAS?'; ppEl.style.color='var(--group-d)'; ppEl.style.fontWeight='700';
+      autoMarcar('hipo_art', false);
+    } else {
+      ppEl.textContent = pp + ' mmHg';
+      ppEl.style.color = pp<=20 ? 'var(--group-d)' : pp<=30 ? 'var(--group-c)' : 'var(--group-b)';
+      ppEl.style.fontWeight = '900';
+      autoMarcar('hipo_art', pp<=20);
+    }
+  } else {
+    ppEl.textContent='—'; ppEl.style.color=''; ppEl.style.fontWeight='';
+    autoMarcar('hipo_art', false);
+  }
+
+  // Taquicardia: sem idade informada usa o limite do adulto
+  // (antes, idade vazia virava 0 anos e aplicava o limite do lactente, 160 bpm)
+  const idade = num('idade');
+  let taqLimite = 100;
+  if(idadeInformada()){
+    if(idade<1) taqLimite=160;
+    else if(idade<=10) taqLimite=120;
+  }
+  autoMarcar('taquic', has('fc') && num('fc')>taqLimite);
+
+  autoMarcar('extrem', has('ec') && num('ec')>2);
+  autoMarcar('oliguria', $('diurese').value==='ausente');
+  autoMarcar('hepa', num('hepato-cm')>2);
+
+  const cons = $('consciencia').value;
+  autoMarcar('letarg', cons==='sonolento' || cons==='irritavel' || cons==='confuso' || cons==='coma');
+  // Confusão/coma = disfunção grave do SNC (critério de Grupo D)
+  autoMarcar('grave', cons==='confuso' || cons==='coma');
+}
+
+// ── Laboratório ──
+function htReferencia(){
+  if(!idadeInformada()){
+    const sx = $('sexo').value;
+    return sx==='M' ? 45 : 40;
+  }
+  const idade = num('idade');
+  if(idade<(1/12)) return 51;
+  if(idade<(2/12)) return 43;
+  if(idade<0.5) return 35;
+  if(idade<2) return 36;
+  if(idade<6) return 37;
+  if(idade<12) return 38;
+  return $('sexo').value==='M' ? 45 : 40;
+}
+
+function calcularLab(){
+  const ht = num('ht');
+  const plaq = intNum('plaquetas');
+  const albumina = num('albumina');
+  const lactato = num('lactato');
+  const ast = num('ast');
+  const alt = num('alt');
+  const bili = num('bili');
+
+  const htRef = htReferencia();
+  const htRefEl = $('ht-ref');
+  const htDeltaEl = $('ht-delta');
+  const temBase = idadeInformada() || $('sexo').value;
+  htRefEl.textContent = (has('ht') || temBase) ? htRef + '%' + (temBase ? '' : ' (adulto, sexo não inf.)') : '—';
+
+  if(has('ht')){
+    const deltaNum = (ht - htRef)/htRef*100;
+    htDeltaEl.textContent = (deltaNum>0?'+':'') + deltaNum.toFixed(1).replace('.',',') + '% vs. ref.';
+    htDeltaEl.style.color = deltaNum>20 ? 'var(--group-d)' : deltaNum>10 ? 'var(--group-c)' : 'var(--group-b)';
+    htDeltaEl.style.fontWeight='900';
+    autoMarcar('hemo', deltaNum>10);
+  } else {
+    htDeltaEl.textContent='—'; htDeltaEl.style.color=''; htDeltaEl.style.fontWeight='';
+    autoMarcar('hemo', false);
+  }
+
+  // Razão Lactato/Albumina
+  const larEl = $('lar-display');
+  if(albumina>0 && has('lactato')){
+    const lar = lactato/albumina;
+    larEl.textContent = lar.toFixed(3).replace('.',',');
+    larEl.style.color = lar>1.25 ? 'var(--group-d)' : 'var(--group-b)';
+    larEl.style.fontWeight='900';
+  } else { larEl.textContent='—'; larEl.style.color=''; larEl.style.fontWeight=''; }
+
+  autoMarcar('plaq', plaq>0 && plaq<50000);
+
+  const alerts = [];
+  if(plaq>0 && plaq<1000) alerts.push({txt:`Plaquetas ${plaq}/mm³: confira se o número foi digitado completo (ex.: 85000, não 85)`,color:'var(--group-c)'});
+  if(ast>400) alerts.push({txt:`AST ${ast} U/L (&gt;400): OR 3,0 para dengue grave`,color:'var(--group-c)'});
+  if(alt>400) alerts.push({txt:`ALT ${alt} U/L (&gt;400): OR 6,6 para dengue grave`,color:'var(--group-d)'});
+  if(bili>17) alerts.push({txt:`Bilirrubina ${bili} µmol/L (&gt;17): OR 4,6 para dengue grave`,color:'var(--group-c)'});
+  if(albumina>0 && albumina<35) alerts.push({txt:`Albumina ${albumina} g/L (&lt;35): OR 3,3 para dengue grave (dias 1–3)`,color:'var(--group-c)'});
+  if(plaq>=1000 && plaq<20000) alerts.push({txt:`Plaquetas ${plaq.toLocaleString('pt-BR')}/mm³: avaliar transfusão de plaquetas se sangramento ativo`,color:'var(--group-d)'});
+
+  const labAl = $('lab-alerts');
+  if(alerts.length){
+    labAl.style.display='block';
+    labAl.innerHTML = alerts.map(a=>`<div style="padding:8px 12px;border-left:4px solid ${a.color};background:var(--white-clinical);margin-bottom:6px;border-radius:0 8px 8px 0;font-size:12px;font-weight:600;color:${a.color}">⚠️ ${a.txt}</div>`).join('');
+  } else { labAl.style.display='none'; labAl.innerHTML=''; }
+}
+
+// Fator de risco por idade marcado sozinho
+function calcularFatoresAuto(){
+  const idade = num('idade');
+  autoMarcar('menor2', idadeInformada() && (idade<2 || idade>=65));
+}
+
+// ── Classificação de grupo ──
+function rotuloCheck(cb){
+  const lab = cb.closest('.check-item');
+  const span = lab && lab.querySelector('.check-label');
+  if(!span) return cb.value;
+  return (span.childNodes[0] ? span.childNodes[0].textContent : span.textContent).trim();
+}
+
+function sangramentoPele(){
+  return $('prova-laco').value==='positiva' || $('tri-petq').checked;
+}
+
+function temDados(){
+  const ids = ['idade','peso','data-inicio','pas','pad','fc','fr','spo2','temp','ec','hepato-cm','ht','plaquetas','leucocitos','albumina','lactato','ast','alt','bili'];
+  if(ids.some(id => $(id) && $(id).value.trim()!=='')) return true;
+  if(document.querySelector('#tab-pratica input[type=checkbox][name]:checked')) return true;
+  if($('prova-laco').value || $('diurese').value!=='normal' || $('consciencia').value!=='normal') return true;
+  return false;
+}
+
+// Uma única regra de grupo, usada pela tela, pelo salvar e pelo relatório
+function calcularGrupo(){
+  const choques = [...document.querySelectorAll('input[name="choque"]:checked')];
+  const alarmes = [...document.querySelectorAll('input[name="alarme"]:checked')];
+  const fatores = [...document.querySelectorAll('input[name="fator"]:checked')];
+  const pele = sangramentoPele();
+  let grupo = null, motivos = [];
+  if(choques.length){ grupo='D'; motivos = choques.map(rotuloCheck); }
+  else if(alarmes.length){ grupo='C'; motivos = alarmes.map(rotuloCheck); }
+  else if(fatores.length || pele){
+    grupo='B';
+    motivos = fatores.map(rotuloCheck);
+    if(pele) motivos.push('Sangramento de pele (petéquias ou prova do laço positiva)');
+  }
+  else if(temDados()){ grupo='A'; motivos=['Sem sinais de alarme, sem choque, sem fatores de risco e sem sangramento de pele']; }
+  return {grupo, motivos, choques, alarmes, fatores};
+}
+
+const STATUS_CORES = {A:'var(--group-a)',B:'var(--group-b)',C:'var(--group-c)',D:'var(--group-d)'};
+const STATUS_TEXTO = {
+  A:'Grupo A — Manejo Domiciliar',
+  B:'Grupo B — Observação / Internação Eletiva',
+  C:'⚠️ GRUPO C — SINAL DE ALARME — Internação e Expansão Volêmica Urgente',
+  D:'🚨 GRUPO D — CHOQUE / DENGUE GRAVE — Ressuscitação Imediata'
+};
+
+function avaliarGrupo(){
+  const peso = num('peso');
+
+  // Visual dos checkboxes
+  document.querySelectorAll('input[name="alarme"], input[name="fator"]').forEach(cb=>{
+    const it = cb.closest('.check-item'); if(it) it.classList.toggle('checked', cb.checked);
+  });
+  document.querySelectorAll('input[name="choque"]').forEach(cb=>{
+    const it = cb.closest('.check-item'); if(it) it.classList.toggle('checked-d', cb.checked);
+  });
+
+  const {grupo, motivos} = calcularGrupo();
+
+  if(!grupo){
+    $('status-bar').style.background = 'var(--teal)';
+    $('status-label').textContent = 'Sistema em standby — insira os dados do paciente';
+    $('group-badge-display').innerHTML = '';
+    $('alert-box').style.display='none';
+    $('grupo-atual').innerHTML = 'Insira os dados do paciente para gerar a conduta automaticamente.';
+    $('grupo-atual').style.color = 'var(--text-muted)';
+    $('conduta-box').innerHTML = '';
+    return;
+  }
+
+  $('status-bar').style.background = STATUS_CORES[grupo];
+  $('status-label').textContent = STATUS_TEXTO[grupo];
+  $('status-label').title = STATUS_TEXTO[grupo];
+  $('group-badge-display').innerHTML = `<span class="badge badge-${grupo.toLowerCase()}" style="background:white">GRUPO ${grupo}</span>`;
+
+  const alertBox = $('alert-box');
+  if(grupo==='C'||grupo==='D'){
+    alertBox.style.display='block';
+    alertBox.style.borderColor = grupo==='D' ? 'var(--group-d)' : 'var(--group-c)';
+    alertBox.style.background = grupo==='D' ? '#FFF1F2' : '#FFF7ED';
+    $('alert-group-name').textContent = grupo==='D' ? 'GRUPO D — CHOQUE / DENGUE GRAVE' : 'GRUPO C — SINAL DE ALARME';
+    $('alert-group-name').style.color = STATUS_CORES[grupo];
+
+    $('alert-body-text').innerHTML = (grupo==='D'
+      ? 'Choque ou dengue grave. Iniciar ressuscitação volêmica <strong>imediata</strong>. Acionar equipe de UTI/emergência.'
+      : 'Sinal(is) de alarme detectado(s). Paciente necessita de <strong>internação</strong> e <strong>hidratação intravenosa urgente</strong>.')
+      + '<br/><small>Motivo: ' + motivos.map(escapeHTML).join(' · ') + '</small>';
+
+    if(peso>0){
+      let vol, tempo, info;
+      if(grupo==='D'){
+        vol = (peso*20).toFixed(0);
+        tempo='15–20 min (bolus rápido)';
+        info='Repetir bolus se sem melhora. Considerar coloide (dextran 70) após 2–3 bolus sem resposta. (MS 2016 / WHO 2009)';
+      } else {
+        vol = (peso*10).toFixed(0);
+        tempo='1 hora';
+        info='Se melhora: reduzir para 5 mL/kg/h (2h) → 3 mL/kg/h. Repetir 10 mL/kg/h se sem melhora, até 2–3×. Limiar: volume acumulado &gt;181 mL/kg/24h. (MS 2016)';
+      }
+      $('alert-calc-text').innerHTML =
+        `💧 Ringer com Lactato: <strong>${vol} mL</strong> EV em <strong>${tempo}</strong> (${String(peso).replace('.',',')} kg × ${grupo==='D'?20:10} mL/kg)<br/><small style="font-weight:400">${info}</small>`;
+    } else {
+      $('alert-calc-text').innerHTML = '⚠️ Insira o peso do paciente para calcular o volume.';
+    }
+  } else {
+    alertBox.style.display='none';
+  }
+
+  gerarConduta(grupo, peso, motivos);
+}
+
+function condutasDoGrupo(grupo, peso){
+  const p = String(peso).replace('.',',');
+  const condutas = {
+    A:[
+      'Paracetamol 10–15 mg/kg/dose VO a cada 6h se febre/dor (máx. 4 g/dia em adultos)',
+      'NÃO usar AINEs, aspirina ou corticosteroides',
+      'Hidratação oral: mínimo 60 mL/kg/dia (SRO preferencial)',
+      'Repouso relativo',
+      'Notificar caso suspeito (2 vias: epidemiologia + laboratório)',
+      'Preencher Cartão da Dengue',
+      'Retorno imediato se surgir qualquer sinal de alarme',
+      'Retorno de acompanhamento no dia da defervescência (início da fase crítica)',
+    ],
+    B:[
+      'Solicitar hemograma completo + plaquetas na urgência',
+      'Paracetamol 10–15 mg/kg/dose VO a cada 6h (NÃO AINEs)',
+      'Hidratação oral supervisionada: 60–80 mL/kg/dia',
+      'Se plaquetas alteradas ou sinais de alarme → internação imediata',
+      'Monitorizar sinais vitais de 4/4h',
+      'NS1 (dias 1–4) ou Sorologia (a partir do 6º dia)',
+      'Gestantes e &lt;2 anos: internar eletivamente para observação',
+    ],
+    C:[
+      'Internação imediata — leito de observação com monitorização contínua',
+      'Acesso venoso periférico calibroso (2 acessos se possível)',
+      peso>0 ? `💧 Ringer com Lactato: ${(peso*10).toFixed(0)} mL EV em 1 hora (${p} kg × 10 mL/kg). Se melhora: reduzir para 5→3 mL/kg/h. Repetir se sem melhora (até 2–3×)` : '💧 Ringer com Lactato: 10 mL/kg EV em 1 hora. Se melhora, reduzir progressivamente (inserir peso para calcular)',
+      'Reavaliação hemodinâmica a cada 15–30 min',
+      'Hemograma, hematócrito, plaquetas — repetir a cada 4–6h',
+      'Controle rigoroso de diurese (sonda vesical se indicado)',
+      'NÃO usar AINEs, aspirina, corticosteroides',
+      'Se sem melhora após 3 bolus → considerar coloide (dextran 70)',
+      'Monitorar volume acumulado — limiar crítico: 181 mL/kg/24h',
+    ],
+    D:[
+      'ATIVAR CÓDIGO DE EMERGÊNCIA — UTI imediata',
+      `💧 Ressuscitação: ${peso>0?(peso*20).toFixed(0)+' mL':'20 mL/kg'} Ringer Lactato EV em 15–20 min. Repetir se sem melhora`,
+      'Monitorização invasiva: PAM, débito urinário horário',
+      'Oxigenioterapia — avaliar IOT se Glasgow reduzido',
+      'Se sem resposta após 3 bolus de cristaloide: coloide (dextran 70 10 mL/kg ou gelatina)',
+      'Solicitar: hemograma, coagulograma, bioquímica completa, gasometria, ECG',
+      'Se hepatopatia grave: Plasmalyte em vez de Ringer Lactato (evitar lactato)',
+      'NÃO usar AINEs, aspirina, corticosteroides',
+      'Transfusão de hemácias: considerar se Hb &lt;10 g/dL com sangramento ativo',
+      'Transfusão de plaquetas: somente se &lt;20.000/mm³ com sangramento ativo ou procedimento invasivo',
+    ]
+  };
+  return condutas[grupo];
+}
+
+function gerarConduta(grupo, peso, motivos){
+  const cores = {A:['var(--group-a)','#DBEAFE'],B:['var(--group-b)','#DCFCE7'],C:['var(--group-c)','#FFEDD5'],D:['var(--group-d)','#FEE2E2']};
+  const [cor, bg] = cores[grupo];
+  const el = $('grupo-atual');
+  el.innerHTML = `<span class="badge badge-${grupo.toLowerCase()}">GRUPO ${grupo}</span> — Conduta baseada nos dados inseridos`
+    + (motivos && motivos.length ? `<div class="grupo-motivos" style="margin-top:8px">Motivo: ${motivos.map(escapeHTML).join(' · ')}</div>` : '');
+  el.style.color = cor;
+
+  $('conduta-box').innerHTML = `
+    <div style="background:${bg};border:2px solid ${cor};border-radius:10px;padding:14px 16px">
+      ${condutasDoGrupo(grupo, peso).map((c,i)=>`<div class="conduta-item"><span class="conduta-num">${i+1}</span><span>${c}</span></div>`).join('')}
+    </div>`;
+}
+
+// ── Fluidos ──
+function calcularFluidos(){
+  const peso = num('peso');
+  const ev = num('vol-ev');
+  const oral = num('vol-oral');
+  const vtEl = $('vol-total');
+  if(!peso || (!has('vol-ev') && !has('vol-oral'))){
+    vtEl.textContent='—'; vtEl.style.color=''; vtEl.style.fontWeight='';
+    $('fluid-bar-wrap').style.display='none';
+    return;
+  }
+  const total = ev + oral;
+  const mlKg = total/peso;
+  const pct = (total/(peso*181))*100;
+  vtEl.textContent = mlKg.toFixed(1).replace('.',',') + ' mL/kg';
+  vtEl.style.color = mlKg>181 ? 'var(--group-d)' : mlKg>130 ? 'var(--group-c)' : 'var(--group-b)';
+  vtEl.style.fontWeight='900';
+
+  $('fluid-bar-wrap').style.display='block';
+  const bar = $('fluid-bar-fill');
+  bar.style.width = Math.min(pct, 100)+'%';
+  bar.style.background = pct>100 ? 'var(--group-d)' : pct>70 ? 'var(--group-c)' : 'var(--group-b)';
+  $('fluid-pct-label').textContent = pct.toFixed(0)+'% do limiar (181 mL/kg)';
+}
+
+// ── Coleta e restauração do formulário ──
+function coletarDados(){
+  const campos = {};
+  document.querySelectorAll('#tab-pratica input[id], #tab-pratica select[id], #tab-pratica textarea[id]').forEach(el=>{
+    if(el.type==='file') return;
+    campos[el.id] = el.type==='checkbox' ? el.checked : el.value;
+  });
+  const checks = [...document.querySelectorAll('#tab-pratica input[type=checkbox][name]:checked')]
+    .map(c=>({k: c.name+':'+c.value, auto: c.dataset.auto==='1'}));
+  const laco = [...document.querySelectorAll('.laco-dot')].map((d,i)=>d.classList.contains('active')?i:-1).filter(i=>i>=0);
+  return {
+    versao: 2,
+    // campos "planos" mantidos para compatibilidade com registros e exportações antigas
+    nome: $('nome').value,
+    prontuario: $('prontuario').value,
+    dataAtend: $('data-atend').value,
+    dataInicio: $('data-inicio').value,
+    idade: $('idade').value,
+    sexo: $('sexo').value,
+    peso: $('peso').value,
+    pas: $('pas').value, pad: $('pad').value, fc: $('fc').value, fr: $('fr').value,
+    spo2: $('spo2').value, temp: $('temp').value, ec: $('ec').value,
+    hepatoCm: $('hepato-cm').value, diurese: $('diurese').value, consciencia: $('consciencia').value,
+    ht: $('ht').value, plaquetas: $('plaquetas').value, leucocitos: $('leucocitos').value,
+    albumina: $('albumina').value, lactato: $('lactato').value,
+    ast: $('ast').value, alt: $('alt').value, bili: $('bili').value,
+    medicamentos: medicamentos.slice(),
+    evolucao: $('evo-log').value,
+    campos, checks, laco,
+    tendencia: trendData.map(e=>({...e})),
+    timestamp: new Date().toISOString()
+  };
+}
+
+function restaurarDados(p){
+  limparFormulario(true);
+  if(p.campos){
+    Object.entries(p.campos).forEach(([id,v])=>{
+      const el = $(id); if(!el || el.type==='file') return;
+      if(el.type==='checkbox') el.checked = !!v; else el.value = v==null ? '' : v;
+    });
+    // checkboxes com name: restaurar marcação e se era automática
+    document.querySelectorAll('#tab-pratica input[type=checkbox][name]').forEach(cb=>{ cb.checked=false; delete cb.dataset.auto; delete cb.dataset.manual; });
+    (p.checks||[]).forEach(c=>{
+      const [name, value] = c.k.split(':');
+      const cb = document.querySelector(`input[type=checkbox][name="${name}"][value="${value}"]`);
+      if(cb){ cb.checked = true; if(c.auto) cb.dataset.auto='1'; else cb.dataset.manual='1'; }
+    });
+  } else {
+    // Registro da versão anterior (sem checkboxes salvos)
+    const mapa = {nome:'nome', prontuario:'prontuario', dataAtend:'data-atend', dataInicio:'data-inicio', idade:'idade', peso:'peso',
+      pas:'pas', pad:'pad', fc:'fc', fr:'fr', spo2:'spo2', temp:'temp', ec:'ec', hepatoCm:'hepato-cm', ht:'ht', plaquetas:'plaquetas',
+      leucocitos:'leucocitos', albumina:'albumina', lactato:'lactato', ast:'ast', alt:'alt', bili:'bili', evolucao:'evo-log',
+      diurese:'diurese', consciencia:'consciencia', sexo:'sexo'};
+    Object.entries(mapa).forEach(([k,id])=>{ if(p[k]!=null && $(id)) $(id).value = p[k]; });
+  }
+  medicamentos = Array.isArray(p.medicamentos) ? p.medicamentos.slice() : [];
+  renderMeds();
+  trendData = Array.isArray(p.tendencia) ? p.tendencia.map(e=>({...e})) : [];
+  renderTrendList(); updateCharts();
+  const dots = document.querySelectorAll('.laco-dot');
+  (p.laco||[]).forEach(i=>{ if(dots[i]) dots[i].classList.add('active'); });
+
+  $('dose-peso').value = $('peso').value;
+  calcularDosePediatrica();
+  sincDataInicio();
+  if(!$('data-inicio').value && $('triagem-data-inicio').value) triagemSincData();
+  atualizar();
+  if(triagemPreenchida()) avaliarTriagem();
+}
+
+// ── Salvar ──
+let pacienteAtualId = null;
+
+async function salvarPaciente(){
+  const {grupo} = calcularGrupo();
+  const dados = { ...coletarDados(), _grupo: grupo || '—' };
+  const nomeLabel = dados.nome || 'paciente';
+  try {
+    if(!db) await dbInit();
+    let atualizarRegistro = false;
+    if(pacienteAtualId != null){
+      atualizarRegistro = confirm(`Atualizar o registro já salvo (ID ${pacienteAtualId})?\n\nOK = atualizar · Cancelar = salvar como novo registro`);
+    }
+    if(atualizarRegistro) dados.id = pacienteAtualId;
+    const id = await dbSalvar(dados);
+    pacienteAtualId = id;
+    alert(`✅ Paciente "${nomeLabel}" ${atualizarRegistro?'atualizado':'salvo'} no histórico (ID: ${id}).\nPara copiar para outro aparelho, use "Exportar" na aba Histórico.`);
+  } catch(e) {
+    console.error(e);
+    // Sem IndexedDB (ex.: navegação privada antiga): oferece o arquivo
+    alert('⚠️ Não foi possível salvar no histórico deste navegador. O registro será exportado como arquivo JSON.');
+    baixarArquivo(`DengueCare_${nomeArquivo(nomeLabel)}_${hojeISO()}.json`, JSON.stringify(dados, null, 2), 'application/json');
+  }
+}
+
+// ── Relatório ──
+function gerarRelatorio(){
+  const dados = coletarDados();
+  const peso = num('peso');
+  const {grupo, motivos, choques, alarmes, fatores} = calcularGrupo();
+  const L = arr => arr.length ? arr.map(rotuloCheck).join('; ') : 'Nenhum';
+  const tri = triagemPreenchida() ? ($('triagem-result').querySelector('.tr-title')||{}).textContent || '—' : 'Não preenchida';
+  const lacoN = document.querySelectorAll('.laco-dot.active').length;
+  const conduta = grupo ? condutasDoGrupo(grupo, peso).map((c,i)=>`  ${i+1}. ${c.replace(/&lt;/g,'<').replace(/&gt;/g,'>')}`).join('\n') : '  Dados insuficientes para classificar.';
+  const sexo = {M:'Masculino', F:'Feminino'}[dados.sexo] || '—';
+
+  const txt = `══════════════════════════════════════════════
+  RELATÓRIO CLÍNICO — DENGUECARE
+  Projeto de Intervenção · UBS Nacional, Contagem
+  Medicina de Família e Comunidade · PUC Minas
+══════════════════════════════════════════════
+
+DADOS DO PACIENTE
+  Nome: ${dados.nome || '—'}
+  Prontuário: ${dados.prontuario || '—'}
+  Idade: ${dados.idade || '—'} anos | Sexo: ${sexo}
+  Peso: ${dados.peso || '—'} kg
+  Data de atendimento: ${dados.dataAtend || '—'}
+  Início dos sintomas: ${dados.dataInicio || '—'}
+  Dias de doença: ${$('dias-doenca').textContent}
+
+TRIAGEM DIAGNÓSTICA: ${tri}
+
+CLASSIFICAÇÃO: ${grupo ? 'GRUPO ' + grupo : '—'}
+  Motivo: ${motivos.length ? motivos.join('; ') : '—'}
+
+SINAIS VITAIS
+  PA: ${dados.pas||'—'}/${dados.pad||'—'} mmHg | PP: ${$('pp-display').textContent}
+  FC: ${dados.fc||'—'} bpm | FR: ${dados.fr||'—'} irpm | SpO2: ${dados.spo2||'—'}%
+  Temperatura: ${dados.temp||'—'}°C | Enchimento capilar: ${dados.ec||'—'} seg
+  Hepatomegalia: ${dados.hepatoCm||'0'} cm | Diurese: ${dados.diurese||'normal'} | Consciência: ${dados.consciencia||'normal'}
+  Prova do laço: ${$('prova-laco').value || 'não realizada'}${lacoN ? ' (' + lacoN + ' petéquias contadas)' : ''}
+
+LABORATÓRIO
+  Hematócrito: ${dados.ht||'—'}% (ref: ${$('ht-ref').textContent}) | Δ: ${$('ht-delta').textContent}
+  Plaquetas: ${intNum('plaquetas') ? intNum('plaquetas').toLocaleString('pt-BR') : '—'}/mm³ | Leucócitos: ${intNum('leucocitos') ? intNum('leucocitos').toLocaleString('pt-BR') : '—'}/mm³
+  Albumina: ${dados.albumina||'—'} g/L | Lactato: ${dados.lactato||'—'} mmol/L | Razão L/A: ${$('lar-display').textContent}
+  AST: ${dados.ast||'—'} U/L | ALT: ${dados.alt||'—'} U/L | Bilirrubina: ${dados.bili||'—'} µmol/L
+${trendData.length ? '\nEVOLUÇÃO SERIADA\n' + trendData.map(e=>`  Dia ${e.dia}: plaquetas ${e.plaq ? e.plaq.toLocaleString('pt-BR') : '—'} | Ht ${e.ht!=null ? e.ht+'%' : '—'}`).join('\n') + '\n' : ''}
+FATORES DE RISCO: ${L(fatores)}
+SINAIS DE ALARME: ${L(alarmes)}
+SINAIS DE CHOQUE / GRAVIDADE: ${L(choques)}
+
+VOLUME ACUMULADO (24h): ${$('vol-total').textContent}
+
+MEDICAÇÕES REGISTRADAS:
+${medicamentos.length ? medicamentos.map(m=>'  • '+m).join('\n') : '  Nenhuma'}
+
+CONDUTA SUGERIDA:
+${conduta}
+
+EVOLUÇÃO CLÍNICA:
+${$('evo-log').value || '  Sem registro.'}
+
+──────────────────────────────────────────────
+Gerado por DengueCare em ${new Date().toLocaleString('pt-BR')}
+⚠️ Ferramenta educacional — não substitui o julgamento clínico
+──────────────────────────────────────────────`;
+
+  baixarArquivo(`Relatorio_${nomeArquivo(dados.nome)}_${hojeISO()}.txt`, txt, 'text/plain;charset=utf-8');
+}
+
+// ── Novo paciente ──
+function limparFormulario(silencioso){
+  if(silencioso!==true && !confirm('Limpar todos os dados do paciente atual?')) return;
+  document.querySelectorAll('#tab-pratica input, #tab-pratica textarea').forEach(el=>{
+    if(el.type==='checkbox'){ el.checked=false; delete el.dataset.auto; delete el.dataset.manual; }
+    else if(el.type!=='file' && el.type!=='button') el.value='';
+  });
+  document.querySelectorAll('#tab-pratica select').forEach(el=>el.selectedIndex=0);
+  $('data-atend').value = hojeISO();
+  medicamentos=[]; renderMeds();
+  trendData=[]; renderTrendList(); updateCharts();
+  pacienteAtualId = null;
+  document.querySelectorAll('.laco-dot').forEach(d=>d.classList.remove('active'));
+  $('med-warning').style.display='none';
+  $('triagem-result').style.display='none'; $('triagem-result').innerHTML='';
+  $('btn-confirmar-dengue').style.display='none';
+  mostrarDias($('triagem-dias'), null);
+  document.querySelectorAll('.check-item').forEach(el=>el.classList.remove('checked','checked-d'));
+  $('dose-results').style.display='none';
+  $('dose-empty').style.display='block';
+  atualizarLacoStatus(true);
+  atualizar();
+}
+
+// ╔══════════════ VOZ — DITADO CLÍNICO ══════════════╗
+// No celular o reconhecimento contínuo do Chrome para Android duplica frases;
+// lá cada frase é uma sessão curta, reiniciada sozinha até o usuário tocar em Parar.
+let vozRecognition = null;
+let vozBase = '';       // texto já confirmado antes desta sessão
+let vozSessao = '';     // frases finais da sessão atual
+let vozAtivo = false;
+let vozErro = '';
+let vozPanelOpen = false;
+
+function toggleVozPanel(){
+  vozPanelOpen = !vozPanelOpen;
+  $('voz-panel').classList.toggle('open', vozPanelOpen);
+}
+
+function vozTextoEditado(){
+  $('btn-voz-interpretar').style.display = $('voz-texto').value.trim() ? 'inline-flex' : 'none';
+}
+
+function vozMostrar(interim){
+  const base = vozBase && !/\s$/.test(vozBase) ? vozBase + ' ' : vozBase;
+  $('voz-texto').value = (base + vozSessao).replace(/\s+$/,' ');
+  $('voz-interim').textContent = interim || '';
+  const ta = $('voz-texto'); ta.scrollTop = ta.scrollHeight;
+}
+
+function iniciarDitado(){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR){
+    alert('⚠️ Reconhecimento de voz não disponível neste navegador.\n\nNo celular: Chrome (Android) ou Safari (iPhone).\nNo computador: Chrome ou Edge.\n\nVocê pode digitar o texto no quadro e tocar em "Interpretar e Preencher".');
+    return;
+  }
+  if(vozAtivo) return;
+  vozBase = $('voz-texto').value;
+  vozSessao = '';
+  vozErro = '';
+  vozAtivo = true;
+  $('voz-texto').readOnly = true;
+  $('voz-status-dot').classList.add('active');
+  $('voz-status-label').textContent = '🔴 Gravando...';
+  $('btn-voz-start').style.display='none';
+  $('btn-voz-stop').style.display='inline-flex';
+  $('voz-fab').classList.add('recording');
+  vozNovaSessao();
+}
+
+function vozNovaSessao(){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const r = new SR();
+  vozRecognition = r;
+  r.lang = 'pt-BR';
+  r.continuous = !EH_MOVEL;
+  r.interimResults = true;
+  r.maxAlternatives = 1;
+
+  r.onresult = (e) => {
+    let fin = '', interim = '';
+    for(let i=0; i<e.results.length; i++){
+      const t = e.results[i][0].transcript;
+      if(e.results[i].isFinal) fin += t.trim() + ' ';
+      else interim += t;
+    }
+    vozSessao = fin;
+    vozMostrar(interim);
+  };
+
+  r.onerror = (e) => {
+    if(e.error==='no-speech' || e.error==='aborted') return; // silêncio: segue gravando
+    vozErro = e.error;
+    vozAtivo = false;
+    const msg = {
+      'not-allowed': 'Microfone bloqueado. Permita o microfone para este site nas configurações do navegador.',
+      'service-not-allowed': 'Reconhecimento de voz bloqueado pelo navegador.',
+      'network': 'Sem internet: o ditado do Chrome/Safari precisa de conexão.',
+      'audio-capture': 'Nenhum microfone encontrado.'
+    }[e.error] || ('Erro: ' + e.error);
+    $('voz-status-label').textContent = '⚠️ ' + msg;
+  };
+
+  r.onend = () => {
+    vozBase = (vozBase && !/\s$/.test(vozBase) ? vozBase + ' ' : vozBase) + vozSessao;
+    vozSessao = '';
+    vozMostrar('');
+    if(vozAtivo){
+      try { r.start(); return; } catch(err){ /* iPhone pode recusar reinício automático */ }
+    }
+    vozFinalizarUI();
+  };
+
+  try { r.start(); }
+  catch(err){ vozAtivo=false; vozErro='start'; $('voz-status-label').textContent='⚠️ Não foi possível iniciar o microfone.'; vozFinalizarUI(); }
+}
+
+function pararDitado(){
+  vozAtivo = false;
+  if(vozRecognition){ try{ vozRecognition.stop(); }catch(e){} }
+  else vozFinalizarUI();
+}
+
+function vozFinalizarUI(){
+  vozAtivo = false;
+  vozRecognition = null;
+  $('voz-texto').readOnly = false;
+  $('voz-interim').textContent = '';
+  $('voz-status-dot').classList.remove('active');
+  if(!vozErro) $('voz-status-label').textContent = 'Gravação concluída';
+  $('btn-voz-start').style.display='inline-flex';
+  $('btn-voz-stop').style.display='none';
+  $('voz-fab').classList.remove('recording');
+  vozTextoEditado();
+}
+
+function limparTranscricao(){
+  if(vozAtivo) pararDitado();
+  vozBase=''; vozSessao='';
+  $('voz-texto').value='';
+  $('voz-interim').textContent='';
+  $('btn-voz-interpretar').style.display='none';
+  $('voz-result-box').style.display='none';
+  $('voz-status-label').textContent = 'Pronto para gravar';
+}
+
+function interpretarEPreencher(){
+  const original = $('voz-texto').value;
+  const texto = normalizar(original);
+  const preenchidos = [];
+
+  const setField = (id, val, label) => {
+    const el = $(id);
+    if(el && val !== null && val !== undefined && val !== ''){
+      el.value = val;
+      preenchidos.push(escapeHTML(label) + ': <strong>' + escapeHTML(val) + '</strong>');
+      return true;
+    }
+    return false;
+  };
+  const marcar = (el, label) => {
+    if(!el) return false;
+    el.checked = true;
+    if(el.name){ el.dataset.manual='1'; delete el.dataset.auto; }
+    preenchidos.push('✓ ' + escapeHTML(label));
+    return true;
+  };
+  const checkBox = (name, value, label) => marcar(document.querySelector(`input[name="${name}"][value="${value}"]`), label);
+  const checkById = (id, label) => marcar($(id), label);
+
+  // Menção que não está negada ("sem dor abdominal", "nega sangramento" não marcam)
+  const menciona = (re) => {
+    const g = new RegExp(re.source, 'g');
+    let m;
+    while((m = g.exec(texto))){
+      const antes = texto.slice(Math.max(0, m.index - 30), m.index);
+      if(!/\b(sem|nega|negou|negando|nao|ausencia de|ausente)\b[^.,;]*$/.test(antes)) return true;
+      if(m[0].length === 0) g.lastIndex++;
+    }
+    return false;
+  };
+
+  // ── NOME (no texto original, para manter acentos) ──
+  const PARADAS = new Set(['com','tem','apresenta','apresentando','relata','refere','febre','idade','sexo','masculino','feminino','gestante','peso','ha','há','anos','ano','meses','e','paciente']);
+  const nomeM = original.toLowerCase().match(/(?:paciente|nome)[:\s]+([\p{L}]+(?:\s+[\p{L}]+){0,4})/u);
+  if(nomeM){
+    const palavras = [];
+    for(const w of nomeM[1].split(/\s+/)){
+      if(PARADAS.has(w) || PARADAS.has(normalizar(w))) break;
+      palavras.push(w);
+    }
+    while(palavras.length && ['de','da','do','dos','das'].includes(palavras[palavras.length-1])) palavras.pop();
+    if(palavras.length){
+      const nome = palavras.map(w => ['de','da','do','dos','das'].includes(w) ? w : w[0].toUpperCase()+w.slice(1)).join(' ');
+      setField('nome', nome, 'Nome');
+    }
+  }
+
+  // ── PRONTUÁRIO ──
+  const pronM = texto.match(/\b(?:prontuario|registro|matricula)[:\s#]+(?:numero\s+)?(\w+)/);
+  if(pronM) setField('prontuario', pronM[1].toUpperCase(), 'Prontuário');
+
+  // ── IDADE ──
+  const idadeM = texto.match(/\b(\d+)\s*anos?\b/);
+  const mesesM = texto.match(/\b(\d+)\s*mes(?:es)?\b/);
+  if(idadeM) setField('idade', idadeM[1], 'Idade');
+  else if(mesesM) setField('idade', String(Math.round(parseInt(mesesM[1])/12*100)/100).replace('.',','), 'Idade (meses → anos)');
+
+  // ── SEXO ──
+  if(/\b(masculino|homem|menino)\b/.test(texto)) setField('sexo','M','Sexo');
+  else if(/\b(feminino|mulher|menina|gestante|gravida)\b/.test(texto)) setField('sexo','F','Sexo');
+
+  // ── PESO ──
+  const pesoM = texto.match(/(\d+(?:[.,]\d+)?)\s*(?:kg|quilos?|quilogramas?)\b/);
+  if(pesoM) setField('peso', pesoM[1].replace('.',','), 'Peso (kg)');
+
+  // ── DIAS DE DOENÇA → data de início ──
+  const diasM = texto.match(/\b(?:ha|faz)\s+(\d+)\s*dias?/) || texto.match(/\b(\d+)\s*dias?\s+de\s+(?:febre|sintomas?|doenca)/);
+  if(diasM){
+    const dias = parseInt(diasM[1]);
+    const d = new Date();
+    d.setDate(d.getDate() - (dias - 1));
+    const iso = isoLocal(d);
+    $('data-inicio').value = iso;
+    sincDataInicio();
+    preenchidos.push('Dias de doença: <strong>' + dias + '</strong> (início ' + iso.split('-').reverse().join('/') + ')');
+  }
+
+  // ── TEMPERATURA ──
+  const tempM = texto.match(/\b(?:febre|temperatura|temp|tax)\s+(?:de\s+)?(\d{2}(?:[.,]\d)?)\b/) || texto.match(/\b(\d{2}(?:[.,]\d)?)\s*(?:graus|°)/);
+  if(tempM){
+    const t = parseNum(tempM[1]);
+    if(t>=34 && t<=43){
+      setField('temp', tempM[1].replace('.',','), 'Temperatura (°C)');
+      $('triagem-temp').value = tempM[1].replace('.',',');
+    }
+  }
+
+  // ── PRESSÃO ARTERIAL ──
+  const paM = texto.match(/\b(?:pressao\s+(?:arterial\s+)?|pa\s+)(?:de\s+)?(\d{2,3})\s*(?:por|x|\/|sobre)\s*(\d{2,3})/);
+  if(paM){ setField('pas', paM[1], 'PA Sistólica'); setField('pad', paM[2], 'PA Diastólica'); }
+
+  // ── FREQUÊNCIA CARDÍACA ──
+  const fcM = texto.match(/\b(?:frequencia\s+cardiaca|pulso|fc|batimentos)[:\s]+(?:de\s+)?(\d{2,3})/) || texto.match(/\b(\d{2,3})\s*(?:bpm|batimentos)/);
+  if(fcM) setField('fc', fcM[1], 'Frequência Cardíaca (bpm)');
+
+  // ── FREQUÊNCIA RESPIRATÓRIA ──
+  const frM = texto.match(/\b(?:frequencia\s+respiratoria|fr|respiracoes)[:\s]+(?:de\s+)?(\d{1,2})/) || texto.match(/\b(\d{1,2})\s*(?:irpm|ipm|rpm)\b/);
+  if(frM) setField('fr', frM[1], 'Frequência Respiratória');
+
+  // ── SPO2 ──
+  const spo2M = texto.match(/\b(?:saturacao|saturando|spo2|sat)[:\s]+(?:de\s+)?(\d{2,3})/);
+  if(spo2M) setField('spo2', spo2M[1], 'SpO₂ (%)');
+
+  // ── HEMATÓCRITO ──
+  const htM = texto.match(/\b(?:hematocrito|ht)[:\s]+(?:de\s+)?(\d+(?:[.,]\d+)?)/);
+  if(htM) setField('ht', htM[1].replace('.',','), 'Hematócrito (%)');
+
+  // ── PLAQUETAS ──
+  const plaqM = texto.match(/\b(?:plaquetas?|plt)[:\s]+(?:de\s+)?(\d+(?:[.,]\d+)?)\s*(mil)?/);
+  if(plaqM){
+    let val = parseFloat(plaqM[1].replace(',','.'));
+    if(plaqM[2]==='mil' || val < 1000) val *= 1000;
+    setField('plaquetas', String(Math.round(val)), 'Plaquetas (/mm³)');
+  }
+
+  // ── LEUCÓCITOS ──
+  const leucM = texto.match(/\b(?:leucocitos?|globulos?\s+brancos?)[:\s]+(?:de\s+)?(\d+(?:[.,]\d+)?)\s*(mil)?/);
+  if(leucM){
+    let val = parseFloat(leucM[1].replace(',','.'));
+    if(leucM[2]==='mil' || val < 100) val *= 1000;
+    setField('leucocitos', String(Math.round(val)), 'Leucócitos');
+  }
+
+  const albM = texto.match(/\balbumina[:\s]+(?:de\s+)?(\d+(?:[.,]\d+)?)/);
+  if(albM) setField('albumina', albM[1].replace('.',','), 'Albumina (g/L)');
+  const lacM = texto.match(/\blactato[:\s]+(?:de\s+)?(\d+(?:[.,]\d+)?)/);
+  if(lacM) setField('lactato', lacM[1].replace('.',','), 'Lactato');
+  const astM = texto.match(/\b(?:ast|tgo)[:\s]+(?:de\s+)?(\d+)/);
+  if(astM) setField('ast', astM[1], 'AST/TGO');
+  const altM = texto.match(/\b(?:alt|tgp)[:\s]+(?:de\s+)?(\d+)/);
+  if(altM) setField('alt', altM[1], 'ALT/TGP');
+  const biliM = texto.match(/\bbilirrubina[:\s]+(?:total\s+)?(?:de\s+)?(\d+(?:[.,]\d+)?)/);
+  if(biliM) setField('bili', biliM[1].replace('.',','), 'Bilirrubina');
+
+  const hepM = texto.match(/\b(?:hepatomegalia|figado)[^.]*?(\d+(?:[.,]\d+)?)\s*(?:cm|centimetros?)/);
+  if(hepM) setField('hepato-cm', hepM[1].replace('.',','), 'Hepatomegalia (cm)');
+  const ecM = texto.match(/\b(?:enchimento\s+capilar|capilar)[^.]*?(\d+(?:[.,]\d+)?)\s*(?:segundos?|seg|s\b)/);
+  if(ecM) setField('ec', ecM[1].replace('.',','), 'Enchimento capilar');
+
+  // ── DIURESE ──
+  if(/diurese\s+(?:ausente|zero)|\banuria\b/.test(texto)) setField('diurese', 'ausente', 'Diurese');
+  else if(/diurese\s+(?:reduzida|diminuida|pouca)|\boliguria\b/.test(texto)) setField('diurese', 'reduzida', 'Diurese');
+
+  // ── CONSCIÊNCIA ──
+  if(menciona(/\bcoma\b|\binconsciente\b|glasgow\s+[1-8]\b/)) setField('consciencia','coma','Consciência');
+  else if(menciona(/\bconfus[oa]\b|\bagitad[oa]\b|\bdesorientad[oa]\b/)) setField('consciencia','confuso','Consciência');
+  else if(menciona(/\bsonolent[oa]\b|\bletargic[oa]\b/)) setField('consciencia','sonolento','Consciência');
+  else if(menciona(/\birritavel\b/)) setField('consciencia','irritavel','Consciência');
+
+  // ── TRIAGEM — SINTOMAS ──
+  if(menciona(/\bfebre\b|\bfebril\b/)) checkById('tri-febre','Febre (triagem)');
+  if(menciona(/cefal|dor\s+de\s+cabeca|dor\s+retro|dor\s+atras\s+dos\s+olhos/)) checkById('tri-cef','Cefaleia/retroorbitária');
+  if(menciona(/mialgia|artralgia|dor\s+muscular|dor\s+no\s+corpo|dor\s+nas\s+juntas|dor\s+articular|quebra.osso/)) checkById('tri-mio','Mialgia/artralgia');
+  if(menciona(/prostrac|astenia|fraqueza|prostrad/)) checkById('tri-prost','Prostração');
+  if(menciona(/exantema|\brash\b|manchas?\s+vermelhas?|manchas?\s+na\s+pele/)) checkById('tri-exan','Exantema');
+  if(menciona(/nausea|enjoo|vomit/)) checkById('tri-naus','Náusea/vômito');
+  if(menciona(/petequi|prova\s+do\s+laco\s+positiva/)) checkById('tri-petq','Petéquias / prova do laço +');
+  if(/prova\s+do\s+laco\s+positiva/.test(texto)) setField('prova-laco','positiva','Prova do laço');
+  else if(/prova\s+do\s+laco\s+negativa/.test(texto)) setField('prova-laco','negativa','Prova do laço');
+
+  // ── SINAIS DE ALARME ──
+  if(menciona(/dor\s+abdominal/)) checkBox('alarme','abd','Dor abdominal');
+  if(menciona(/vomitos?\s+persistentes?|vomitando\s+muito/)) checkBox('alarme','vom','Vômitos persistentes');
+  if(menciona(/hipotensao\s+postural|lipotimia/)) checkBox('alarme','hipo','Hipotensão postural');
+  if(menciona(/hepatomegalia\s+dolorosa|figado\s+dolo/)) checkBox('alarme','hepa','Hepatomegalia dolorosa');
+  if(menciona(/sangramento|epistaxe|gengivorragia|melena|hematemese/)) checkBox('alarme','sang','Sangramento de mucosas');
+  if(menciona(/sonolencia|letargia|irritabilidade/)) checkBox('alarme','letarg','Sonolência/letargia');
+  if(menciona(/derrame\s+pleural|ascite|derrame\s+pericardico/)) checkBox('alarme','derrame','Derrames cavitários');
+
+  // ── SINAIS DE CHOQUE ── ("pressão de pulso" não marca: ela é calculada pela PA)
+  if(menciona(/\bchoque\b|hipotensao\s+arterial/)) checkBox('choque','hipo_art','Hipotensão/choque');
+  if(menciona(/extremidades\s+frias|cianose/)) checkBox('choque','extrem','Extremidades frias');
+  if(menciona(/\boliguria\b|\banuria\b/)) checkBox('choque','oliguria','Oligúria/anúria');
+
+  // ── FATORES DE RISCO ──
+  if(menciona(/gestante|gravida/)) checkBox('fator','gestante','Gestante');
+  if(menciona(/hipertens|\bhas\b/)) checkBox('fator','hipertensao','HAS');
+  if(menciona(/diabet|\bdm\b/)) checkBox('fator','diabetes','Diabetes');
+  if(menciona(/renal\s+cronica|\bdrc\b/)) checkBox('fator','renal','DRC');
+  if(menciona(/hepatopatia|doenca\s+hepatica|cirrose/)) checkBox('fator','hepato','Hepatopatia');
+  if(menciona(/imunossuprimid|imunossupressao/)) checkBox('fator','imuno','Imunossupressão');
+  if(menciona(/cardiopatia|\bdpoc\b|\basma\b/)) checkBox('fator','cardio','Cardiopatia/DPOC/asma');
+  if(menciona(/dengue\s+(?:previa|anterior)|ja\s+teve\s+dengue/)) checkBox('fator','dengue_prev','Dengue prévia');
+
+  // ── RECALCULAR TUDO ──
+  sincPeso();
+  atualizar();
+  avaliarTriagem();
+
+  const resultBox = $('voz-result-box');
+  resultBox.style.display = 'block';
+  if(preenchidos.length){
+    resultBox.innerHTML = `<div style="font-weight:700;color:var(--group-b);margin-bottom:8px">✅ ${preenchidos.length} campo(s) preenchido(s):</div>`
+      + preenchidos.map(p=>`<div style="padding:2px 0;border-bottom:1px solid #BBF7D0">→ ${p}</div>`).join('')
+      + `<div style="margin-top:8px;font-size:11px;color:var(--text-muted)">⚠️ Revise os campos antes de usar clinicamente. Negações simples ("sem", "nega") são respeitadas; frases complexas podem não ser.</div>`;
+  } else {
+    resultBox.innerHTML = `<div style="color:var(--group-d);font-weight:700">❌ Nenhum campo reconhecido. Tente falar de forma mais clara ou use os termos do exemplo.</div>`;
+  }
+
+  switchTab('pratica');
+}
+
+// ╔══════════════ TRIAGEM DIAGNÓSTICA ══════════════╗
+const TRI_SINTOMAS = ['tri-cef','tri-mio','tri-prost','tri-exan','tri-naus','tri-petq'];
+
+function triagemPreenchida(){
+  return $('tri-febre').checked || TRI_SINTOMAS.some(id=>$(id).checked) || $('tri-exame').value || has('triagem-temp') || $('triagem-data-inicio').value;
+}
+
+function avaliarTriagem(){
+  const febre = $('tri-febre').checked;
+  const sintomas = TRI_SINTOMAS.filter(id => $(id).checked).length;
+  const exame = $('tri-exame').value;
+  const epi = $('tri-epi').value;
+  const temp = num('triagem-temp');
+  const dias = diasDesde($('triagem-data-inicio').value);
+
+  const febreItem = $('tri-febre-item');
+  febreItem.classList.toggle('checked', febre);
+  febreItem.classList.toggle('checked-d', !febre && sintomas>0);
+  TRI_SINTOMAS.forEach(id=>{ const el = $(id+'-item'); if(el) el.classList.toggle('checked', $(id).checked); });
+
+  const result = $('triagem-result');
+  const btnConfirmar = $('btn-confirmar-dengue');
+  result.style.display = 'block';
+
+  const labConfirmado = ['ns1pos','igmpos','pcr'].includes(exame);
+  const labNegativo = ['ns1neg','igmneg'].includes(exame);
+
+  let nivel;
+  if(labConfirmado) nivel = 'confirmado';
+  else if(febre && sintomas >= 2 && epi === 'sim') nivel = 'provavel';
+  else if(febre && sintomas >= 1) nivel = 'possivel';
+  else nivel = 'improvavel';
+
+  let titulo = '', corpo = '', corBorda = '', corFundo = '';
+  if(nivel === 'confirmado'){
+    titulo = '✅ DENGUE CONFIRMADA LABORATORIALMENTE';
+    corpo = `Resultado laboratorial positivo (${exame==='ns1pos'?'NS1':exame==='igmpos'?'IgM':'PCR'}). Prosseguir com classificação por grupo e conduta.`;
+    corBorda = 'var(--group-b)'; corFundo = '#F0FDF4';
+    btnConfirmar.style.display = 'block';
+  } else if(nivel === 'provavel'){
+    titulo = '⚠️ DENGUE PROVÁVEL (critérios clínicos + epidemiologia)';
+    corpo = `Febre ✓ + ${sintomas} sintomas associados ✓ + área endêmica ✓. Critérios clínicos de suspeita preenchidos. Solicitar NS1 se dias 1–4, ou sorologia se ≥ 6º dia. Iniciar manejo como dengue suspeita.`;
+    corBorda = 'var(--group-c)'; corFundo = '#FFF7ED';
+    btnConfirmar.style.display = 'block';
+  } else if(nivel === 'possivel'){
+    titulo = '🟡 DENGUE POSSÍVEL';
+    corpo = `Febre ✓ · ${sintomas} sintoma(s) associado(s) (mínimo 2). `
+      + (sintomas<2 ? `Marque pelo menos mais ${2-sintomas} sintoma(s) para suspeita clínica. ` : 'Sem contexto epidemiológico confirmado: considerar os diagnósticos diferenciais. ')
+      + 'Na dúvida, manejar como caso suspeito.';
+    corBorda = '#F59E0B'; corFundo = '#FFFBEB';
+    btnConfirmar.style.display = sintomas>=2 ? 'block' : 'none';
+  } else {
+    titulo = '❌ CRITÉRIOS INSUFICIENTES para dengue';
+    corpo = `${!febre?'Febre ausente (critério obrigatório). ':''}${sintomas<2?'Sintomas associados insuficientes ('+sintomas+'/2 mínimo). ':''}Considere outros diagnósticos diferenciais listados acima.`;
+    corBorda = 'var(--text-muted)'; corFundo = '#F8FAFC';
+    btnConfirmar.style.display = 'none';
+  }
+
+  // Exame negativo NÃO descarta dengue (antes rebaixava para "improvável")
+  if(labNegativo){
+    corpo += exame==='ns1neg'
+      ? ' ℹ️ NS1 negativo não descarta dengue (sensibilidade menor, sobretudo em infecção secundária e após o 4º dia). Manter o manejo clínico.'
+      : ' ℹ️ IgM negativa não descarta dengue se colhida antes do 6º dia. Repetir se necessário e manter o manejo clínico.';
+  }
+  if(exame==='ns1pos' && dias && dias>5) corpo += ' (NS1 tem melhor desempenho até o 4º–5º dia.)';
+  if(exame==='igmpos' && dias && dias<6) corpo += ' (IgM antes do 6º dia: confira a data de início.)';
+  if(temp>0 && temp<37.5 && febre){
+    corpo += ' ⚠️ Temperatura atual abaixo de 37,5°C — paciente pode estar em defervescência (início da fase crítica).';
+  }
+
+  result.style.borderColor = corBorda;
+  result.style.background = corFundo;
+  result.innerHTML = `<div class="tr-title" style="color:${corBorda}">${titulo}</div><div class="tr-body">${corpo}</div>`;
+}
+
+function confirmarDengue(){
+  const dataTriagem = $('triagem-data-inicio').value;
+  if(dataTriagem && !$('data-inicio').value) $('data-inicio').value = dataTriagem;
+  const tempTriagem = $('triagem-temp').value;
+  if(tempTriagem && !$('temp').value) $('temp').value = tempTriagem;
+  ['dados','vitais','lab','sinais','medic','conduta'].forEach(id=>{
+    const body = $('body-'+id);
+    const chev = $('chevron-'+id);
+    if(body && !body.classList.contains('open')){ body.classList.add('open'); if(chev) chev.classList.add('open'); }
+  });
+  atualizar();
+  $('body-dados').closest('.card').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// ╔══════════════ PROVA DO LAÇO INTERATIVA ══════════════╗
+const LACO_TOTAL_DOTS = 40; // grade 8×5
+
+function initLaco(){
+  const grid = $('laco-grid');
+  grid.innerHTML = '';
+  for(let i=0; i<LACO_TOTAL_DOTS; i++){
+    const dot = document.createElement('div');
+    dot.className = 'laco-dot';
+    dot.dataset.idx = i;
+    dot.setAttribute('role','button');
+    dot.setAttribute('aria-label','Petéquia '+(i+1));
+    dot.addEventListener('click', () => toggleLacoDot(dot));
+    grid.appendChild(dot);
+  }
+}
+
+function toggleLacoDot(dot){
+  dot.classList.toggle('active');
+  updateLacoCount();
+}
+
+// Mostra a contagem. Só mexe no campo "Prova do Laço" quando a contagem foi usada,
+// para não apagar um resultado escolhido direto na lista.
+function atualizarLacoStatus(daGrade){
+  const active = document.querySelectorAll('.laco-dot.active').length;
+  const counter = $('laco-counter');
+  const status = $('laco-status');
+  const select = $('prova-laco');
+  const idade = idadeInformada() ? num('idade') : 99;
+  const limiar = idade < 12 ? 10 : 20;
+  const positivo = active >= limiar;
+
+  counter.textContent = active;
+  counter.style.color = positivo ? 'var(--group-d)' : active > 0 ? 'var(--group-c)' : 'var(--text-muted)';
+
+  if(active === 0){
+    status.textContent = '—';
+    status.style.color = 'var(--text-muted)';
+    if(daGrade) select.value = '';
+  } else {
+    if(positivo){
+      status.textContent = '⚠️ POSITIVA — Sinal hemorrágico presente';
+      status.style.color = 'var(--group-d)';
+    } else {
+      status.textContent = `Negativa — faltam ${limiar - active} petéquia(s) para positivar (limiar ${limiar})`;
+      status.style.color = 'var(--group-b)';
+    }
+    select.value = positivo ? 'positiva' : 'negativa';
+  }
+}
+
+function updateLacoCount(){
+  atualizarLacoStatus(true);
+  atualizar();
+}
+
+function resetLaco(){
+  document.querySelectorAll('.laco-dot').forEach(d=>d.classList.remove('active'));
+  updateLacoCount();
+}
+
+// ╔══════════════ CALCULADORA DE DOSES ══════════════╗
+function calcularDosePediatrica(){
+  const pesoInput = $('dose-peso');
+  if(!pesoInput.value && $('peso').value) pesoInput.value = $('peso').value;
+
+  const peso = num('dose-peso');
+  const results = $('dose-results');
+  const empty = $('dose-empty');
+
+  if(!peso || peso<=0){ results.style.display='none'; empty.style.display='block'; return; }
+  results.style.display='block'; empty.style.display='none';
+
+  const fmt = v => Math.round(v).toLocaleString('pt-BR');
+  // Com teto: em adultos e crianças grandes o cálculo por kg passava da dose máxima
+  const set = (id, val, unit, teto) => {
+    const capado = teto && val > teto;
+    $(id).innerHTML = fmt(capado ? teto : val) + ' ' + unit + (capado ? ' <span class="dose-warn">(teto adulto)</span>' : '');
+  };
+
+  set('d-para-min', peso*10, 'mg/dose', 1000);
+  set('d-para-max', peso*15, 'mg/dose', 1000);
+  set('d-para-dia', peso*60, 'mg/dia', 4000);
+  set('d-dipi', peso*15, 'mg/dose', 1000);
+  set('d-rl-c', peso*10, 'mL');
+  set('d-rl-d', peso*20, 'mL');
+  set('d-limiar', peso*181, 'mL/24h');
+  set('d-oral-a', peso*60, 'mL/dia');
+  set('d-oral-b', peso*80, 'mL/dia');
+}
+
+// ╔══════════════ INDEXEDDB — HISTÓRICO ══════════════╗
+let db = null;
+const DB_NAME = 'DengueCareDB';
+const DB_VERSION = 1;
+const STORE_NAME = 'pacientes';
+
+function dbInit(){
+  return new Promise((resolve, reject)=>{
+    if(!window.indexedDB){ reject(new Error('IndexedDB indisponível')); return; }
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+    req.onupgradeneeded = e => {
+      const d = e.target.result;
+      if(!d.objectStoreNames.contains(STORE_NAME)){
+        const store = d.createObjectStore(STORE_NAME, {keyPath:'id', autoIncrement:true});
+        store.createIndex('nome','nome',{unique:false});
+        store.createIndex('timestamp','timestamp',{unique:false});
+      }
+    };
+    req.onsuccess = e => { db = e.target.result; resolve(db); };
+    req.onerror = e => { console.error('IndexedDB error:', e); reject(e); };
+  });
+}
+
+function dbReq(modo, fn){
+  return new Promise((resolve, reject)=>{
+    const tx = db.transaction(STORE_NAME, modo);
+    const req = fn(tx.objectStore(STORE_NAME));
+    req.onsuccess = e => resolve(e.target.result);
+    req.onerror = e => reject(e);
+  });
+}
+const dbSalvar = dados => dbReq('readwrite', s => s.put(dados));
+const dbListar = () => dbReq('readonly', s => s.getAll());
+const dbCarregar = id => dbReq('readonly', s => s.get(id));
+const dbExcluir = id => dbReq('readwrite', s => s.delete(id));
+
+async function renderHistorico(){
+  const el = $('hist-list');
+  let lista;
+  try {
+    if(!db) await dbInit();
+    lista = await dbListar();
+  } catch(e){
+    el.innerHTML = '<div id="hist-empty">⚠️ O histórico não está disponível neste navegador (modo privado ou armazenamento bloqueado).</div>';
+    return;
+  }
+  if(!lista.length){
+    el.innerHTML='<div id="hist-empty">📋 Nenhum registro salvo ainda. Salve os dados de um paciente para começar.</div>';
+    return;
+  }
+  lista.sort((a,b)=> new Date(b.timestamp)-new Date(a.timestamp));
+  const grupoColors={A:'var(--group-a)',B:'var(--group-b)',C:'var(--group-c)',D:'var(--group-d)'};
+  el.innerHTML = lista.map(p=>{
+    const dt = new Date(p.timestamp).toLocaleString('pt-BR');
+    const grupo = ['A','B','C','D'].includes(p._grupo) ? p._grupo : '—';
+    const gc = grupoColors[grupo]||'var(--text-muted)';
+    const id = Number(p.id);
+    return `<div class="hist-card">
+      <div>
+        <strong>${escapeHTML(p.nome||'Paciente sem nome')}</strong>
+        <span style="margin-left:10px;background:${gc};color:white;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px">GRUPO ${grupo}</span>
+        <div class="hist-meta">
+          Prontuário: ${escapeHTML(p.prontuario||'—')} · ${escapeHTML(p.idade||'—')} anos · ${escapeHTML(p.peso||'—')} kg<br/>
+          ${escapeHTML(dt)}
+        </div>
+      </div>
+      <div class="hist-btns">
+        <button class="hist-btn hist-btn-load" onclick="carregarPaciente(${id})">📂 Carregar</button>
+        <button class="hist-btn hist-btn-del" onclick="excluirPaciente(${id})" aria-label="Excluir">🗑️</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function carregarPaciente(id){
+  try {
+    if(!db) await dbInit();
+    const p = await dbCarregar(id);
+    if(!p) return;
+    restaurarDados(p);
+    pacienteAtualId = p.id;
+    switchTab('pratica');
+    alert(`Paciente "${p.nome||'sem nome'}" carregado.`);
+  } catch(e){
+    console.error(e);
+    alert('⚠️ Não foi possível carregar o registro.');
+  }
+}
+
+async function excluirPaciente(id){
+  if(!confirm('Excluir este registro permanentemente?')) return;
+  if(!db) await dbInit();
+  await dbExcluir(id);
+  if(pacienteAtualId === id) pacienteAtualId = null;
+  renderHistorico();
+}
+
+async function exportarHistorico(){
+  try {
+    if(!db) await dbInit();
+    const lista = await dbListar();
+    if(!lista.length){ alert('Nenhum registro para exportar.'); return; }
+    baixarArquivo(`DengueCare_Historico_${hojeISO()}.json`, JSON.stringify(lista, null, 2), 'application/json');
+  } catch(e){
+    alert('⚠️ Não foi possível ler o histórico deste navegador.');
+  }
+}
+
+async function importarHistorico(input){
+  const arq = input.files && input.files[0];
+  input.value = '';
+  if(!arq) return;
+  try {
+    const dados = JSON.parse(await arq.text());
+    const lista = (Array.isArray(dados) ? dados : [dados]).filter(p => p && typeof p === 'object' && p.timestamp);
+    if(!lista.length){ alert('O arquivo não tem registros do DengueCare.'); return; }
+    if(!confirm(`Importar ${lista.length} registro(s)? Eles serão adicionados aos já existentes.`)) return;
+    if(!db) await dbInit();
+    for(const p of lista){
+      const novo = {...p}; delete novo.id;
+      await dbReq('readwrite', s => s.add(novo));
+    }
+    alert(`✅ ${lista.length} registro(s) importado(s).`);
+    renderHistorico();
+  } catch(e){
+    console.error(e);
+    alert('⚠️ Arquivo inválido ou histórico indisponível.');
+  }
+}
+
+// ╔══════════════ CHART.JS — GRÁFICOS DE TENDÊNCIA ══════════════╗
+let trendData = [];
+let chartPlaq = null;
+let chartHt = null;
+
+// Linhas de referência tracejadas (o título prometia as linhas de 100k/50k, mas elas não eram desenhadas)
+const linhasRefPlugin = {
+  id: 'linhasRef',
+  afterDatasetsDraw(chart, args, opts){
+    const linhas = (opts && opts.linhas) || [];
+    const y = chart.scales.y; const a = chart.chartArea; const ctx = chart.ctx;
+    if(!y || !a) return;
+    linhas.forEach(l=>{
+      if(l.valor == null) return;
+      const py = y.getPixelForValue(l.valor);
+      if(py < a.top || py > a.bottom) return;
+      ctx.save();
+      ctx.strokeStyle = l.cor; ctx.lineWidth = 1.5; ctx.setLineDash([6,4]);
+      ctx.beginPath(); ctx.moveTo(a.left, py); ctx.lineTo(a.right, py); ctx.stroke();
+      ctx.setLineDash([]); ctx.fillStyle = l.cor; ctx.font = '600 10px system-ui, sans-serif';
+      ctx.fillText(l.rotulo, a.left + 4, py - 4);
+      ctx.restore();
+    });
+  }
+};
+
+function initCharts(){
+  if(typeof Chart === 'undefined'){
+    document.querySelectorAll('.chart-wrap').forEach(w=>{
+      w.innerHTML = '<div class="chart-msg">Gráfico indisponível: a biblioteca de gráficos não carregou (sem internet?). As medições continuam registradas na lista acima.</div>';
+    });
+    return;
+  }
+  const fmtPt = v => Number(v).toLocaleString('pt-BR');
+  const base = (tituloY, cor, fundo, linhas) => ({
+    type: 'line',
+    data: { labels: [], datasets: [{ data: [], borderColor: cor, backgroundColor: fundo, borderWidth: 2, pointRadius: 5, fill: true, tension: 0.3, spanGaps: true }] },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, linhasRef: { linhas }, tooltip: { callbacks: { label: c => fmtPt(c.parsed.y) } } },
+      scales: {
+        x: { title: { display: true, text: 'Dia de Doença', font:{size:11} }, ticks:{font:{size:10}} },
+        y: { title: { display: true, text: tituloY, font:{size:11} }, ticks:{font:{size:10}, callback: v => fmtPt(v)} }
+      }
+    },
+    plugins: [linhasRefPlugin]
+  });
+
+  const cfgP = base('Plaquetas /mm³', '#DC2626', 'rgba(220,38,38,0.1)', [
+    {valor:100000, cor:'#EA580C', rotulo:'100 mil'},
+    {valor:50000, cor:'#DC2626', rotulo:'50 mil (alarme)'}
+  ]);
+  cfgP.options.scales.y.suggestedMin = 0;
+  cfgP.options.scales.y.suggestedMax = 150000;
+  chartPlaq = new Chart($('chart-plaq').getContext('2d'), cfgP);
+
+  chartHt = new Chart($('chart-ht').getContext('2d'), base('Hematócrito %', '#EA580C', 'rgba(234,88,12,0.1)', []));
+}
+
+function updateCharts(){
+  if(!chartPlaq || !chartHt) return;
+  const labels = trendData.map(e=>'Dia '+e.dia);
+  chartPlaq.data.labels = labels;
+  chartPlaq.data.datasets[0].data = trendData.map(e=>e.plaq);
+  chartPlaq.data.datasets[0].pointBackgroundColor = trendData.map(e=>{
+    if(!e.plaq) return '#94A3B8';
+    if(e.plaq<50000) return '#DC2626';
+    if(e.plaq<100000) return '#EA580C';
+    return '#16A34A';
+  });
+  chartPlaq.update();
+
+  const ref = htReferencia();
+  chartHt.options.plugins.linhasRef.linhas = [
+    {valor: ref*1.1, cor:'#EA580C', rotulo:'+10% (' + (ref*1.1).toFixed(1).replace('.',',') + '%)'},
+    {valor: ref*1.2, cor:'#DC2626', rotulo:'+20% (' + (ref*1.2).toFixed(1).replace('.',',') + '%)'}
+  ];
+  chartHt.options.scales.y.suggestedMin = Math.floor(ref*0.85);
+  chartHt.options.scales.y.suggestedMax = Math.ceil(ref*1.25);
+  chartHt.data.labels = labels;
+  chartHt.data.datasets[0].data = trendData.map(e=>e.ht);
+  chartHt.update();
+}
+
+function addTrendEntry(){
+  const diaTxt = $('t-dia').value.trim();
+  const dia = diaTxt ? parseInt(diaTxt,10) : (diasDesde($('data-inicio').value) || NaN);
+  const plaq = intNum('t-plaq') || null;
+  const ht = has('t-ht') ? num('t-ht') : null;
+
+  if(!dia || dia<1){ alert('Informe o dia de doença.'); return; }
+  if(!plaq && ht==null){ alert('Informe ao menos plaquetas ou hematócrito.'); return; }
+
+  trendData = trendData.filter(e=>e.dia!==dia);
+  trendData.push({dia, plaq, ht});
+  trendData.sort((a,b)=>a.dia-b.dia);
+
+  $('t-dia').value=''; $('t-plaq').value=''; $('t-ht').value='';
+  atualizarPlaceholderDia();
+  updateCharts();
+  renderTrendList();
+}
+
+function atualizarPlaceholderDia(){
+  const d = diasDesde($('data-inicio').value);
+  $('t-dia').placeholder = d && d>0 ? `Hoje: dia ${d}` : 'Ex: 3';
+}
+
+function renderTrendList(){
+  const el = $('trend-entries-list');
+  if(!trendData.length){ el.innerHTML=''; return; }
+  el.innerHTML = '<div style="font-weight:700;margin-bottom:6px">Medições registradas:</div>'
+    + trendData.map((e,i)=>`
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:5px 10px;background:var(--white-clinical);border:1px solid var(--platinum);border-radius:7px;margin-bottom:4px;font-size:12px">
+      <span>📅 Dia ${e.dia} &nbsp;|&nbsp; Plaquetas: ${e.plaq ? e.plaq.toLocaleString('pt-BR') : '—'} /mm³ &nbsp;|&nbsp; Ht: ${e.ht!=null ? String(e.ht).replace('.',',')+'%' : '—'}</span>
+      <button onclick="removeTrendEntry(${i})" aria-label="Remover" style="border:none;background:none;cursor:pointer;color:var(--group-d);font-size:18px;padding:2px 8px">×</button>
+    </div>`).join('');
+}
+
+function removeTrendEntry(i){ trendData.splice(i,1); updateCharts(); renderTrendList(); }
+
+function clearTrend(){
+  if(!trendData.length) return;
+  if(!confirm('Limpar todos os pontos do gráfico?')) return;
+  trendData=[];
+  updateCharts();
+  renderTrendList();
+}
+
+// ── Início ──
+document.addEventListener('DOMContentLoaded', async ()=>{
+  $('data-atend').value = hojeISO();
+  sincronizarChevrons();
+  // Cada parte isolada: se uma falhar (ex.: gráfico sem internet), as outras continuam funcionando
+  try { initLaco(); } catch(e){ console.error(e); }
+  try { initCharts(); } catch(e){ console.error(e); }
+  atualizar();
+  atualizarPlaceholderDia();
+  $('data-inicio').addEventListener('input', atualizarPlaceholderDia);
+  $('triagem-data-inicio').addEventListener('input', atualizarPlaceholderDia);
+
+  // Modal de AINE: fecha tocando fora ou com Esc
+  $('nsaid-overlay').addEventListener('click', e=>{ if(e.target.id==='nsaid-overlay') fecharModal(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && $('nsaid-overlay').classList.contains('show')) fecharModal(); });
+
+  try { await dbInit(); } catch(e){ console.warn('IndexedDB não disponível:', e); }
+});
+</script>
+</body>
+</html>
