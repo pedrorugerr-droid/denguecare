@@ -21,8 +21,8 @@ Em seguida, os dados do paciente: idade, sexo e peso. Se houver alguma condiçã
 ## Cena 7 · Calculadora: sinais de alarme e conduta (tela)
 Depois, registramos os sinais vitais e os exames. O aplicativo compara a pressão, a frequência cardíaca e o hematócrito com os valores de referência para a idade, e marca alguns sinais de forma automática. No fluxograma de sinais de alarme, vamos marcar dor abdominal intensa e contínua. Imediatamente, o paciente passa para o Grupo C, e a barra do topo fica amarela. O alerta mostra o volume de soro fisiológico já calculado pelo peso: dez mililitros por quilo na primeira hora. Logo abaixo, a conduta recomendada resume os próximos passos. Ao final, é possível salvar o atendimento no histórico.
 
-## Cena 8 · Aba Algoritmo (tela)
-A aba Algoritmo é a consulta rápida. São três perguntas, sempre nesta ordem. Primeiro: há sinais de gravidade? Se sim, Grupo D. Segundo: há sinais de alarme? Se sim, Grupo C. Terceiro: há sangramento de pele, prova do laço positiva, ou alguma condição especial? Se sim, Grupo B. Se a resposta for não para todas, Grupo A. Cada grupo traz a hidratação e a conduta essenciais. No final, há uma consulta rápida de hipotensão, antitérmicos e critérios de alta.
+## Cena 8 · Aba Algoritmo na APS (tela)
+A aba Algoritmo organiza o atendimento na UBS em quatro passos. Primeiro, o acolhimento: classificar o risco, oferecer soro oral já na sala de espera e notificar. Segundo, a avaliação mínima, com peso, pressão deitado e em pé, e prova do laço. Terceiro, a classificação, com três perguntas, nesta ordem: sinais de gravidade, Grupo D; sinais de alarme, Grupo C; sangramento de pele ou condição especial, Grupo B; e, se nenhum, Grupo A. Para cada grupo, o algoritmo mostra o que fazer na própria UBS, para onde encaminhar e quando reavaliar. Por fim, vêm as orientações ao paciente e o papel de cada profissional da equipe.
 
 ## Cena 9 · Histórico e Referências (tela)
 No Histórico, ficam os atendimentos salvos neste aparelho, que podem ser reabertos na reavaliação. Os dados ficam apenas no próprio dispositivo. Em Referências, estão todas as fontes utilizadas, em formato ABNT.
