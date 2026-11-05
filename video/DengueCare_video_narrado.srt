@@ -1,0 +1,304 @@
+1
+00:00:00,500 --> 00:00:00,716
+Olá!
+
+2
+00:00:00,766 --> 00:00:05,322
+Este é o DengueCare, um aplicativo de apoio ao atendimento da dengue,
+
+3
+00:00:05,372 --> 00:00:11,129
+criado como projeto de intervenção da residência em Medicina de Família e Comunidade da
+
+4
+00:00:11,179 --> 00:00:13,799
+PUC Minas, na UBS Nacional, em Contagem.
+
+5
+00:00:13,849 --> 00:00:19,740
+Nos próximos minutos, vamos mostrar como ele funciona e como pode ajudar no dia a dia das
+
+6
+00:00:19,790 --> 00:00:20,273
+equipes.
+
+7
+00:00:21,724 --> 00:00:23,137
+Por que um aplicativo?
+
+8
+00:00:23,187 --> 00:00:28,062
+Segundo o Ministério da Saúde, a maioria dos óbitos por dengue é evitável.
+
+9
+00:00:28,112 --> 00:00:31,788
+O que salva vidas é reconhecer cedo os sinais de alarme,
+
+10
+00:00:31,838 --> 00:00:35,781
+classificar o paciente corretamente nos grupos A, B, C ou D,
+
+11
+00:00:35,831 --> 00:00:38,775
+e iniciar a hidratação certa, no tempo certo.
+
+12
+00:00:38,825 --> 00:00:42,036
+O DengueCare reúne essas condutas em um só lugar,
+
+13
+00:00:42,086 --> 00:00:46,361
+com base no manual do Ministério da Saúde, sexta edição, de 2024.
+
+14
+00:00:46,411 --> 00:00:51,818
+Ele funciona no navegador do computador ou do celular, sem precisar instalar nada.
+
+15
+00:00:53,268 --> 00:00:55,132
+O aplicativo tem cinco abas.
+
+16
+00:00:55,182 --> 00:00:57,388
+Teoria, com o conteúdo de estudo.
+
+17
+00:00:57,438 --> 00:01:00,739
+Calculadora, para o atendimento à beira do leito.
+
+18
+00:01:00,789 --> 00:01:03,268
+Algoritmo, com o fluxograma resumido.
+
+19
+00:01:03,318 --> 00:01:06,140
+Histórico, onde ficam os pacientes salvos.
+
+20
+00:01:06,190 --> 00:01:08,875
+E Referências, com as fontes utilizadas.
+
+21
+00:01:08,925 --> 00:01:14,481
+A barra colorida no topo mostra, o tempo todo, o grupo do paciente em atendimento.
+
+22
+00:01:15,932 --> 00:01:20,803
+Na aba Teoria, o resumo essencial traz o que todo profissional precisa saber:
+
+23
+00:01:20,853 --> 00:01:24,702
+as três fases da doença, com atenção especial à fase crítica,
+
+24
+00:01:24,752 --> 00:01:26,620
+que começa quando a febre cai;
+
+25
+00:01:26,670 --> 00:01:28,537
+os critérios de caso suspeito;
+
+26
+00:01:28,587 --> 00:01:30,775
+os sinais de alarme e de gravidade;
+
+27
+00:01:30,825 --> 00:01:31,861
+os quatro grupos;
+
+28
+00:01:31,911 --> 00:01:34,546
+os medicamentos permitidos e os proibidos;
+
+29
+00:01:34,596 --> 00:01:36,463
+e o volume da hidratação oral.
+
+30
+00:01:36,513 --> 00:01:41,896
+Para quem quer se aprofundar, basta tocar em Texto completo, que traz fisiopatologia,
+
+31
+00:01:41,946 --> 00:01:47,393
+farmacologia, uso de anticoagulantes, situações especiais e as evidências científicas.
+
+32
+00:01:48,843 --> 00:01:50,236
+Agora, a Calculadora.
+
+33
+00:01:50,286 --> 00:01:52,229
+Vamos simular um atendimento.
+
+34
+00:01:52,279 --> 00:01:54,428
+Primeiro, a triagem diagnóstica.
+
+35
+00:01:54,478 --> 00:01:59,994
+Informamos a data de início dos sintomas, e o aplicativo calcula o dia de doença.
+
+36
+00:02:00,044 --> 00:02:04,598
+Marcamos a febre, o vínculo epidemiológico e os sintomas presentes.
+
+37
+00:02:04,648 --> 00:02:10,369
+Com febre e duas ou mais manifestações, o aplicativo indica caso suspeito de dengue.
+
+38
+00:02:11,819 --> 00:02:13,964
+Em seguida, os dados do paciente:
+
+39
+00:02:14,014 --> 00:02:15,228
+idade, sexo e peso.
+
+40
+00:02:15,278 --> 00:02:21,081
+Se houver alguma condição especial, como gestação, idade acima de sessenta e cinco anos,
+
+41
+00:02:21,131 --> 00:02:23,675
+diabetes ou risco social, basta marcar.
+
+42
+00:02:23,725 --> 00:02:29,462
+Com o peso, a calculadora mostra automaticamente as doses de paracetamol e de dipirona,
+
+43
+00:02:29,512 --> 00:02:33,053
+e o volume de hidratação oral em vinte e quatro horas,
+
+44
+00:02:33,103 --> 00:02:35,913
+já dividido conforme o Ministério da Saúde.
+
+45
+00:02:37,363 --> 00:02:40,460
+Depois, registramos os sinais vitais e os exames.
+
+46
+00:02:40,510 --> 00:02:46,047
+O aplicativo compara a pressão, a frequência cardíaca e o hematócrito com os valores de
+
+47
+00:02:46,097 --> 00:02:50,350
+referência para a idade, e marca alguns sinais de forma automática.
+
+48
+00:02:50,400 --> 00:02:55,551
+No fluxograma de sinais de alarme, vamos marcar dor abdominal intensa e contínua.
+
+49
+00:02:55,601 --> 00:03:00,624
+Imediatamente, o paciente passa para o Grupo C, e a barra do topo fica laranja.
+
+50
+00:03:00,674 --> 00:03:04,991
+O alerta mostra o volume de soro fisiológico já calculado pelo peso:
+
+51
+00:03:05,041 --> 00:03:07,688
+dez mililitros por quilo na primeira hora.
+
+52
+00:03:07,738 --> 00:03:11,606
+Logo abaixo, a conduta recomendada resume os próximos passos.
+
+53
+00:03:11,656 --> 00:03:15,137
+Ao final, é possível salvar o atendimento no histórico.
+
+54
+00:03:16,587 --> 00:03:20,669
+A aba Algoritmo organiza o atendimento na UBS em quatro passos.
+
+55
+00:03:20,719 --> 00:03:22,244
+Primeiro, o acolhimento:
+
+56
+00:03:22,294 --> 00:03:27,031
+classificar o risco, oferecer soro oral já na sala de espera e notificar.
+
+57
+00:03:27,081 --> 00:03:32,278
+Segundo, a avaliação mínima, com peso, pressão deitado e em pé, e prova do laço.
+
+58
+00:03:32,328 --> 00:03:36,148
+Terceiro, a classificação, com três perguntas, nesta ordem:
+
+59
+00:03:36,198 --> 00:03:38,050
+sinais de gravidade, Grupo D;
+
+60
+00:03:38,100 --> 00:03:39,755
+sinais de alarme, Grupo C;
+
+61
+00:03:39,805 --> 00:03:43,035
+sangramento de pele ou condição especial, Grupo B;
+
+62
+00:03:43,085 --> 00:03:44,478
+e, se nenhum, Grupo A.
+
+63
+00:03:44,528 --> 00:03:48,609
+Para cada grupo, o algoritmo mostra o que fazer na própria UBS,
+
+64
+00:03:48,659 --> 00:03:51,233
+para onde encaminhar e quando reavaliar.
+
+65
+00:03:51,283 --> 00:03:56,545
+Por fim, vêm as orientações ao paciente e o papel de cada profissional da equipe.
+
+66
+00:03:57,995 --> 00:04:01,840
+No Histórico, ficam os atendimentos salvos neste aparelho,
+
+67
+00:04:01,890 --> 00:04:04,459
+que podem ser reabertos na reavaliação.
+
+68
+00:04:04,509 --> 00:04:07,481
+Os dados ficam apenas no próprio dispositivo.
+
+69
+00:04:07,531 --> 00:04:11,913
+Em Referências, estão todas as fontes utilizadas, em formato ABNT.
+
+70
+00:04:13,363 --> 00:04:13,994
+Lembre-se:
+
+71
+00:04:14,044 --> 00:04:16,647
+o DengueCare é uma ferramenta de apoio.
+
+72
+00:04:16,697 --> 00:04:19,300
+Ele não substitui o julgamento clínico,
+
+73
+00:04:19,350 --> 00:04:23,110
+e o paciente deve ser reclassificado a cada reavaliação.
+
+74
+00:04:23,160 --> 00:04:26,647
+Use, compartilhe com a sua equipe e envie sugestões.
+
+75
+00:04:26,697 --> 00:04:31,205
+Juntos, podemos reduzir as mortes evitáveis por dengue em Contagem.
+
+76
+00:04:31,255 --> 00:04:31,818
+Obrigado!
+
