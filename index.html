@@ -3279,7 +3279,7 @@ function limparTranscricao(){
   $('voz-previa').innerHTML='';
   $('btn-voz-interpretar').style.display='none';
   $('voz-result-box').style.display='none';
-  $('voz-status-label').textContent = 'Pronto para gravar';
+  $('voz-status-label').textContent = 'Texto limpo. Os dados já preenchidos continuam no formulário.';
 }
 
 // ── PREPARO DO TEXTO ──────────────────────────────────────────────
@@ -3382,7 +3382,7 @@ const VOZ_ORD = {primeiro:1, segundo:2, terceiro:3, quarto:4, quinto:5, sexto:6,
 
 function vozExtrair(original){
   const texto = vozPreparar(original);
-  const R = {campos: [], marcar: [], negados: [], dias: null};
+  const R = {campos: [], marcar: [], negados: [], negSel: [], dias: null};
   const campo = (id, val, label) => {
     if(val === null || val === undefined || val === '' || !$(id)) return;
     R.campos = R.campos.filter(c => c.id !== id);
@@ -3407,7 +3407,7 @@ function vozExtrair(original){
   const sinal = (re, sel, label) => {
     const e = estado(re);
     if(e === 'sim') R.marcar.push({sel, label});
-    else if(e === 'nao') R.negados.push(label);
+    else if(e === 'nao'){ R.negados.push(label); R.negSel.push(sel); }
   };
   const box = (name, value) => `input[name="${name}"][value="${value}"]`;
 
@@ -3648,10 +3648,16 @@ function interpretarEPreencher(){
   const R = vozExtrair($('voz-texto').value);
   const feitos = [];
 
-  // Desfaz o que uma interpretação anterior marcou: o texto corrigido vale por inteiro
-  document.querySelectorAll('input[type="checkbox"][data-voz]').forEach(el => {
-    el.checked = false; delete el.dataset.voz; delete el.dataset.manual;
-  });
+  // As interpretações se somam: o que já foi preenchido continua, mesmo que o quadro
+  // tenha sido limpo para ditar a parte seguinte. Só sai o que o novo ditado negar
+  // ("nega vômitos") e que tenha sido marcado pela voz.
+  for(const sel of R.negSel){
+    const el = document.querySelector(sel);
+    if(el && el.checked && el.dataset.voz){
+      el.checked = false; delete el.dataset.voz; delete el.dataset.manual;
+      feitos.push('✗ desmarcado: ' + escapeHTML(R.negados[R.negSel.indexOf(sel)]));
+    }
+  }
 
   for(const c of R.campos){
     const el = $(c.id);
@@ -3692,7 +3698,7 @@ function interpretarEPreencher(){
     resultBox.innerHTML = `<div style="font-weight:700;color:var(--group-b);margin-bottom:8px">✅ ${feitos.length} campo(s) preenchido(s):</div>`
       + feitos.map(p=>`<div style="padding:2px 0;border-bottom:1px solid #BBF7D0">→ ${p}</div>`).join('')
       + neg
-      + `<div style="margin-top:8px;font-size:11px;color:var(--text-muted)">⚠️ Revise os campos antes de usar clinicamente. Se corrigir o texto e interpretar de novo, as marcações feitas pela voz são refeitas.</div>`
+      + `<div style="margin-top:8px;font-size:11px;color:var(--text-muted)">⚠️ Revise os campos antes de usar clinicamente. Pode limpar o quadro e ditar a parte seguinte: o que já foi preenchido continua. Para desmarcar, diga "nega ..." ou desmarque no formulário.</div>`
       + (grupoAtual ? `<button type="button" class="btn btn-ir-conduta" onclick="toggleVozPanel(); irParaConduta()">📋 Ver a conduta (Grupo ${grupoAtual}) ›</button>` : '');
   } else {
     resultBox.innerHTML = `<div style="color:var(--group-d);font-weight:700">❌ Nenhum campo reconhecido. Tente falar de forma mais clara ou use os termos do exemplo.</div>` + neg;
