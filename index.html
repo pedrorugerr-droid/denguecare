@@ -743,7 +743,7 @@
         <li>Confirme em <strong>Instalar</strong>. O ícone do DengueCare aparece na tela do celular.</li>
       </ol>
     </div>
-    <div class="instalar-rodape">Endereço: <strong>pedrorugerr-droid.github.io/denguecare</strong></div>
+    <div class="instalar-rodape">Endereço: <strong id="instalar-endereco">pedroruger.com.br/denguecare</strong></div>
   </div>
 </div>
 <div id="app-header">
@@ -3222,6 +3222,8 @@ async function instalarApp(){
   $('instalar-android').style.display = (!EH_IOS) ? '' : 'none';
   m.classList.add('open');
 }
+
+document.addEventListener('DOMContentLoaded', () => { const e = document.getElementById('instalar-endereco'); if(e && /^https?:$/.test(location.protocol)) e.textContent = location.host + location.pathname.replace(/index\.html$/, '').replace(/\/$/, ''); });
 
 function fecharInstalar(){
   const m = $('instalar-modal'); if(m) m.classList.remove('open');
