@@ -9,6 +9,10 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="DengueCare"/>
 <meta name="format-detection" content="telephone=no"/>
+<meta name="description" content="Apoio ao atendimento da dengue na Atenção Primária: triagem, classificação de risco (A, B, C e D), conduta e hidratação pelo protocolo do Ministério da Saúde (2024), ditado por voz e alerta de febre maculosa."/>
+<link rel="manifest" href="manifest.webmanifest"/>
+<link rel="icon" type="image/png" href="icons/favicon-64.png"/>
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png"/>
 <title>DengueCare · UBS Nacional Contagem</title>
 <!-- Chart.js 4.4.1 (MIT) embutido: o app funciona sem internet -->
 <script>
@@ -589,6 +593,30 @@
   .table-scroll .group-table { min-width: 560px; }
   .tab-short { display: none; }
   #status-label { overflow: hidden; text-overflow: ellipsis; }
+  #btn-instalar { margin-top: 8px; align-items: center; gap: 6px; background: var(--teal); color: white; border: none; border-radius: 999px; padding: 7px 14px; font: 600 12.5px/1 inherit; font-family: inherit; cursor: pointer; box-shadow: 0 2px 8px rgba(13,148,136,.35); }
+  #btn-instalar:hover { background: var(--teal-light); }
+  #instalar-modal { display: none; position: fixed; inset: 0; z-index: 3000; background: rgba(15,23,42,.6); align-items: flex-end; justify-content: center; padding: 16px; padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+  #instalar-modal.open { display: flex; }
+  .instalar-caixa { position: relative; background: white; color: var(--text-main); border-radius: 18px; max-width: 460px; width: 100%; max-height: 88vh; overflow-y: auto; padding: 20px 18px 16px; box-shadow: 0 20px 50px rgba(0,0,0,.35); }
+  @media (min-width: 641px) { #instalar-modal { align-items: center; } }
+  .instalar-fechar { position: absolute; top: 8px; right: 10px; background: none; border: none; font-size: 26px; line-height: 1; color: var(--text-muted); cursor: pointer; padding: 4px 8px; }
+  .instalar-topo { display: flex; gap: 12px; align-items: center; margin-bottom: 14px; padding-right: 24px; }
+  .instalar-topo img { border-radius: 13px; flex-shrink: 0; }
+  .instalar-nome { font-weight: 700; font-size: 17px; }
+  .instalar-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.45; margin-top: 2px; }
+  .instalar-bloco { background: #F8FAFC; border: 1px solid var(--platinum); border-radius: 12px; padding: 10px 14px; margin-bottom: 10px; }
+  .instalar-sub { font-weight: 700; font-size: 13.5px; margin-bottom: 4px; }
+  .instalar-bloco ol { margin: 0; padding-left: 20px; font-size: 13px; line-height: 1.55; }
+  .instalar-ico { display: inline-block; border: 1.5px solid currentColor; border-radius: 4px; padding: 0 4px; font-size: 11px; }
+  .instalar-rodape { font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 4px; word-break: break-all; }
+  .alerta-maculosa { margin-top: 10px; border: 2px solid var(--group-d); background: #FEF2F2; color: #7F1D1D; border-radius: 10px; padding: 10px 14px; font-size: 13px; line-height: 1.5; }
+  .alerta-maculosa .am-tit { font-weight: 800; color: var(--group-d); margin-bottom: 4px; letter-spacing: .01em; }
+  .alerta-maculosa ul { margin: 6px 0 0; padding-left: 18px; }
+  .alerta-maculosa li { margin-bottom: 3px; }
+  .alerta-maculosa a { color: var(--group-d); font-weight: 700; }
+  .alerta-maculosa-leve { border-color: #F59E0B; background: #FFFBEB; color: #78350F; }
+  .alerta-maculosa-leve .am-tit, .alerta-maculosa-leve a { color: #B45309; }
+  #conduta-maculosa { margin: 0 0 12px; }
   .badge-conduta { border: none; cursor: pointer; font-family: inherit; white-space: nowrap; }
   .badge-conduta:hover { filter: brightness(0.95); }
   .btn-ir-conduta { margin-top: 12px; font-size: 13px; padding: 9px 14px; background: white; color: var(--slate-dark); border: 1.5px solid currentColor; }
@@ -679,11 +707,43 @@
     <div>
       <div class="app-title">🦟 Dengue<span>Care</span></div>
       <div class="app-subtitle">Projeto de Intervenção · UBS Nacional, Contagem · MFC · PUC Minas 2026</div>
+      <button type="button" id="btn-instalar" onclick="instalarApp()" style="display:none">📲 Instalar no celular</button>
     </div>
     <div class="header-meta">
       Preceptor: Patrik Ferreira de Carvalho Pinto<br/>
       Patricia G. de Marco · Guilherme O. Rodrigues · Walterez G. A. Barbosa · Marcus V. Tolentino · Pedro A. Rüger
     </div>
+  </div>
+</div>
+<div id="instalar-modal" role="dialog" aria-modal="true" aria-labelledby="instalar-titulo" onclick="if(event.target===this) fecharInstalar()">
+  <div class="instalar-caixa">
+    <button type="button" class="instalar-fechar" onclick="fecharInstalar()" aria-label="Fechar">×</button>
+    <div class="instalar-topo">
+      <img src="icons/icon-192.png" alt="" width="56" height="56"/>
+      <div>
+        <div id="instalar-titulo" class="instalar-nome">DengueCare</div>
+        <div class="instalar-desc">Triagem, classificação de risco, conduta e hidratação da dengue pelo protocolo do MS (2024). Abre como aplicativo, em tela cheia, e funciona sem internet depois de instalado.</div>
+      </div>
+    </div>
+    <div class="instalar-bloco" id="instalar-iphone">
+      <div class="instalar-sub">📱 iPhone e iPad (Safari)</div>
+      <ol>
+        <li>Abra este endereço no <strong>Safari</strong>.</li>
+        <li>Toque em <strong>Compartilhar</strong> <span class="instalar-ico">⬆︎</span> (quadrado com a seta, embaixo ou no topo da tela).</li>
+        <li>Role e toque em <strong>Adicionar à Tela de Início</strong>.</li>
+        <li>Toque em <strong>Adicionar</strong>. O ícone do DengueCare aparece na tela do celular.</li>
+      </ol>
+    </div>
+    <div class="instalar-bloco" id="instalar-android">
+      <div class="instalar-sub">🤖 Android (Chrome)</div>
+      <ol>
+        <li>Abra este endereço no <strong>Chrome</strong>.</li>
+        <li>Toque no menu <strong>⋮</strong> (três pontinhos, no canto de cima).</li>
+        <li>Toque em <strong>Instalar app</strong> (ou <strong>Adicionar à tela inicial</strong>).</li>
+        <li>Confirme em <strong>Instalar</strong>. O ícone do DengueCare aparece na tela do celular.</li>
+      </ol>
+    </div>
+    <div class="instalar-rodape">Endereço: <strong>pedrorugerr-droid.github.io/denguecare</strong></div>
   </div>
 </div>
 <div id="app-header">
@@ -1347,6 +1407,10 @@
             </select>
           </div>
         </div>
+        <div class="check-list" style="margin-top:10px">
+          <label class="check-item" id="tri-carrapato-item"><input type="checkbox" id="tri-carrapato" onchange="avaliarTriagem()"/><span class="check-label">Foi picado por carrapato nos últimos 15 dias?<small>Vale também: esteve em mata, pasto ou beira de rio, ou teve contato com capivara, cavalo ou cão com carrapato. Pergunte sempre: a picada costuma passar despercebida.</small></span></label>
+        </div>
+        <div id="alerta-maculosa" class="alerta-maculosa" style="display:none" role="alert"></div>
       </div>
 
       <!-- MANIFESTAÇÕES (precisa ≥2) -->
@@ -1706,6 +1770,7 @@
       <span class="chevron open" id="chevron-conduta">▼</span>
     </div>
     <div class="card-body open" id="body-conduta">
+      <div id="conduta-maculosa" class="alerta-maculosa" style="display:none" role="alert"></div>
       <div id="grupo-atual" style="font-size:13px;color:var(--text-muted);margin-bottom:12px">
         Insira os dados do paciente para gerar a conduta automaticamente.
       </div>
@@ -2740,6 +2805,7 @@ function avaliarGrupo(){
   const {grupo, motivos} = calcularGrupo();
   grupoAtual = grupo;
   doseFiltrarGrupo();
+  avaliarMaculosa();
 
   if(!grupo){
     $('status-bar').style.background = 'var(--teal)';
@@ -3117,6 +3183,49 @@ let vozPanelOpen = false;
 let vozReinicios = [];  // horários dos reinícios automáticos, para não entrar em laço
 let vozWakeLock = null;
 let vozPreviaTimer = null;
+
+// ╔══════════════ INSTALAR NO CELULAR ══════════════╗
+let pedidoInstalacao = null;
+const EH_IOS = /iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && /Mac/.test(navigator.platform));
+const JA_INSTALADO = () => (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
+
+if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
+  window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
+}
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  pedidoInstalacao = e;
+  mostrarBotaoInstalar();
+});
+window.addEventListener('appinstalled', () => {
+  pedidoInstalacao = null;
+  const b = $('btn-instalar'); if(b) b.style.display = 'none';
+  fecharInstalar();
+});
+
+function mostrarBotaoInstalar(){
+  const b = $('btn-instalar');
+  if(b) b.style.display = JA_INSTALADO() ? 'none' : 'inline-flex';
+}
+document.addEventListener('DOMContentLoaded', mostrarBotaoInstalar);
+
+async function instalarApp(){
+  if(pedidoInstalacao){
+    pedidoInstalacao.prompt();
+    try { await pedidoInstalacao.userChoice; } catch(e) {}
+    pedidoInstalacao = null;
+    return;
+  }
+  const m = $('instalar-modal');
+  // Mostra primeiro as instruções do aparelho em uso; no computador, as duas
+  $('instalar-iphone').style.display = (EH_IOS || !EH_MOVEL) ? '' : 'none';
+  $('instalar-android').style.display = (!EH_IOS) ? '' : 'none';
+  m.classList.add('open');
+}
+
+function fecharInstalar(){
+  const m = $('instalar-modal'); if(m) m.classList.remove('open');
+}
 
 function toggleVozPanel(){
   vozPanelOpen = !vozPanelOpen;
@@ -3570,6 +3679,7 @@ function vozExtrair(original){
 
   // TRIAGEM — MANIFESTAÇÕES (MS, item 10.1)
   sinal(/\bfebre\b|\bfebril\b|\bhipertermia\b|\btemperatura\s+alta\b/, '#tri-febre', 'Febre');
+  sinal(/\bcarrapat|\bmicuim|\bmucuim/, '#tri-carrapato', 'Picada de carrapato');
   sinal(/\bnausea|\benjo[oa]/, '#tri-naus', 'Náuseas');
   sinal(/\bvomit/, '#tri-vom', 'Vômitos');
   sinal(/\bexantema|\brash\b|manchas?\s+vermelhas?|manchas?\s+na\s+pele|vermelhidao\s+na\s+pele/, '#tri-exan', 'Exantema');
@@ -3714,7 +3824,59 @@ function triagemPreenchida(){
   return $('tri-febre').checked || $('tri-crianca').checked || TRI_SINTOMAS.some(id=>$(id).checked) || $('tri-exame').value || has('triagem-temp') || $('triagem-data-inicio').value;
 }
 
+// ╔══════════════ FEBRE MACULOSA (MS: Guia de Vigilância em Saúde, 6ª ed.; Nota Técnica nº 11/2024) ══════════════╗
+// Caso suspeito: febre de início súbito, cefaleia e mialgia, com picada de carrapato, contato com animais
+// ou ida a área de transmissão nos últimos 15 dias. A doxiciclina começa na suspeita, sem esperar exame.
+function avaliarMaculosa(){
+  const cb = $('tri-carrapato');
+  if(!cb) return;
+  const picado = cb.checked;
+  const item = $('tri-carrapato-item');
+  item.classList.toggle('checked-d', picado);
+  const box = $('alerta-maculosa'), boxC = $('conduta-maculosa');
+  if(!picado){ box.style.display = 'none'; boxC.style.display = 'none'; return; }
+
+  const febre = $('tri-febre').checked || num('triagem-temp') >= 37.8;
+  const peso = num('peso');
+  let dose;
+  if(peso > 0 && peso < 45) dose = `<strong>${Math.round(2.2 * peso)} mg a cada 12 h</strong> (2,2 mg/kg; peso ${String(peso).replace('.', ',')} kg)`;
+  else if(peso >= 45) dose = '<strong>100 mg a cada 12 h</strong> (peso ≥ 45 kg)';
+  else dose = '<strong>100 mg a cada 12 h</strong> (adulto ou ≥ 45 kg) · <strong>2,2 mg/kg a cada 12 h</strong> (&lt; 45 kg)';
+
+  if(febre){
+    box.innerHTML = `<div class="am-tit">🚨 SUSPEITA DE FEBRE MACULOSA</div>
+      <div>Febre com picada de carrapato (ou exposição) nos últimos 15 dias é <strong>caso suspeito</strong> (MS). Minas Gerais tem transmissão, e a letalidade é alta quando o tratamento atrasa.</div>
+      <ul>
+        <li><strong>Doxiciclina já, na suspeita, sem esperar exame</strong>, em qualquer idade: ${dose}. Em média 7 dias, mantendo até 3 dias depois do fim da febre.</li>
+        <li><strong>Notificação imediata</strong> (até 24 h) à vigilância e coleta de sorologia (2ª amostra 14 a 21 dias depois).</li>
+        <li>Procure exantema em punhos, tornozelos, palmas e plantas: pode surgir tarde ou nem aparecer, então não espere por ele.</li>
+        <li>Hipotensão, sangramento, confusão, oligúria ou falta de ar: <strong>urgência e internação</strong>.</li>
+        <li>Pode ser confundida com dengue ou coexistir com ela: siga a classificação da dengue <strong>e não atrase a doxiciclina</strong>. Sem doxiciclina disponível, a alternativa do MS é o cloranfenicol (discutir com a referência).</li>
+      </ul>`;
+    boxC.innerHTML = `<div class="am-tit">🚨 Suspeita de febre maculosa (febre + picada de carrapato)</div>
+      <div>Iniciar <strong>doxiciclina</strong> já: ${dose}. Notificação imediata. <a href="#" onclick="event.preventDefault(); irParaMaculosa()">Ver o alerta completo ›</a></div>`;
+    box.className = boxC.className = 'alerta-maculosa';
+  } else {
+    box.innerHTML = `<div class="am-tit">⚠️ Picada de carrapato, ainda sem febre</div>
+      <div>Oriente <strong>voltar no mesmo dia</strong> se surgir febre, dor de cabeça ou dor no corpo nos próximos 15 dias: com febre, é caso suspeito de febre maculosa e a doxiciclina começa na hora. Retire carrapatos com pinça, sem esmagar.</div>`;
+    boxC.innerHTML = `<div class="am-tit">⚠️ Picada de carrapato nos últimos 15 dias</div><div>Se houver febre, tratar como suspeita de febre maculosa (doxiciclina já). <a href="#" onclick="event.preventDefault(); irParaMaculosa()">Ver orientação ›</a></div>`;
+    box.className = boxC.className = 'alerta-maculosa alerta-maculosa-leve';
+  }
+  box.style.display = 'block';
+  boxC.style.display = 'block';
+}
+
+function irParaMaculosa(){
+  switchTab('pratica');
+  setTimeout(() => {
+    const alvo = $('tri-carrapato-item');
+    const topo = (document.querySelector('.tab-nav') || {offsetHeight: 0}).offsetHeight + ($('status-bar') || {offsetHeight: 0}).offsetHeight + 8;
+    window.scrollTo({top: alvo.getBoundingClientRect().top + window.scrollY - topo, behavior: 'smooth'});
+  }, 60);
+}
+
 function avaliarTriagem(){
+  avaliarMaculosa();
   const febre = $('tri-febre').checked;
   const crianca = $('tri-crianca').checked;
   const sintomas = TRI_SINTOMAS.filter(id => $(id).checked).length;
